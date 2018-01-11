@@ -1,0 +1,4 @@
+void stackNewCone() {	//TODO: account for limited range of motion
+	chainAngle = chainPos[STACK];
+	liftAngle = RAD_TO_POT_FCTR * asin((CONE_HEIGHT * numCones + LIFT_BASE_HEIGHT) / 2 / LIFT_LEN) + liftPos[L_ZERO];
+}
