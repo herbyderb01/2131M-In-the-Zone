@@ -1,6 +1,6 @@
 #include "Voids & Vars.c"
 //----------------------Drive PID----------------------//
-
+/*
 static float  Drive_Kp = 0.30; //Power Tuning Value
 static float  DriveRequestedValue;
 static float  Drive_Kd = 0.5; // Requested Guess Value
@@ -58,7 +58,7 @@ task DriveController()
 		// Don't hog cpu
 		wait1Msec( 25 );
 	}
-}
+}*/
 //----------------------LIFT PID----------------------//
 
 
@@ -173,7 +173,7 @@ task calwController()
 
 		// send to motor
 
-		motor[ Calw ] = calwDrive;
+		motor[ Claw ] = calwDrive;
 
 		lastcalwError = calwError;
 		// Don't hog cpu

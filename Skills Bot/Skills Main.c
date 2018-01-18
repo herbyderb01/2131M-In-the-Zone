@@ -90,8 +90,5 @@ task usercontrol()
 		{
 			setLiftPower(0);      // Else, stop mobile motors
 		}
-
-
-
   }
 }
