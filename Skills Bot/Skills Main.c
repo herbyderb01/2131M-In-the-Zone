@@ -1,5 +1,7 @@
 #pragma config(Sensor, in1,    clawp,          sensorPotentiometer)
 #pragma config(Sensor, in2,    liftPot,        sensorPotentiometer)
+#pragma config(Sensor, in3,    selectpot,      sensorPotentiometer)
+#pragma config(Sensor, in4,    Gyro,           sensorGyro)
 #pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
 #pragma config(Motor,  port1,           Claw,          tmotorVex393_HBridge, openLoop)
@@ -20,6 +22,7 @@
 #include "Vex_Competition_Includes.c"
 #include "PIDS.c"
 #include "Voids & Vars.c"
+#include "Aton.c"
 
 task drive() //Redirecting Drive into a task
 {
@@ -47,6 +50,15 @@ void pre_auton()
 
 task autonomous()
 {
+	if (SensorValue[selectpot] < 2045)
+	{
+		startTask(Skills);
+	}
+	if (SensorValue[selectpot] > 2045)
+	{
+		startTask(TenPoint);
+	}
+
 
 }
 
@@ -58,37 +70,43 @@ task autonomous()
 
 task usercontrol()
 {
+	startTask(calwController);
+	calwRequestedValue = 605;
 	startTask(drive);
+
   while (true)
   {
-  	//----------------------Moblie Goal Lift------------------------//
+  	//----------------------Claw------------------------//
 		if( vexRT[Btn6U] == 1)      // Setting Btn7U to Extend Goal
 		{
-			setClawPower(-127);
+			calwRequestedValue = 950;
 		}
 
 		else if( vexRT[Btn6D] == 1)      // Setting Btn7D to Intake Goal
 		{
-			setClawPower(127);
+			calwRequestedValue = 1290;
 		}
-		else
+		else if( vexRT[Btn8D] == 1)      // Setting Btn7U to Extend Goal
 		{
-			setClawPower(0);      // Else, stop mobile motors
+			calwRequestedValue = 655;
 		}
+
 
 		  	//----------------------Lift------------------------//
 		if( vexRT[Btn5U] == 1)      // Setting Btn7U to Extend Goal
 		{
 			setLiftPower(-127);
+			liftStillSpeed = -15;
 		}
 
 		else if( vexRT[Btn5D] == 1)      // Setting Btn7D to Intake Goal
 		{
 			setLiftPower(127);
+			liftStillSpeed = -8;
 		}
 		else
 		{
-			setLiftPower(0);      // Else, stop mobile motors
+			setLiftPower(liftStillSpeed);      // Else, stop mobile motors
 		}
   }
 }

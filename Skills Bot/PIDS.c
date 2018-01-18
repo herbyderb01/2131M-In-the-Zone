@@ -9,23 +9,11 @@ float DriveD;						//Establishing variables
 float DriveP;
 float lastDriveError;
 float DriveDF;
-int waitMobliERerror = 100;
 float  DriveSensorCurrentValue;
 
-//mobile Values Right
-//Clamp = 450
-//Straight = 2000
-//Locked = 3850
-//V = 1150
-
-//mobile Values Left
-//Clamp = 4000
-//Straight = 2600
-//Locked = 1250
-//V = 3600
 task DriveController()
 {
-	//float  DriveSensorCurrentValue;
+	float  DriveSensorCurrentValue;
 	float  DriveError;
 	float  DriveDrive;
 
@@ -71,17 +59,6 @@ float liftRP;
 float lastliftRError;
 float liftRDF;
 
-//lift Values Right
-//Clamp = 450
-//Straight = 2000
-//Locked = 3850
-//V = 1150
-
-//lift Values Left
-//Clamp = 4000
-//Straight = 2600
-//Locked = 1250
-//V = 3600
 task liftRController()
 {
 	float  liftRSensorCurrentValue;
@@ -120,7 +97,7 @@ task liftRController()
 		wait1Msec( 25 );
 	}
 }
-//----------------------Mobile Bar PID----------------------//
+//----------------------Claw PID----------------------//
 
 static float  calw_Kp = 0.30; //Power Tuning Value
 static float  calwRequestedValue;
@@ -133,17 +110,6 @@ float calwDF;
 int waitMobliERerror = 100;
 float  calwSensorCurrentValue;
 
-//mobile Values Right
-//Clamp = 450
-//Straight = 2000
-//Locked = 3850
-//V = 1150
-
-//mobile Values Left
-//Clamp = 4000
-//Straight = 2600
-//Locked = 1250
-//V = 3600
 task calwController()
 {
 	//float  calwSensorCurrentValue;

@@ -4,6 +4,8 @@
 int drivepower;
 int drivepowerPID;
 
+int liftStillSpeed;
+
 //-------------Motor Void Set-Up--------------//
 void setDrivePower(int left, int right)
 {// Defining all of the motors for the -DRIVE-
