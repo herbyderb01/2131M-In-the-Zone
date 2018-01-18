@@ -18,6 +18,7 @@
 #pragma competitionControl(Competition)
 
 #include "Vex_Competition_Includes.c"
+#include "PIDS.c"
 
 
 //-------------Motor Void Set-Up--------------//
