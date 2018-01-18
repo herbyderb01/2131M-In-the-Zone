@@ -1,3 +1,5 @@
+#include "Voids & Vars.c"
+
 //----------------------Drive PID----------------------//
 
 static float  Drive_Kp = 0.30; //Power Tuning Value
@@ -31,7 +33,7 @@ task DriveController()
 	while( true )
 	{
 		// Read the sensor value and scale
-		DriveSensorCurrentValue = SensorValue[ mobileP ];
+		DriveSensorCurrentValue = SensorValue[ rightEncoder ];
 		// calculate error
 		DriveError =  DriveRequestedValue - DriveSensorCurrentValue;
 
@@ -51,8 +53,7 @@ task DriveController()
 
 		// send to motor
 
-		motor[ MobileL ] = DriveDrive;
-		motor[ Drive ] = DriveDrive;
+		setDrivePower(drivepowerPID);
 
 		lastDriveError = DriveError;
 		// Don't hog cpu
