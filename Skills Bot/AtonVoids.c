@@ -50,7 +50,7 @@ void drivePID(int distance)
 	SensorValue[rightEncoder] = 0;
 	SensorValue[leftEncoder] = 0;
 
-	DriveRequestedValue = 1000;
+	DriveRequestedValue = distance;
 }
 
 void turnRight(int ticks) // void to turn the robot right as much as you want
