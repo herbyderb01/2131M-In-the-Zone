@@ -1,9 +1,8 @@
-#include "Voids & Vars.c"
 //-----------------Variables-----------------//
 int drivepower;
 int drivepowerPID = 127;
 
-int liftStillSpeed;.
+int liftStillSpeed;
 
 //-------------Motor Void Set-Up--------------//
 
@@ -27,14 +26,6 @@ void setLiftPower(int Lpower)
 	motor[LOne] = Lpower;
 	motor[LTwo] = Lpower;
 	motor[LThree] = Lpower;
-}
-
-void drivePID(int distance)
-{
-	SensorValue[rightEncoder] = 0;
-	SensorValue[leftEncoder] = 0;
-
-	DriveRequestedValue = 1000;
 }
 
 //----------------------Drive PID----------------------//

@@ -1,5 +1,4 @@
-#include "PIDS.c"
-
+#include "PIDS&Motors&Vars.c"
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //--------------------Autonomous Voids-----------------------//
 /*
@@ -46,6 +45,14 @@ void Atondrive(int ticks, int power)
 	wait1Msec(100);
 }
 */
+void drivePID(int distance)
+{
+	SensorValue[rightEncoder] = 0;
+	SensorValue[leftEncoder] = 0;
+
+	DriveRequestedValue = 1000;
+}
+
 void turnRight(int ticks) // void to turn the robot right as much as you want
 {
 	//Clear Gyro

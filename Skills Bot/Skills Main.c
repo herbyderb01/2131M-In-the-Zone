@@ -20,9 +20,9 @@
 #pragma competitionControl(Competition)
 
 #include "Vex_Competition_Includes.c"
-#include "PIDS.c"
-#include "Voids & Vars.c"
-#include "Aton.c"
+#include "PIDS&Motors&Vars.c"
+#include "AtonPrograms.c"
+#include "AtonVoids.c"
 
 task drive() //Redirecting Drive into a task
 {
