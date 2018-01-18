@@ -50,6 +50,11 @@ void pre_auton()
 
 task autonomous()
 {
+
+	startTask(calwController);
+	startTask(liftRController);
+	startTask(DriveController);
+
 	if (SensorValue[selectpot] < 2045)
 	{
 		startTask(Skills);
@@ -79,7 +84,7 @@ task usercontrol()
   	//----------------------Claw------------------------//
 		if( vexRT[Btn6U] == 1)      // Setting Btn7U to Extend Goal
 		{
-			calwRequestedValue = 950;
+			calwRequestedValue = 850;
 		}
 
 		else if( vexRT[Btn6D] == 1)      // Setting Btn7D to Intake Goal
@@ -102,11 +107,18 @@ task usercontrol()
 		else if( vexRT[Btn5D] == 1)      // Setting Btn7D to Intake Goal
 		{
 			setLiftPower(127);
-			liftStillSpeed = -8;
+			liftStillSpeed = 10;
 		}
 		else
 		{
-			setLiftPower(liftStillSpeed);      // Else, stop mobile motors
+			if(SensorValue[liftPot] > 2470)
+			{
+				setLiftPower(15);      // Else, stop mobile motors
+			}
+			else
+			{
+				setLiftPower(liftStillSpeed);      // Else, stop mobile motors
+			}
 		}
   }
 }

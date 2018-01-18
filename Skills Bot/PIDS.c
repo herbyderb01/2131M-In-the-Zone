@@ -1,6 +1,44 @@
 #include "Voids & Vars.c"
+//-----------------Variables-----------------//
+int drivepower;
+int drivepowerPID = 127;
+
+int liftStillSpeed;.
+
+//-------------Motor Void Set-Up--------------//
+
+void setDrivePower(int left, int right)
+{// Defining all of the motors for the -DRIVE-
+	motor[LexDrive] = left;		//Define this motor as the left drive
+	motor[RexDrive] = right;	//Define this motor as the right drive
+	motor[LDriveOne] = left;		//Define this motor as the left 3 motor drive
+	motor[LDriveTwo] = left;	//Define this motor as the right 3 motor drive.
+	motor[RDriveOne] = right;		//Define this motor as the left 3 motor drive
+	motor[RDriveTwo] = right;	//Define this motor as the right 3 motor drive
+}
+
+void setClawPower(int Cpower)
+{
+	motor[Claw] = Cpower;
+}
+
+void setLiftPower(int Lpower)
+{
+	motor[LOne] = Lpower;
+	motor[LTwo] = Lpower;
+	motor[LThree] = Lpower;
+}
+
+void drivePID(int distance)
+{
+	SensorValue[rightEncoder] = 0;
+	SensorValue[leftEncoder] = 0;
+
+	DriveRequestedValue = 1000;
+}
+
 //----------------------Drive PID----------------------//
-/*
+
 static float  Drive_Kp = 0.30; //Power Tuning Value
 static float  DriveRequestedValue;
 static float  Drive_Kd = 0.5; // Requested Guess Value
@@ -9,11 +47,10 @@ float DriveD;						//Establishing variables
 float DriveP;
 float lastDriveError;
 float DriveDF;
-float  DriveSensorCurrentValue;
+float DriveSensorCurrentValue;
 
 task DriveController()
 {
-	float  DriveSensorCurrentValue;
 	float  DriveError;
 	float  DriveDrive;
 
@@ -40,13 +77,13 @@ task DriveController()
 
 		// send to motor
 
-		setDrivePower(drivepowerPID);
+		setDrivePower(drivepowerPID , drivepowerPID);
 
 		lastDriveError = DriveError;
 		// Don't hog cpu
 		wait1Msec( 25 );
 	}
-}*/
+}
 //----------------------LIFT PID----------------------//
 
 

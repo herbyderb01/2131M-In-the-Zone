@@ -1,7 +1,10 @@
-task Skills ()
+ task Skills ()
 {
   calwRequestedValue = 705;
-  liftRRequestedValue = 2500;
+  liftRRequestedValue = 1500;
+  
+
+
 
 }
 
