@@ -76,7 +76,7 @@ void AutoStrait(int distance, int power)
 		motor[RDrive] = 0;
 }
 
-void Atondrive(int ticks, int power)
+void Atondrive(int ticks*2, int power)
 { //auton function to move forward by its self
 	  //Clear Encoders
   SensorValue[rightEncoder] = 0;
