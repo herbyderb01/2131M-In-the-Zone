@@ -184,12 +184,17 @@ startTask(drive);
 			setLiftPower(127);
 			liftstillspeed=15;
 		}
-		//still speeds
-		// Setting still speeds to keep lift at constant value
-		/*else if (SensorValue[liftP] < 2500 )
+		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D to lift Down
 		{
-			setLiftPower(10);
-		}*/
+			setLiftPower(-127);
+			liftstillspeed=-15;
+		}
+
+		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5U to lift Up
+		{
+			setLiftPower(127);
+			liftstillspeed=15;
+		}
 		else
 		{
 			setLiftPower(liftstillspeed);
@@ -206,7 +211,15 @@ startTask(drive);
 		{
 			setIntakePower(-127);
 		}
+		if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setIntakePower(127);
+		}
 
+		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn6D to Outtake Cone
+		{
+			setIntakePower(-127);
+		}
 		else
 		{
 			setIntakePower(20);   // Else, set a intake still speed to hold cone in
@@ -239,6 +252,18 @@ startTask(drive);
 			setChainPower(-127);
 			chainstillspeed=-15;
 		}
+		if( vexRT[Btn8DXmtr2] == 1)
+		{
+			setChainPower(127);
+			chainstillspeed=15;
+		}
+
+		else if( vexRT[Btn8RXmtr2] == 1)
+		{
+			setChainPower(-127);
+			chainstillspeed=-15;
+		}
+
 		else
 		{
 			setChainPower(chainstillspeed);
