@@ -55,7 +55,7 @@ void AutoStrait(int distance, int power)
 	distance = abs(distance);
 
  // telling it to do this while you are driving to the disired distance
-	while(abs(SensorValue[rightEncoder])<distance)
+	while((abs(SensorValue[rightEncoder])/2) < distance)
 	{
 		 // Checking if the right drive is faster than the left drive
 		if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder]))
@@ -76,7 +76,7 @@ void AutoStrait(int distance, int power)
 		motor[RDrive] = 0;
 }
 
-void Atondrive(int ticks*2, int power)
+void Atondrive(int ticks, int power)
 { //auton function to move forward by its self
 	  //Clear Encoders
   SensorValue[rightEncoder] = 0;
@@ -194,6 +194,8 @@ task RightBlue () // Auton task to grab moble base on the right and score it
 
 	liftRRequestedValue = 3000;
 
+	setChainPower(20);
+
 	Atondrive(750, 127);
 
 	wait1Msec(200);
@@ -261,6 +263,8 @@ task LeftBlue ()
 	WaitieThing();
 
 	liftRRequestedValue = 3000;
+
+	setChainPower(20);
 
 	Atondrive(650, 127);
 
@@ -640,6 +644,8 @@ task LeftRed ()
 
 	liftRRequestedValue = 3000;
 
+	setChainPower(20);
+
 	Atondrive(780, 127);
 
 	wait1Msec(200);
@@ -706,6 +712,8 @@ task RightRed ()
 	WaitieThing();
 
 	liftRRequestedValue = 3000;
+
+	setChainPower(20);
 
 	Atondrive(650, 127);
 
@@ -904,7 +912,7 @@ task Defensive ()
 
 task DoNothing ()
 {
-	Preload();
+
 }
 
 task DefensiveTwo ()
