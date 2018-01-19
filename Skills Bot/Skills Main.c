@@ -76,7 +76,7 @@ task autonomous()
 task usercontrol()
 {
 	startTask(calwController);
-	calwRequestedValue = 605;
+	calwRequestedValue = 850;
 	startTask(drive);
 
   while (true)
@@ -91,10 +91,7 @@ task usercontrol()
 		{
 			calwRequestedValue = 1290;
 		}
-		else if( vexRT[Btn8D] == 1)      // Setting Btn7U to Extend Goal
-		{
-			calwRequestedValue = 655;
-		}
+
 
 
 		  	//----------------------Lift------------------------//
