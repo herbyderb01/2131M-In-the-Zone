@@ -472,7 +472,7 @@ task SkillsOne ()
 	mobileRRequestedValue = mobileOut;  // Outake mobile goal
 	WaitieThing();										  // Wait for Mobile Goal
 
-	Atondrive(-50, drivepower);         // Drive 175 encoder clicks
+	Atondrive(-75, drivepower);         // Drive 175 encoder clicks
 
 	mobileRRequestedValue = mobileIn;
 	WaitieThing();											 // Wait for Mobile Goal
@@ -482,7 +482,7 @@ task SkillsOne ()
 
 	turnLeft(Nine+50);
 
-	Atondrive(200, drivepower);         // Drive 190 encoder clicks
+	Atondrive(210, drivepower);         // Drive 190 encoder clicks
 
 	turnLeft(Nine+50);
 
@@ -502,7 +502,7 @@ task SkillsOne ()
 
 	turnLeft(Nine);
 
-	Atondrive(250, drivepower);         // Drive 180 encoder clicks
+	Atondrive(200, drivepower);         // Drive 180 encoder clicks
 
 	turnRight(Nine);
 
@@ -542,7 +542,7 @@ task SkillsOne ()
 	mobileRRequestedValue = mobileMid;  // Set mobile goal OUT
 	WaitieThing();                      // Wait until mobile goal is out
 
-	turnRight(full+120);
+	turnRight(full-10);
 
 	Atondrive(470, drivepower);         // Drive 450 encoder clicks
 
@@ -560,7 +560,7 @@ task SkillsOne ()
 	mobileRRequestedValue = mobileOut;  // Set mobile goal out
 
 	setDrivePower(-40, -40);            // Dead recon to bar for accuacy
-	wait1Msec(1800);
+	wait1Msec(1600);
 	setDrivePower(0, 0);
 
 	setMobilePower(20);
@@ -583,7 +583,7 @@ task SkillsOne ()
 
 	mobileRRequestedValue = mobileOut;  // Multi task to save time/outtake
 
-	turnRight(Nine+450);
+	turnRight(Nine+390);
 
 	Atondrive(600, drivepower);         // Drive 600 encoder clicks
 
@@ -606,11 +606,14 @@ task SkillsOne ()
 
 	Atondrive(-100, drivepower);
 
+	mobileRRequestedValue = mobileMid;  // Bring lift in so it can turn around
+	WaitieThing();											// Wait until it does so
+
 	turnLeft(Nine+50);
 
 	Atondrive(300, drivepower);
 
-	turnLeft(Nine+250);
+	turnLeft(Nine-250);
 
 	mobileRRequestedValue = mobileOut;  // Set Mobile goal Out to place in 10pt
 	WaitieThing();
@@ -622,13 +625,11 @@ task SkillsOne ()
 
 	Atondrive(-600, drivepower);
 
-	turnLeft(Nine+250);
+	turnRight(Nine+250);
 
 	Atondrive(100, drivepower);
 
 	mobileRRequestedValue = mobileOut;  // Bring lift in so it can turn around
-
-
 }
 
 task SkillsTwo ()

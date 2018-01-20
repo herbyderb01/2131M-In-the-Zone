@@ -245,24 +245,24 @@ startTask(drive);
 		if( vexRT[Btn8D] == 1)
 		{
 			setChainPower(127);
-			chainstillspeed=15;
+			chainstillspeed=20;
 		}
 
 		else if( vexRT[Btn8R] == 1)
 		{
 			setChainPower(-127);
-			chainstillspeed=-15;
+			chainstillspeed=-20;
 		}
 		else if( vexRT[Btn8DXmtr2] == 1)
 		{
 			setChainPower(127);
-			chainstillspeed=15;
+			chainstillspeed=20;
 		}
 
 		else if( vexRT[Btn8RXmtr2] == 1)
 		{
 			setChainPower(-127);
-			chainstillspeed=-15;
+			chainstillspeed=-20;
 		}
 
 		else
