@@ -132,16 +132,12 @@ wait1Msec(25);
 /*
 void AutoStackUp()									// Simple Auto stack cone up
 {
-
 	//Atondrive(1000, 100);
-
 }
 
 void AutoStackDown()									// Simple Auto stack cone down
 {
-
 //	Atondrive(1000, -100);
-
 }
 */
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//

@@ -1,6 +1,5 @@
 //----------------------LIFT PID----------------------//
 
-
 static float  liftR_Kp = 0.2; 	//Power Tuning Value
 static float  liftRRequestedValue;
 static float  liftR_Kd = 1;			// Requested Guess Value
