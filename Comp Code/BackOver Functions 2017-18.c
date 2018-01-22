@@ -9,17 +9,6 @@ float liftRP;
 float lastliftRError;
 float liftRDF;
 
-//lift Values Right
-//Clamp = 450
-//Straight = 2000
-//Locked = 3850
-//V = 1150
-
-//lift Values Left
-//Clamp = 4000
-//Straight = 2600
-//Locked = 1250
-//V = 3600
 task liftRController()
 {
 	float  liftRSensorCurrentValue;
@@ -73,17 +62,6 @@ float mobileRDF;
 int waitMobliERerror = 100;
 float  mobileRSensorCurrentValue;
 
-//mobile Values Right
-//Clamp = 450
-//Straight = 2000
-//Locked = 3850
-//V = 1150
-
-//mobile Values Left
-//Clamp = 4000
-//Straight = 2600
-//Locked = 1250
-//V = 3600
 task mobileRController()
 {
 	//float  mobileRSensorCurrentValue;
