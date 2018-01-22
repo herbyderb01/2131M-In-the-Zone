@@ -8,6 +8,18 @@ void setDrivePower(int left, int right)
 	motor[DriveR] = right;	//Define this motor as the right 3 motor drive
 }
 
+void setDrivePowerRight(int power)
+{// Defining all of the motors for the -DRIVE-
+	motor[RDrive] = power;	//Define this motor as the right drive
+	motor[DriveR] = power;	//Define this motor as the right 3 motor drive
+}
+
+void setDrivePowerLeft(int power)
+{// Defining all of the motors for the -DRIVE-
+	motor[LDrive] = power;		//Define this motor as the left drive
+	motor[DriveL] = power;		//Define this motor as the left 3 motor drive
+}
+
 void setLiftPower(int power)
 {// Defining all of the motors for the -LIFT-
 	motor[liftR] = power;
