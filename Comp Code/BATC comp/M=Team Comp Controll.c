@@ -68,35 +68,35 @@ task autonomous()
 	{
 			if (SensorValue[selectP] == 0) // Defensive - 1
 			{
-				startTask(Defensive);
+				Defensive();
 			}
 			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575) // Right Blue - 2
 			{
-				startTask(RightBlue);
+				RightBlue();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185) //Left Blue - 3
 			{
-				startTask(LeftBlue);
+				LeftBlue();
 			}
 			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)//Skils 1 - 4
 			{
-				startTask(SkillsOne);
+				SkillsOne();
 			}
 			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)//Skills 2 - 5
 			{
-				startTask(SkillsTwo);
+				SkillsTwo();
 			}
 			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)//Left Red - 6
 			{
-				startTask(LeftRed);
+				LeftRed();
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)//Right Red - 7
 			{
-				startTask(RightRed);
+				RightRed();
 			}
 			if (SensorValue[selectP] == 4095)//Do Nothing - 8
 			{
-				startTask(DoNothing);
+				DoNothing();
 			}
 
 	}
@@ -104,35 +104,35 @@ task autonomous()
 	{
 			if (SensorValue[selectP] == 0) // Defensive - 1
 			{
-				startTask(DefensiveTwo);
+				DefensiveTwo();
 			}
 			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575) // Right Blue - 2
 			{
-				startTask(RightBlueTwo);
+				RightBlueTwo();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185) //Left Blue - 3
 			{
-				startTask(LeftBlueTwo);
+				LeftBlueTwo();
 			}
 			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)//Skils 1 - 4
 			{
-				startTask(SkillsOne);
+				SkillsOne();
 			}
 			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)//Skills 2 - 5
 			{
-				startTask(SkillsTwo);
+				SkillsTwo();
 			}
 			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)//Left Red - 6
 			{
-				startTask(LeftRedTwo);
+				LeftRedTwo();
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)//Right Red - 7
 			{
-				startTask(RightRedTwo);
+				RightRedTwo();
 			}
 			if (SensorValue[selectP] == 4095)//Do Nothing - 8
 			{
-				startTask(DoNothingTwo);
+				DoNothingTwo();
 			}
 
 	}
