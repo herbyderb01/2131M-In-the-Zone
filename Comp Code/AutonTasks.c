@@ -13,39 +13,6 @@ int mobileOut = 3260;
 int mobileMid = 1860;
 int mobileSMid = 2770;
 //#endregion
-//#region motor set up
-//-------------Motor Void Set-Up--------------//
-void setDrivePower(int left, int right)
-{// Defining all of the motors for the -DRIVE-
-	motor[LDrive] = left;		//Define this motor as the left drive
-	motor[RDrive] = right;	//Define this motor as the right drive
-	motor[DriveL] = left;		//Define this motor as the left 3 motor drive
-	motor[DriveR] = right;	//Define this motor as the right 3 motor drive
-}
-
-void setLiftPower(int power)
-{// Defining all of the motors for the -LIFT-
-	motor[liftR] = power;
-	motor[liftL] = power;
-}
-
-void setChainPower(int cpower)
-{// Defining all of the motors for the -CHAIN BAR-
-	motor[chain] = cpower;
-}
-
-void setIntakePower(int Ipower)
-{// Defining all of the motors for the -INTAKE-
-	motor[INtake] = Ipower;
-}
-
-void setMobilePower(int Mpower)
-{// Defining all of the motors for the -MOBILE GOAL INTAKE-
-	motor[MobileL] = Mpower;
-	motor[MobileR] = Mpower;
-}
-//_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
-//#endregion
 //#region Autonomous Voids
 //--------------------Autonomous Voids-----------------------//
 void AutoStrait(int distance, int power)
