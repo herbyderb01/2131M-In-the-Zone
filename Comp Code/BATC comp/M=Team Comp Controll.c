@@ -54,6 +54,7 @@ task autonomous()
 	//startTask(chainRController);
 	startTask(liftRController);
 	startTask(mobileRController);  //Start Mobile PID
+	startTask(DrivePID);
 	liftRSensorCurrentValue = SensorValue[ liftP ];
 	//chainRRequestedValue = StraitUpChain;
 	/*

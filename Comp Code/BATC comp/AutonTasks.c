@@ -873,7 +873,11 @@ void Defensive ()
 
 void DoNothing ()
 {
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = 2600;          // PRESETS
+	while(1==1)
+	{
+		
+	}
 }
 
 void DefensiveTwo ()

@@ -39,7 +39,7 @@ task RPIDDriveController()
 
   		// send to motor
 
-  		setDrivePowerRight(DriveRDrive);
+  		setDrivePowerRight(-DriveRDrive);
 
   		lastDriveRError = DriveRError;
 
@@ -102,14 +102,6 @@ task DrivePID()
 {
   startTask(RPIDDriveController);
   startTask(LPIDDriveController);
-
-  SensorValue[rightEncoder] = 0;
-  SensorValue[leftEncoder] = 0;
-  SensorValue[Gyro] = 0;
-
-  while(true)
-  {
-  }
   // Don't hog cpu
   wait1Msec( 25 );
 }
