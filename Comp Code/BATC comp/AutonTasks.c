@@ -716,7 +716,7 @@ void RightRed ()
 
 	turnRight(full-300);
 
-	Atondrive(100, drivepower)
+	Atondrive(100, drivepower);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
@@ -877,11 +877,12 @@ void DoNothing ()
 	liftRRequestedValue = 2600;          // PRESETS
 	while(1==1)
 	{
-		droveStraight(12,true);
-		liftRRequestedValue=3000;
-		droveStraight(-12);
-	liftRRequestedValue = 2600;
-	wait1Msec(3000)
+		droveStraight(900,true);
+		liftRRequestedValue=2200;
+		wait1Msec(2000);
+		droveStraight(-900);
+	liftRRequestedValue = 3000;
+	wait1Msec(3000);
 	}
 }
 

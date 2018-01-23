@@ -1,5 +1,5 @@
 float wheelDiameter = 4;
-int driveStraightError = 50;
+int driveStraightError = 100;
 
 
 //----------------------Right Drive PID----------------------//
@@ -111,13 +111,15 @@ void droveStraight(float distance, bool waity = false)
   SensorValue[rightEncoder] = 0;
   SensorValue[leftEncoder] = 0;
 
-  distance=InchesToCounts(distance);
+  //distance=InchesToCounts(distance);
 
   DriveRRequestedValue = distance;
   DriveLRequestedValue = distance;
   if (waity)
   {
-    while (abs(SensorValue[leftEncoder]) - abs(distance) <= driveStraightError){}
+  //  distance = abs(distance); //help
+    while( -SensorValue[ leftEncoder ] >= DriveLRequestedValue + driveStraightError
+		|| -SensorValue[ leftEncoder ] <= DriveLRequestedValue - driveStraightError){}
     wait1Msec(200);
   }
 }
