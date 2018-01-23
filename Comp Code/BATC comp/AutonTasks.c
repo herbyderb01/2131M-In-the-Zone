@@ -1,4 +1,5 @@
 #include "BackOver Functions 2017-18.c"
+#include "Drive PID.c"
 //#region Variables
 //-------------Variables--------------//
 // Random variable for turn and drive
@@ -876,7 +877,11 @@ void DoNothing ()
 	liftRRequestedValue = 2600;          // PRESETS
 	while(1==1)
 	{
-		
+		droveStraight(12,true);
+		liftRRequestedValue=3000;
+		droveStraight(-12);
+	liftRRequestedValue = 2600;
+	wait1Msec(3000)
 	}
 }
 

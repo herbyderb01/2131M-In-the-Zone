@@ -1,13 +1,18 @@
+float wheelDiameter = 4;
+int driveStraightError = 50;
+
+
 //----------------------Right Drive PID----------------------//
 
-static float  DriveR_Kp = 0.45; 	//Power Tuning Value
+static float  DriveR_Kp = 0.6; 	//Power Tuning Value
 static float  DriveRRequestedValue;
-static float  DriveR_Kd = 0.03;			// Requested Guess Value
+static float  DriveR_Kd = 4;			// Requested Guess Value
 
 float DriveRD;
 float DriveRP;
 float lastDriveRError;
 float DriveRDF;
+
 
 task RPIDDriveController()
 {
@@ -39,7 +44,7 @@ task RPIDDriveController()
 
   		// send to motor
 
-  		setDrivePowerRight(-DriveRDrive);
+  		setDrivePowerRight(DriveRDrive);
 
   		lastDriveRError = DriveRError;
 
@@ -50,9 +55,9 @@ task RPIDDriveController()
 
 //----------------------Left Drive PID----------------------//
 
-static float  DriveL_Kp = 0.45; 	//Power Tuning Value
+static float  DriveL_Kp = 0.6; 	//Power Tuning Value
 static float  DriveLRequestedValue;
-static float  DriveL_Kd = 0.03;			// Requested Guess Value
+static float  DriveL_Kd = 4;			// Requested Guess Value
 
 float DriveLD;
 float DriveLP;
@@ -68,7 +73,7 @@ task LPIDDriveController()
   	while( true )
   	{
   		// Read the sensor value and scale
-  		DriveLSensorCurrentValue = SensorValue[ leftEncoder ];
+  		DriveLSensorCurrentValue = -SensorValue[ leftEncoder ];
 
   		// calculate error
   		DriveLError =  DriveLRequestedValue - DriveLSensorCurrentValue;
@@ -89,7 +94,7 @@ task LPIDDriveController()
 
   		// send to motor
 
-  		setDrivePowerLeft(-DriveLDrive);
+  		setDrivePowerLeft(DriveLDrive);
 
   		lastDriveLError = DriveLError;
 
@@ -97,11 +102,22 @@ task LPIDDriveController()
   		wait1Msec( 25 );
   	}
 }
-
-task DrivePID()
+int InchesToCounts(float value) //converts drive encoder counts into inches
 {
-  startTask(RPIDDriveController);
-  startTask(LPIDDriveController);
-  // Don't hog cpu
-  wait1Msec( 25 );
+  return (value * 360)/(PI * wheelDiameter);
+}
+void droveStraight(float distance, bool waity = false)
+{
+  SensorValue[rightEncoder] = 0;
+  SensorValue[leftEncoder] = 0;
+
+  distance=InchesToCounts(distance);
+
+  DriveRRequestedValue = distance;
+  DriveLRequestedValue = distance;
+  if (waity)
+  {
+    while (abs(SensorValue[leftEncoder]) - abs(distance) <= driveStraightError){}
+    wait1Msec(200);
+  }
 }
