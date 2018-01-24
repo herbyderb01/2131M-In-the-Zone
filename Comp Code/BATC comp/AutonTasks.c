@@ -89,10 +89,22 @@ task drive() //Redirecting Drive into a task
 {
 	while (true)
 	{
-		setDrivePower(vexRT[Ch3], vexRT[Ch2]);
+	if (abs(vexRT[Ch3])+ abs(vexRT[Ch2])>10)
+	{
+		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
 	}
-wait1Msec(25);
-}
+  else
+		{
+			setDrivePower(vexRT[Ch3Xmtr2],vexRT[Ch2Xmtr2]);
+		}
+				//DrivePower(vexRT[Ch3Xmtr2], vexRT[Ch2Xmtr2]);
+		}
+				//setDrivePower(vexRT[Ch3]+vexRT[Ch3Xmtr2],vexRT[Ch2]+vexRT[Ch2Xmtr2]);
+
+		wait1Msec(25); //dont hog cpu
+	}
+
+
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
 //#region Special Auto Stack Voids

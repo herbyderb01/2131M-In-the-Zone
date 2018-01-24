@@ -187,17 +187,6 @@ startTask(drive);
 			setLiftPower(127);
 			liftstillspeed=15;
 		}
-		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D to lift Down
-		{
-			setLiftPower(-127);
-			liftstillspeed=-15;
-		}
-
-		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5U to lift Up
-		{
-			setLiftPower(127);
-			liftstillspeed=15;
-		}
 		else
 		{
 			setLiftPower(liftstillspeed);
@@ -211,15 +200,6 @@ startTask(drive);
 		}
 
 		else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Outtake Cone
-		{
-			setIntakePower(-127);
-		}
-		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
-		{
-			setIntakePower(127);
-		}
-
-		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn6D to Outtake Cone
 		{
 			setIntakePower(-127);
 		}
@@ -238,6 +218,14 @@ startTask(drive);
 		{
 			setMobilePower(-127);
 		}
+		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(-127);
+		}
+		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(127);
+		}
 		else
 		{
 			setMobilePower(0);      // Else, stop mobile motors
@@ -251,17 +239,6 @@ startTask(drive);
 		}
 
 		else if( vexRT[Btn8R] == 1)
-		{
-			setChainPower(-127);
-			chainstillspeed=-20;
-		}
-		else if( vexRT[Btn8DXmtr2] == 1)
-		{
-			setChainPower(127);
-			chainstillspeed=20;
-		}
-
-		else if( vexRT[Btn8RXmtr2] == 1)
 		{
 			setChainPower(-127);
 			chainstillspeed=-20;
