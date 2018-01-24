@@ -1,4 +1,3 @@
-//#region Pragmas and includes
 #pragma config(Sensor, in1,    clawp,          sensorPotentiometer)
 #pragma config(Sensor, in2,    liftPot,        sensorPotentiometer)
 #pragma config(Sensor, in3,    selectpot,      sensorPotentiometer)
@@ -20,10 +19,10 @@
 #pragma competitionControl(Competition)
 
 #include "Vex_Competition_Includes.c"
+
 #include "PIDS&Motors&Vars.c"
 #include "AtonPrograms.c"
 #include "Drive PID.c"
-//#endregion
 //#region Drive Task
 task drive() //Redirecting Drive into a task
 {
@@ -54,15 +53,17 @@ task autonomous()
 
 	startTask(calwController);
 	startTask(liftRController);
-	startTask(DriveController);
+	startTask(RPIDDriveController);
+	startTask(LPIDDriveController);
+
 
 	if (SensorValue[selectpot] < 2045)
 	{
-		startTask(Skills);
+		Skills();
 	}
 	if (SensorValue[selectpot] > 2045)
 	{
-		startTask(TenPoint);
+		TenPoint();
 	}
 
 

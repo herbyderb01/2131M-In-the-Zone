@@ -110,8 +110,6 @@ int InchesToCounts(float value) //converts drive encoder counts into inches
 {
   return (value * 360)/(PI * wheelDiameter);
 }
-#endregion
-#region
 void droveStraight(float distance, bool waity = false)
 {
   SensorValue[rightEncoder] = 0;
