@@ -75,7 +75,7 @@ task LPIDDriveController()
   	while( true )
   	{
   		// Read the sensor value and scale
-  		DriveLSensorCurrentValue = -SensorValue[ leftEncoder ];
+  		DriveLSensorCurrentValue = SensorValue[ leftEncoder ];
 
   		// calculate error
   		DriveLError =  DriveLRequestedValue - DriveLSensorCurrentValue;
@@ -122,8 +122,8 @@ void droveStraight(float distance, bool waity = false)
   if (waity)
   {
   //  distance = abs(distance); //help
-    while( -SensorValue[ leftEncoder ] >= DriveLRequestedValue + driveStraightError
-		|| -SensorValue[ leftEncoder ] <= DriveLRequestedValue - driveStraightError){}
+    while( SensorValue[ leftEncoder ] >= DriveLRequestedValue + driveStraightError
+		|| SensorValue[ leftEncoder ] <= DriveLRequestedValue - driveStraightError){}
     wait1Msec(200);
   }
 }
