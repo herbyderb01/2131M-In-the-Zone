@@ -1,4 +1,6 @@
 #include "PIDS&Motors&Vars.c"
+
+//#region Old Drive Void
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //--------------------Autonomous Voids-----------------------//
 /*
@@ -45,14 +47,8 @@ void Atondrive(int ticks, int power)
 	wait1Msec(100);
 }
 */
-void drivePID(int distance)
-{
-	SensorValue[rightEncoder] = 0;
-	SensorValue[leftEncoder] = 0;
-
-	DriveRequestedValue = distance;
-}
-
+//#endregion
+//#region Turn Voids
 void turnRight(int ticks) // void to turn the robot right as much as you want
 {
 	//Clear Gyro
@@ -78,3 +74,4 @@ void turnLeft(int ticks) // void to turn the robot left as much as you want
 	}
 	setDrivePower(10,-10); //then stop}
 }
+//#endregion

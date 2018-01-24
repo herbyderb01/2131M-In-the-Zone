@@ -1,6 +1,8 @@
+//#region global variables
 float wheelDiameter = 4;
 int driveStraightError = 100;
-
+//#endregion
+//#region Right Drive PID
 //----------------------Right Drive PID----------------------//
 
 static float  DriveR_Kp = 0.6; 	//Power Tuning Value
@@ -51,7 +53,8 @@ task RPIDDriveController()
   		wait1Msec( 25 );
   	}
 }
-
+//#endregion
+//#region Left Drive PID
 //----------------------Left Drive PID----------------------//
 
 static float  DriveL_Kp = 0.6; 	//Power Tuning Value
@@ -101,10 +104,14 @@ task LPIDDriveController()
   		wait1Msec( 25 );
   	}
 }
+//#endregion
+//#region Converter
 int InchesToCounts(float value) //converts drive encoder counts into inches
 {
   return (value * 360)/(PI * wheelDiameter);
 }
+#endregion
+#region
 void droveStraight(float distance, bool waity = false)
 {
   SensorValue[rightEncoder] = 0;
@@ -122,3 +129,4 @@ void droveStraight(float distance, bool waity = false)
     wait1Msec(200);
   }
 }
+//#endregion

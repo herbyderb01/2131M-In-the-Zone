@@ -1,9 +1,11 @@
+//#region Variables
 //-----------------Variables-----------------//
 int drivepower;
 int drivepowerPID = 127;
 
 int liftStillSpeed;
-
+//#endregion
+//#region Motor Port Voids
 //-------------Motor Void Set-Up--------------//
 
 void setDrivePower(int left, int right)
@@ -27,54 +29,8 @@ void setLiftPower(int Lpower)
 	motor[LTwo] = Lpower;
 	motor[LThree] = Lpower;
 }
-
-//----------------------Drive PID----------------------//
-
-static float  Drive_Kp = 0.30; //Power Tuning Value
-static float  DriveRequestedValue;
-static float  Drive_Kd = 0.5; // Requested Guess Value
-
-float DriveD;						//Establishing variables
-float DriveP;
-float lastDriveError;
-float DriveDF;
-float DriveSensorCurrentValue;
-
-task DriveController()
-{
-	float  DriveError;
-	float  DriveDrive;
-
-	while( true )
-	{
-		// Read the sensor value and scale
-		DriveSensorCurrentValue = SensorValue[ rightEncoder ];
-		// calculate error
-		DriveError =  DriveRequestedValue - DriveSensorCurrentValue;
-
-		// calculate drive
-		DriveP = (Drive_Kp * DriveError);
-
-		DriveD = DriveError- lastDriveError;
-		DriveDF = (Drive_Kd * DriveD);
-
-		DriveDrive = DriveP + DriveDF;
-
-		// limit drive
-		if( DriveDrive > 127 )
-			DriveDrive = 127;
-		if( DriveDrive < (-127) )
-			DriveDrive = (-127);
-
-		// send to motor
-
-		setDrivePower(drivepowerPID , drivepowerPID);
-
-		lastDriveError = DriveError;
-		// Don't hog cpu
-		wait1Msec( 25 );
-	}
-}
+//#endregion
+//#region Lift PID
 //----------------------LIFT PID----------------------//
 
 
@@ -125,6 +81,8 @@ task liftRController()
 		wait1Msec( 25 );
 	}
 }
+//#endregion
+//#region CLaw PID
 //----------------------Claw PID----------------------//
 
 static float  calw_Kp = 0.30; //Power Tuning Value
@@ -174,3 +132,4 @@ task calwController()
 		wait1Msec( 25 );
 	}
 }
+//#endregion
