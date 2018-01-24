@@ -226,6 +226,16 @@ startTask(drive);
 		{
 			setMobilePower(127);
 		}
+		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(-64);
+		}
+		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(64);
+		}
+
+
 		else
 		{
 			setMobilePower(0);      // Else, stop mobile motors
