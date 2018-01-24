@@ -1,7 +1,6 @@
 float wheelDiameter = 4;
 int driveStraightError = 100;
 
-
 //----------------------Right Drive PID----------------------//
 
 static float  DriveR_Kp = 0.6; 	//Power Tuning Value
