@@ -87,6 +87,11 @@ void turnLeft(int ticks) // void to turn the robot left as much as you want
 
 task drive() //Redirecting Drive into a task
 {
+	while(true)
+	{
+	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
+	}
+	/*
 	while (true)
 	{
 	if (abs(vexRT[Ch3])+ abs(vexRT[Ch2])>10)
@@ -100,7 +105,7 @@ task drive() //Redirecting Drive into a task
 				//DrivePower(vexRT[Ch3Xmtr2], vexRT[Ch2Xmtr2]);
 		}
 				//setDrivePower(vexRT[Ch3]+vexRT[Ch3Xmtr2],vexRT[Ch2]+vexRT[Ch2Xmtr2]);
-
+*/
 		wait1Msec(25); //dont hog cpu
 	}
 
