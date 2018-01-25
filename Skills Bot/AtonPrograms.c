@@ -4,23 +4,29 @@
 //#region Skills
  void Skills ()
 {
-  calwRequestedValue = 705;
-  liftRRequestedValue = 1500;
+  calwRequestedValue = 1266;
+  liftRRequestedValue = 2100;
+
+  droveStraight(800,true);
+
+  calwRequestedValue = 880;
+  wait1Msec(1000);
+
+  liftRRequestedValue = 1000;
+
+  droveStraight(2300,true);
 
 }
 //#endregion
 //#region Ten Point AtonPrograms
 void TenPoint ()
 {
-  liftRRequestedValue = 2600;          // PRESETS
-	while(1==1)
-	{
-		droveStraight(900,true);
-		liftRRequestedValue=2200;
-		wait1Msec(2000);
-		droveStraight(-900);
-	liftRRequestedValue = 3000;
-	wait1Msec(3000);
-	}
+  liftRRequestedValue = 1800;          // PRESETS
+
+  droveStraight(900);
+  wait1Msec(200);
+
+//  Turn(rightTurn);
+
 }
 //#endregion

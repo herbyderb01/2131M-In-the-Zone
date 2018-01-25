@@ -3,6 +3,9 @@
 int drivepower;
 int drivepowerPID = 127;
 
+int rightTurn = -900;
+int leftTurn = 900;
+
 int liftStillSpeed;
 //#endregion
 //#region Motor Port Voids
@@ -87,7 +90,7 @@ task liftRController()
 
 		// send to motor
 
-		setLiftPower(127);
+		setLiftPower(liftRDrive);
 
 		lastliftRError = liftRError;
 

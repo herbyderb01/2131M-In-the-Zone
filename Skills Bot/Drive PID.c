@@ -105,13 +105,73 @@ task LPIDDriveController()
   	}
 }
 //#endregion
-//#region Converter
+
+//----------------------Turn PID----------------------//
+
+static float  DriveT_Kp = 0.6; 	//Power Tuning Value
+static float  DriveTRequestedValue;
+static float  DriveT_Kd = 2.5;			// Requested Guess Value
+
+float DriveTD;
+float DriveTP;
+float lastDriveTError;
+float DriveTDF;
+
+task TPIDDriveController()
+{
+  float  DriveTSensorCurrentValue;
+	float  DriveTError;
+	float  DriveTDrive;
+
+  	while( true )
+  	{
+  		// Read the sensor value and scale
+  		DriveTSensorCurrentValue = SensorValue[ Gyro ];
+
+  		// calculate error
+  		DriveTError =  DriveTRequestedValue - DriveTSensorCurrentValue;
+
+  		// calculate drive
+  		DriveTP = (DriveT_Kp * DriveTError);
+
+  		DriveTD = DriveTError- lastDriveTError;
+  		DriveTDF = (DriveT_Kd * DriveTD);
+
+  		DriveTDrive = DriveTP + DriveTDF;
+
+  		// limit drive
+  		if( DriveTDrive > 127 )
+  			DriveTDrive = 127;
+  		if( DriveTDrive < (-127) )
+  			DriveTDrive = (-127);
+
+  		// send to motor
+
+  		setDrivePowerLeft(-DriveTDrive);
+      setDrivePowerRight(DriveTDrive);
+
+  		lastDriveTError = DriveTError;
+
+  		// Don't hog cpu
+  		wait1Msec( 25 );
+  	}
+}
+
+
+//#region Converter and Called task
 int InchesToCounts(float value) //converts drive encoder counts into inches
 {
   return (value * 360)/(PI * wheelDiameter);
 }
+
 void droveStraight(float distance, bool waity = false)
 {
+  stopTask(TPIDDriveController);
+  
+  startTask(RPIDDriveController);
+  startTask(LPIDDriveController);
+
+
   SensorValue[rightEncoder] = 0;
   SensorValue[leftEncoder] = 0;
 
@@ -126,5 +186,18 @@ void droveStraight(float distance, bool waity = false)
 		|| SensorValue[ leftEncoder ] <= DriveLRequestedValue - driveStraightError){}
     wait1Msec(200);
   }
+  wait1Msec(25);
+}
+
+void Turn (int turnAmount)
+{
+  stopTask(RPIDDriveController);
+  stopTask(LPIDDriveController);
+
+  startTask(TPIDDriveController);
+
+  SensorValue[Gyro] = 0;
+  DriveTRequestedValue = turnAmount;
+  wait1Msec(25);
 }
 //#endregion
