@@ -83,8 +83,6 @@ task usercontrol()
 	startTask(calwController);
 	calwRequestedValue = 850;
 	startTask(drive);
-		startTask(TPIDDriveController);
-
 
   while (true)
   {

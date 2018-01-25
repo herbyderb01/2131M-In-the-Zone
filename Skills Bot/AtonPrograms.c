@@ -4,8 +4,8 @@
 //#region Skills
  void Skills ()
 {
-  calwRequestedValue = 1266;
-  liftRRequestedValue = 2100;
+  setClawTo(1222,true);
+  LiftTo(2180,true);
 
   droveStraight(800,true);
 
@@ -21,10 +21,11 @@
 //#region Ten Point AtonPrograms
 void TenPoint ()
 {
-  liftRRequestedValue = 1800;          // PRESETS
+  setClawTo(1222,true);
 
-  droveStraight(900);
-  wait1Msec(200);
+  LiftTo(2180,true);
+  wait1Msec(2000);
+  LiftTo(1500,true);
 
 //  Turn(rightTurn);
 

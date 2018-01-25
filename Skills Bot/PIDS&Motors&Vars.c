@@ -7,6 +7,10 @@ int rightTurn = -900;
 int leftTurn = 900;
 
 int liftStillSpeed;
+int liftWaityError = 50;
+
+int clawWaityError = 50;
+
 //#endregion
 //#region Motor Port Voids
 //-------------Motor Void Set-Up--------------//
@@ -98,6 +102,20 @@ task liftRController()
 		wait1Msec( 25 );
 	}
 }
+
+void LiftTo (int Height, bool waity = false)
+{
+	liftRRequestedValue = Height;
+
+	if (waity)
+	{
+	//  distance = abs(distance); //help
+		while( SensorValue[ liftPot ] >= liftRRequestedValue + liftWaityError
+		|| SensorValue[ liftPot ] <= liftRRequestedValue - liftWaityError){}
+		wait1Msec(200);
+	}
+	wait1Msec(25);
+}
 //#endregion
 //#region CLaw PID
 //----------------------Claw PID----------------------//
@@ -148,5 +166,19 @@ task calwController()
 		// Don't hog cpu
 		wait1Msec( 25 );
 	}
+}
+
+void setClawTo (int position, bool waity = false)
+{
+	calwRequestedValue = position;
+
+	if (waity)
+	{
+	//  distance = abs(distance); //help
+		while( SensorValue[ liftPot ] >= calwRequestedValue + clawWaityError
+		|| SensorValue[ liftPot ] <= calwRequestedValue - clawWaityError){}
+		wait1Msec(200);
+	}
+	wait1Msec(25);
 }
 //#endregion
