@@ -26,7 +26,7 @@
 //include both Void programs, and PID
 #include "BackOver Functions 2017-18.c"
 #include "AutonTasks.c"
-#include "Drive PID.c"
+//#include "Drive PID.c"
 
 int liftstillspeed;      //define the liftstillspeed
 int chainstillspeed;      //define the chainstillspeed
@@ -51,11 +51,10 @@ void pre_auton()
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
-	//startTask(chainRController);
 	startTask(liftRController);
 	startTask(mobileRController);  //Start Mobile PID
-	startTask(LPIDDriveController);
-	startTask(RPIDDriveController);
+	//startTask(LPIDDriveController);
+	//startTask(RPIDDriveController);
 	liftRSensorCurrentValue = SensorValue[ liftP ];
 	//chainRRequestedValue = StraitUpChain;
 	/*
@@ -116,13 +115,9 @@ task autonomous()
 			{
 				LeftBlueTwo();
 			}
-			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)//Skils 1 - 4
+			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 2410)//Special Aton
 			{
 				SkillsOne();
-			}
-			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)//Skills 2 - 5
-			{
-				SkillsTwo();
 			}
 			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)//Left Red - 6
 			{
