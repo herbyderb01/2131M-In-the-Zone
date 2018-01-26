@@ -7,7 +7,7 @@ int rightTurn = -900;
 int leftTurn = 900;
 
 int liftStillSpeed;
-int liftWaityError = 50;
+int liftWaityError = 150;
 
 int clawWaityError = 50;
 
@@ -94,7 +94,7 @@ task liftRController()
 
 		// send to motor
 
-		setLiftPower(liftRDrive);
+		setLiftPower(-liftRDrive);
 
 		lastliftRError = liftRError;
 

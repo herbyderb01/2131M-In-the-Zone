@@ -108,7 +108,7 @@ task LPIDDriveController()
 
 //----------------------Turn PID----------------------//
 
-static float  DriveT_Kp = 0.6; 	//Power Tuning Value
+static float  DriveT_Kp = 0.5; 	//Power Tuning Value
 static float  DriveTRequestedValue;
 static float  DriveT_Kd = 2.5;			// Requested Guess Value
 
@@ -167,7 +167,7 @@ int InchesToCounts(float value) //converts drive encoder counts into inches
 void droveStraight(float distance, bool waity = false)
 {
   stopTask(TPIDDriveController);
-  
+
   startTask(RPIDDriveController);
   startTask(LPIDDriveController);
 
@@ -189,7 +189,7 @@ void droveStraight(float distance, bool waity = false)
   wait1Msec(25);
 }
 
-void Turn (int turnAmount)
+void Turn (int turnAmount,int waity=false)
 {
   stopTask(RPIDDriveController);
   stopTask(LPIDDriveController);
@@ -198,6 +198,15 @@ void Turn (int turnAmount)
 
   SensorValue[Gyro] = 0;
   DriveTRequestedValue = turnAmount;
+  if (waity)
+  {
+    {
+    //  distance = abs(distance); //help
+      while( SensorValue[ Gyro ] >= DriveTRequestedValue + driveStraightError
+  		|| SensorValue[ Gyro ] <= DriveTRequestedValue - driveStraightError){}
+      wait1Msec(200);
+    }
+  }
   wait1Msec(25);
 }
 //#endregion
