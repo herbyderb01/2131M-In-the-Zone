@@ -302,10 +302,12 @@ startTask(drive);
     }
     initalize=0;
 
+    	setChainPower(20);
+
     //---------------------PreLoad Task-----------------------------//
     if (vexRT[Btn7R] == 1)
     {
-    	Preload();
+    	//Preload();
     }
 			//----------------------Moblie Goal Lift------------------------//
 			if( vexRT[Btn6U] == 1)      // Setting Btn7U to Extend Goal
