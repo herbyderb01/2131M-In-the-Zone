@@ -86,12 +86,12 @@ void turnLeft(int ticks) // void to turn the robot left as much as you want
 }
 
 task drive() //Redirecting Drive into a task
-{
+{/*
 	while(true)
 	{
 	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
 	}
-	/*
+	*/
 	while (true)
 	{
 	if (abs(vexRT[Ch3])+ abs(vexRT[Ch2])>10)
@@ -105,7 +105,7 @@ task drive() //Redirecting Drive into a task
 				//DrivePower(vexRT[Ch3Xmtr2], vexRT[Ch2Xmtr2]);
 		}
 				//setDrivePower(vexRT[Ch3]+vexRT[Ch3Xmtr2],vexRT[Ch2]+vexRT[Ch2Xmtr2]);
-*/
+
 		wait1Msec(25); //dont hog cpu
 	}
 
@@ -517,30 +517,30 @@ void SkillsOne ()
 
 	turnLeft(Nine);
 
-	Atondrive(250, drivepower);         // Drive 220 encoder clicks
+	Atondrive(220, drivepower);         // Drive 220 encoder clicks
 
 	turnLeft(Nine+120);
 
 	mobileRRequestedValue = mobileOut+10;  // Set Mobile goal Out
 	WaitieThing();                      // Wait until mobile goal is out
 
-	setDrivePower(-40, -40);            // Dead Recon to bar for accuracy
+	setDrivePower(-30, -40);            // Dead Recon to bar for accuracy
 	wait1Msec(1000);
 	setDrivePower(0, 0);
 
-	Atondrive(450, drivepower);         // Drive 420 encoder clicks
+	Atondrive(550, drivepower);         // Drive 420 encoder clicks
 
 	mobileRRequestedValue = mobileMid;  // Set mobile goal OUT
 	WaitieThing();                      // Wait until mobile goal is out
 
-	turnRight(full-10);
+	turnRight(full);
 
-	Atondrive(470, drivepower);         // Drive 450 encoder clicks
+	Atondrive(520, drivepower);         // Drive 450 encoder clicks
 
 	mobileRRequestedValue = mobileOut;  // Set Mobile goal Out
 	WaitieThing();                      // Wait until mobile goal is out
 
-	Atondrive(-40, drivepower);         // Drive back 40 encoder clicks
+	Atondrive(-50, drivepower);         // Drive back 40 encoder clicks
 
 	mobileRRequestedValue = mobileMid;  // Set mobile goal to middle position
 	Atondrive(-50, drivepower);         // Drive back 50 encoder clicks
@@ -550,7 +550,7 @@ void SkillsOne ()
 
 	mobileRRequestedValue = mobileOut;  // Set mobile goal out
 
-	setDrivePower(-40, -40);            // Dead recon to bar for accuacy
+	setDrivePower(-30, -40);            // Dead recon to bar for accuacy
 	wait1Msec(1600);
 	setDrivePower(0, 0);
 
@@ -574,7 +574,7 @@ void SkillsOne ()
 
 	mobileRRequestedValue = mobileOut;  // Multi task to save time/outtake
 
-	turnRight(Nine+390);
+	turnRight(Nine+360);
 
 	Atondrive(600, drivepower);         // Drive 600 encoder clicks
 
@@ -600,16 +600,12 @@ void SkillsOne ()
 	mobileRRequestedValue = mobileMid;  // Bring lift in so it can turn around
 	WaitieThing();											// Wait until it does so
 
-	turnLeft(Nine+50);
-
-	Atondrive(300, drivepower);
-
-	turnLeft(Nine-250);
+	turnLeft(Nine+300);
 
 	mobileRRequestedValue = mobileOut;  // Set Mobile goal Out to place in 10pt
 	WaitieThing();
 
-	Atondrive(600, drivepower);
+	Atondrive(900, drivepower);
 
 	mobileRRequestedValue = mobileMid;  // Bring lift in so it can turn around
 	WaitieThing();											// Wait until it does so
@@ -642,7 +638,7 @@ void LeftRed ()
 
 	setChainPower(20);
 
-	Atondrive(800, 127);
+	Atondrive(850, 127);
 
 	wait1Msec(200);
 
@@ -659,7 +655,7 @@ void LeftRed ()
 
 	//--------------------------//
 
-	Atondrive(-550, 127);
+	Atondrive(-800, 127);
 
 	liftRRequestedValue = 3000;
 	wait1Msec(200);
@@ -678,7 +674,7 @@ void LeftRed ()
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	Atondrive(-80, drivepower);
+	Atondrive(-200, drivepower);
 
 	mobileRRequestedValue = mobileIn;
 	WaitieThing();
@@ -905,6 +901,7 @@ void Defensive ()
 
 void DoNothing ()
 {
+	liftRRequestedValue = 2600;           // PRESETS
 }
 
 void DefensiveTwo ()
