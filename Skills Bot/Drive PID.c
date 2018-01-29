@@ -1,6 +1,13 @@
 //#region global variables
 float wheelDiameter = 4;
 int driveStraightError = 100;
+
+//Drive ramp values
+int rampInterval = 1;
+int normalRampSpeed = 7;
+int highRampSpeed = 30;
+int deadband = 10;
+
 //#endregion
 //#region Right Drive PID
 //----------------------Right Drive PID----------------------//
@@ -45,7 +52,8 @@ task RPIDDriveController()
 
   		// send to motor
 
-  		setDrivePowerRight(DriveRDrive);
+  		//setDrivePowerRight(DriveRDrive);
+      RDriveRampRequest = DriveRDrive;
 
   		lastDriveRError = DriveRError;
 
@@ -96,7 +104,7 @@ task LPIDDriveController()
 
   		// send to motor
 
-  		setDrivePowerLeft(DriveLDrive);
+  		LDriveRampRequest = DriveLDrive;
 
   		lastDriveLError = DriveLError;
 
@@ -105,7 +113,7 @@ task LPIDDriveController()
   	}
 }
 //#endregion
-
+//#region Turn PID
 //----------------------Turn PID----------------------//
 
 static float  DriveT_Kp = 0.5; 	//Power Tuning Value
@@ -156,8 +164,73 @@ task TPIDDriveController()
   		wait1Msec( 25 );
   	}
 }
+//#endregion
+//#region Right Ramping
+int RDriveRampRequest;
+int RDriveRampCurrent;
 
+int LDriveRampRequest;
+int LDriveRampCurrent;
 
+task rightDriveRamping()
+{
+  if(RDriveRampRequest > deadband)
+  {
+   if(RDriveRampCurrent < RDriveRampRequest && RDriveRampCurrent < 30)
+   RDriveRampCurrent += highRampSpeed;
+   else if(RDriveRampCurrent < RDriveRampRequest)
+   RDriveRampCurrent += normalRampSpeed;
+   else if(RDriveRampCurrent >= RDriveRampRequest)
+   RDriveRampCurrent = RDriveRampRequest;
+  }
+
+  else if(abs(RDriveRampRequest) <= deadband)
+  RDriveRampCurrent = 0;
+
+  if(RDriveRampRequest < -deadband)
+  {
+   if(RDriveRampCurrent > RDriveRampRequest && RDriveRampCurrent > -30)
+   RDriveRampCurrent -= highRampSpeed;
+   else if(RDriveRampCurrent > RDriveRampRequest)
+   RDriveRampCurrent -= normalRampSpeed;
+   else if(RDriveRampCurrent <= RDriveRampRequest)
+   RDriveRampCurrent -= RDriveRampRequest;
+ }
+
+ setDrivePowerRight(RDriveRampCurrent);
+ wait1Msec(rampInterval);
+}
+
+task leftDriveRamping()
+{
+  if(LDriveRampRequest > deadband)
+  {
+   if(LDriveRampCurrent < LDriveRampRequest && LDriveRampCurrent < 30)
+   LDriveRampCurrent += highRampSpeed;
+   else if(LDriveRampCurrent < LDriveRampRequest)
+   LDriveRampCurrent += normalRampSpeed;
+   else if(LDriveRampCurrent >= LDriveRampRequest)
+   LDriveRampCurrent = LDriveRampRequest;
+  }
+
+  else if(abs(LDriveRampRequest) <= deadband)
+  LDriveRampCurrent = 0;
+
+  if(LDriveRampRequest < -deadband)
+  {
+   if(LDriveRampCurrent > LDriveRampRequest && LDriveRampCurrent > -30)
+   LDriveRampCurrent -= highRampSpeed;
+   else if(LDriveRampCurrent > LDriveRampRequest)
+   LDriveRampCurrent -= normalRampSpeed;
+   else if(LDriveRampCurrent <= LDriveRampRequest)
+   LDriveRampCurrent -= LDriveRampRequest;
+ }
+
+ setDrivePowerRight(LDriveRampCurrent);
+ wait1Msec(rampInterval);
+}
+
+//#endregion
 //#region Converter and Called task
 int InchesToCounts(float value) //converts drive encoder counts into inches
 {
