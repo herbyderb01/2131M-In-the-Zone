@@ -3,8 +3,8 @@ float wheelDiameter = 4;
 int driveStraightError = 100;
 
 //Drive ramp values
-int rampInterval = 1;
-int normalRampSpeed = 7;
+int rampInterval = 5;
+int normalRampSpeed = 1;
 int highRampSpeed = 30;
 int deadband = 10;
 
@@ -17,12 +17,20 @@ int LDriveRampRequest;
 int LDriveRampSgn;
 int LDriveRampCurrent;
 
+float  DriveRDrive;
+float lastDriveRError;
+float  DriveLDrive;
+float lastDriveLError;
+
 //#endregion
 //#region Ramping
 task rightDriveRamping()
 {
+
   while(true)
   {
+    if (lastDriveRError>10 )
+    {
     RDriveRampSgn = sgn(RDriveRampRequest);
 
     if(abs(RDriveRampRequest) > deadband)
@@ -41,12 +49,18 @@ task rightDriveRamping()
    setDrivePowerRight(RDriveRampCurrent);
    wait1Msec(rampInterval);
   }
+  else
+  setDrivePowerRight(DriveRDrive);
+}
 }
 
 task leftDriveRamping()
 {
+
   while(true)
   {
+    if (lastDriveLError>10 )
+    {
     LDriveRampSgn = sgn(LDriveRampRequest);
 
     if(abs(LDriveRampRequest) > deadband)
@@ -65,29 +79,31 @@ task leftDriveRamping()
    setDrivePowerLeft(LDriveRampCurrent);
    wait1Msec(rampInterval);
   }
+  else
+  setDrivePowerLeft(DriveLDrive);
+}
 }
 
 //#endregion
 //#region Right Drive PID
 //----------------------Right Drive PID----------------------//
 
-static float  DriveR_Kp = 0.6; 	//Power Tuning Value
+static float  DriveR_Kp = 0.15; 	//Power Tuning Value
 static float  DriveRRequestedValue;
-static float  DriveR_Kd = 4;			// Requested Guess Value
+static float  DriveR_Kd = .025;			// Requested Guess Value
 
 float DriveRD;
 float DriveRP;
-float lastDriveRError;
 float DriveRDF;
+
 
 
 task RPIDDriveController()
 {
-  startTask(rightDriveRamping);
+  //startTask(rightDriveRamping);
 
   float  DriveRSensorCurrentValue;
 	float  DriveRError;
-	float  DriveRDrive;
 
   	while( true )
   	{
@@ -113,8 +129,8 @@ task RPIDDriveController()
 
   		// send to motor
 
-  		//setDrivePowerRight(DriveRDrive);
-      RDriveRampRequest = DriveRDrive;
+  		setDrivePowerRight(DriveRDrive);
+      //RDriveRampRequest = DriveRDrive;
 
   		lastDriveRError = DriveRError;
 
@@ -126,22 +142,21 @@ task RPIDDriveController()
 //#region Left Drive PID
 //----------------------Left Drive PID----------------------//
 
-static float  DriveL_Kp = 0.6; 	//Power Tuning Value
+static float  DriveL_Kp = 0.15; 	//Power Tuning Value
 static float  DriveLRequestedValue;
-static float  DriveL_Kd = 4;			// Requested Guess Value
+static float  DriveL_Kd = .025;			// Requested Guess Value
 
 float DriveLD;
 float DriveLP;
-float lastDriveLError;
 float DriveLDF;
+
 
 task LPIDDriveController()
 {
-  startTask(leftDriveRamping);
+  //startTask(leftDriveRamping);
 
   float  DriveLSensorCurrentValue;
 	float  DriveLError;
-	float  DriveLDrive;
 
   	while( true )
   	{
@@ -167,8 +182,8 @@ task LPIDDriveController()
 
   		// send to motor
 
-      //setDrivePowerLeft(DriveLDrive);
-  		LDriveRampRequest = DriveLDrive;
+      setDrivePowerLeft(DriveLDrive);
+  		//LDriveRampRequest = DriveLDrive;
 
   		lastDriveLError = DriveLError;
 
@@ -271,12 +286,10 @@ void Turn (int turnAmount,int waity=false)
   DriveTRequestedValue = turnAmount;
   if (waity)
   {
-    {
     //  distance = abs(distance); //help
       while( SensorValue[ Gyro ] >= DriveTRequestedValue + driveStraightError
   		|| SensorValue[ Gyro ] <= DriveTRequestedValue - driveStraightError){}
       wait1Msec(200);
-    }
   }
   wait1Msec(25);
 }

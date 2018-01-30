@@ -49,7 +49,7 @@ void TenPoint ()
   Turn(leftTurn/2,true);
 */
   droveStraight(1000,true);
-  droveStraight(-1000,true);
+  //droveStraight(-1000,true);
   //setDrivePowerLeft(127);
   /*
 
