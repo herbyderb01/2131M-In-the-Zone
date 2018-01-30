@@ -55,9 +55,10 @@ task autonomous()
 
 	startTask(calwController);
 	startTask(liftRController);
-	//startTask(RPIDDriveController);
-	//startTask(LPIDDriveController);
-	//startTask(TPIDDriveController);
+	startTask(RPIDDriveController);
+	startTask(LPIDDriveController);
+	startTask(TPIDDriveController);
+
 
 
 	if (SensorValue[selectpot] < 2045)

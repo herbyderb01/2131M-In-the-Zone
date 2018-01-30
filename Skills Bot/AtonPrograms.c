@@ -41,16 +41,18 @@
 //#endregion
 //#region Ten Point AtonPrograms
 void TenPoint ()
-{
-  LiftTo(1300,true);
+{/*
+  LiftTo(2000,true);
 
   Turn(rightTurn/2,true);
 
   Turn(leftTurn/2,true);
-
-  droveStraight(370,true);
-  droveStraight(-370,true);
+*/
+  droveStraight(1000,true);
+  droveStraight(-1000,true);
+  //setDrivePowerLeft(127);
   /*
+
   setClawTo(1222,true);
 
   LiftTo(1600);

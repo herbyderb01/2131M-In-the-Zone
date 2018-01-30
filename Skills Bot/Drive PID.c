@@ -8,6 +8,65 @@ int normalRampSpeed = 7;
 int highRampSpeed = 30;
 int deadband = 10;
 
+// Ramping Vars
+int RDriveRampRequest;
+int RDriveRampSgn;
+int RDriveRampCurrent;
+
+int LDriveRampRequest;
+int LDriveRampSgn;
+int LDriveRampCurrent;
+
+//#endregion
+//#region Ramping
+task rightDriveRamping()
+{
+  while(true)
+  {
+    RDriveRampSgn = sgn(RDriveRampRequest);
+
+    if(abs(RDriveRampRequest) > deadband)
+    {
+     if(abs(RDriveRampCurrent) < abs(RDriveRampRequest) && abs(RDriveRampCurrent) < 30)
+     RDriveRampCurrent += highRampSpeed*RDriveRampSgn;
+     else if(abs(RDriveRampCurrent) < abs(RDriveRampRequest))
+     RDriveRampCurrent += normalRampSpeed*RDriveRampSgn;
+     else if(abs(RDriveRampCurrent) >= abs(RDriveRampRequest))
+     RDriveRampCurrent = RDriveRampRequest*RDriveRampSgn;
+    }
+
+    else if(abs(RDriveRampRequest) <= deadband)
+    RDriveRampCurrent = 0;
+
+   setDrivePowerRight(RDriveRampCurrent);
+   wait1Msec(rampInterval);
+  }
+}
+
+task leftDriveRamping()
+{
+  while(true)
+  {
+    LDriveRampSgn = sgn(LDriveRampRequest);
+
+    if(abs(LDriveRampRequest) > deadband)
+    {
+     if(abs(LDriveRampCurrent) < abs(LDriveRampRequest) && abs(LDriveRampCurrent) < 30)
+     LDriveRampCurrent += highRampSpeed*LDriveRampSgn;
+     else if(abs(LDriveRampCurrent) < abs(LDriveRampRequest))
+     LDriveRampCurrent += normalRampSpeed*LDriveRampSgn;
+     else if(abs(LDriveRampCurrent) >= abs(LDriveRampRequest))
+     LDriveRampCurrent = LDriveRampRequest*LDriveRampSgn;
+    }
+
+    else if(abs(LDriveRampRequest) <= deadband)
+    LDriveRampCurrent = 0;
+
+   setDrivePowerLeft(LDriveRampCurrent);
+   wait1Msec(rampInterval);
+  }
+}
+
 //#endregion
 //#region Right Drive PID
 //----------------------Right Drive PID----------------------//
@@ -24,6 +83,8 @@ float DriveRDF;
 
 task RPIDDriveController()
 {
+  startTask(rightDriveRamping);
+
   float  DriveRSensorCurrentValue;
 	float  DriveRError;
 	float  DriveRDrive;
@@ -76,6 +137,8 @@ float DriveLDF;
 
 task LPIDDriveController()
 {
+  startTask(leftDriveRamping);
+
   float  DriveLSensorCurrentValue;
 	float  DriveLError;
 	float  DriveLDrive;
@@ -104,6 +167,7 @@ task LPIDDriveController()
 
   		// send to motor
 
+      //setDrivePowerLeft(DriveLDrive);
   		LDriveRampRequest = DriveLDrive;
 
   		lastDriveLError = DriveLError;
@@ -164,72 +228,6 @@ task TPIDDriveController()
   		wait1Msec( 25 );
   	}
 }
-//#endregion
-//#region Right Ramping
-int RDriveRampRequest;
-int RDriveRampCurrent;
-
-int LDriveRampRequest;
-int LDriveRampCurrent;
-
-task rightDriveRamping()
-{
-  if(RDriveRampRequest > deadband)
-  {
-   if(RDriveRampCurrent < RDriveRampRequest && RDriveRampCurrent < 30)
-   RDriveRampCurrent += highRampSpeed;
-   else if(RDriveRampCurrent < RDriveRampRequest)
-   RDriveRampCurrent += normalRampSpeed;
-   else if(RDriveRampCurrent >= RDriveRampRequest)
-   RDriveRampCurrent = RDriveRampRequest;
-  }
-
-  else if(abs(RDriveRampRequest) <= deadband)
-  RDriveRampCurrent = 0;
-
-  if(RDriveRampRequest < -deadband)
-  {
-   if(RDriveRampCurrent > RDriveRampRequest && RDriveRampCurrent > -30)
-   RDriveRampCurrent -= highRampSpeed;
-   else if(RDriveRampCurrent > RDriveRampRequest)
-   RDriveRampCurrent -= normalRampSpeed;
-   else if(RDriveRampCurrent <= RDriveRampRequest)
-   RDriveRampCurrent -= RDriveRampRequest;
- }
-
- setDrivePowerRight(RDriveRampCurrent);
- wait1Msec(rampInterval);
-}
-
-task leftDriveRamping()
-{
-  if(LDriveRampRequest > deadband)
-  {
-   if(LDriveRampCurrent < LDriveRampRequest && LDriveRampCurrent < 30)
-   LDriveRampCurrent += highRampSpeed;
-   else if(LDriveRampCurrent < LDriveRampRequest)
-   LDriveRampCurrent += normalRampSpeed;
-   else if(LDriveRampCurrent >= LDriveRampRequest)
-   LDriveRampCurrent = LDriveRampRequest;
-  }
-
-  else if(abs(LDriveRampRequest) <= deadband)
-  LDriveRampCurrent = 0;
-
-  if(LDriveRampRequest < -deadband)
-  {
-   if(LDriveRampCurrent > LDriveRampRequest && LDriveRampCurrent > -30)
-   LDriveRampCurrent -= highRampSpeed;
-   else if(LDriveRampCurrent > LDriveRampRequest)
-   LDriveRampCurrent -= normalRampSpeed;
-   else if(LDriveRampCurrent <= LDriveRampRequest)
-   LDriveRampCurrent -= LDriveRampRequest;
- }
-
- setDrivePowerRight(LDriveRampCurrent);
- wait1Msec(rampInterval);
-}
-
 //#endregion
 //#region Converter and Called task
 int InchesToCounts(float value) //converts drive encoder counts into inches
