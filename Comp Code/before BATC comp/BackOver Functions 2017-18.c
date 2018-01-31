@@ -43,7 +43,7 @@ void setMobilePower(int Mpower)
 }
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
-//#region Lift PID
+
 //----------------------LIFT PID----------------------//
 
 static float  liftR_Kp = 0.2; 	//Power Tuning Value
@@ -94,8 +94,7 @@ task liftRController()
 		wait1Msec( 25 );
 	}
 }
-//#endregion
-//#region Mobile PID
+
 //----------------------Mobile Bar PID----------------------//
 
 static float  mobileR_Kp = 0.30; //Power Tuning Value
@@ -146,12 +145,9 @@ task mobileRController()
 		wait1Msec( 25 );
 	}
 }
-//#endregion
-//#region WaityThing for mobilegoal
 void WaitieThing()
 {
 	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
 		|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
 		{}
 }
-//#endregion

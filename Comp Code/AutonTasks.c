@@ -1,4 +1,5 @@
 #include "BackOver Functions 2017-18.c"
+//#include "Drive PID.c"
 //#region Variables
 //-------------Variables--------------//
 // Random variable for turn and drive
@@ -85,13 +86,30 @@ void turnLeft(int ticks) // void to turn the robot left as much as you want
 }
 
 task drive() //Redirecting Drive into a task
-{
+{/*
+	while(true)
+	{
+	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
+	}
+	*/
 	while (true)
 	{
-		setDrivePower(vexRT[Ch3], vexRT[Ch2]);
+	if (abs(vexRT[Ch3])+ abs(vexRT[Ch2])>10)
+	{
+		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
 	}
-wait1Msec(25);
-}
+  else
+		{
+			setDrivePower(vexRT[Ch3Xmtr2],vexRT[Ch2Xmtr2]);
+		}
+				//DrivePower(vexRT[Ch3Xmtr2], vexRT[Ch2Xmtr2]);
+		}
+				//setDrivePower(vexRT[Ch3]+vexRT[Ch3Xmtr2],vexRT[Ch2]+vexRT[Ch2Xmtr2]);
+
+		wait1Msec(25); //dont hog cpu
+	}
+
+
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
 //#region Special Auto Stack Voids
@@ -148,7 +166,7 @@ void Preload()
 }
 //#endregion
 //#region Blue Aton Programs
-task RightBlue () // Auton task to grab moble base on the right and score it
+void RightBlue () // Auton task to grab moble base on the right and score it
 {
 	//--------------------------//
 	setIntakePower(15);                   //
@@ -198,10 +216,12 @@ task RightBlue () // Auton task to grab moble base on the right and score it
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	Atondrive(-80, drivepower);
+	Atondrive(-120, drivepower);
 
 	mobileRRequestedValue = mobileIn;
 	WaitieThing();
+
+	liftRRequestedValue = 3000;
 
 	//--------------------------//
 
@@ -209,17 +229,17 @@ task RightBlue () // Auton task to grab moble base on the right and score it
 
 	Atondrive(-300, drivepower);
 
-	turnLeft(190);
+	turnLeft(150);
 
 	setDrivePower(-127,-127);
 	wait1Msec(500);
 
 	setDrivePower(-80,-80);
-	wait1Msec(2000);
+	wait1Msec(1800);
 	setDrivePower(0,0);
 }
 
-task LeftBlue ()
+void LeftBlue ()
 {
 	//--------------------------//
 	liftRRequestedValue = 2600;           // PRESETS
@@ -262,16 +282,16 @@ task LeftBlue ()
 	liftRRequestedValue = 2600;
 
 
-	turnLeft(full-300);
+	turnLeft(full-360);
 
 	setDrivePower(60,60);
-	wait1Msec(800);
+	wait1Msec(500);
 	setDrivePower(0,0);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	Atondrive(-80, drivepower);
+	Atondrive(-120, drivepower);
 
 	mobileRRequestedValue = mobileIn;
 	WaitieThing();
@@ -291,10 +311,10 @@ task LeftBlue ()
 	turnLeft(Nine+100);
 }
 
-task RightBlueTwo () // Auton task to grab moble base on the right and score it
+void RightBlueTwo () // Auton task to grab moble base on the right and score it
 {
 	//--------------------------//
-	//chainRRequestedValue = StraitUpChain; //
+	setIntakePower(15);                   //
 	liftRRequestedValue = 2600;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
@@ -303,58 +323,61 @@ task RightBlueTwo () // Auton task to grab moble base on the right and score it
 
 	liftRRequestedValue = 3000;
 
-	Atondrive(700, 127);
+	setChainPower(20);
+
+	Atondrive(750, 127);
 
 	wait1Msec(200);
 
 	liftRRequestedValue = 2910;
 	//chainRRequestedValue = OutPositionChain; //score pre-load
 
-	wait1Msec(600);
+	wait1Msec(1);
 
 	//chainRRequestedValue = StraitUpChain;
 	liftRRequestedValue = 2600;
 	wait1Msec(1);
-	mobileRRequestedValue = mobileMid;
+	mobileRRequestedValue = mobileIn;
 	wait1Msec(600);
 
-
 	//--------------------------//
 
-	Atondrive(-550, 127);
+	Atondrive(-600, 127);
 
-	turnRight(full-500);
+	liftRRequestedValue = 3000;
+	wait1Msec(200);
 
-	Atondrive(130, 127);
 
-	mobileRRequestedValue = mobileOut;
-	WaitieThing();
+	setIntakePower(-127);                   //
+	wait1Msec(250);
+	setIntakePower(0);                   //
 
-	Atondrive(-80, drivepower);
+	liftRRequestedValue = 2600;
+
+	turnRight(Nine/2-100);
+
+	Atondrive(-200, 127);
+
+	turnRight(Nine);
+
+	Atondrive(300, drivepower);         // Drive 300 encoder clicks
+
+	setDrivePower(20,20);							  // Set drive still speed
+
+	mobileRRequestedValue = mobileOut;  // Outake mobile goal
+	WaitieThing();										  // Wait for Mobile Goal
+
+	Atondrive(-75, drivepower);         // Drive 175 encoder clicks
 
 	mobileRRequestedValue = mobileIn;
-	WaitieThing();
+	WaitieThing();											 // Wait for Mobile Goal
 
-	//--------------------------//
-
-	turnRight(110);
-
-	Atondrive(-280, drivepower);
-
-	turnLeft(190);
-
-	setDrivePower(-127,-127);
-	wait1Msec(500);
-
-	setDrivePower(-80,-80);
-	wait1Msec(2000);
-	setDrivePower(0,0);
+	Atondrive(-190, drivepower);         // Drive back 190 encoder clicks
 }
 
-task LeftBlueTwo ()
+void LeftBlueTwo ()
 {
 	//--------------------------//
-	//chainRRequestedValue = StraitUpChain; //
 	liftRRequestedValue = 2600;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
@@ -363,7 +386,9 @@ task LeftBlueTwo ()
 
 	liftRRequestedValue = 3000;
 
-	Atondrive(590, 127);
+	setChainPower(20);
+
+	Atondrive(650, 127);
 
 	wait1Msec(200);
 
@@ -375,43 +400,46 @@ task LeftBlueTwo ()
 	//chainRRequestedValue = StraitUpChain;
 	liftRRequestedValue = 2600;
 	wait1Msec(1);
-	mobileRRequestedValue = mobileMid;
+	mobileRRequestedValue = mobileIn;
 	wait1Msec(500);
 
 	//--------------------------//
 
 	Atondrive(-580, 127);
 
-	turnLeft(full-300);
+	liftRRequestedValue = 3000;
+	wait1Msec(200);
 
-	Atondrive(130, 127);
+	setIntakePower(-127);                   //
+	wait1Msec(250);
+	setIntakePower(0);                   //
 
-	mobileRRequestedValue = mobileOut;
-	WaitieThing();
+	liftRRequestedValue = 2600;
 
-	Atondrive(-80, drivepower);
+	turnLeft((Nine/2)-100);
+
+	Atondrive(-250, 127);
+
+	turnLeft(Nine);
+
+	Atondrive(300, drivepower);         // Drive 300 encoder clicks
+
+	setDrivePower(20,20);							  // Set drive still speed
+
+	mobileRRequestedValue = mobileOut;  // Outake mobile goal
+	WaitieThing();										  // Wait for Mobile Goal
+
+	Atondrive(-75, drivepower);         // Drive 175 encoder clicks
 
 	mobileRRequestedValue = mobileIn;
-	WaitieThing();
+	WaitieThing();											 // Wait for Mobile Goal
 
-	//--------------------------//
-
-	turnLeft(150);
-
-	setDrivePower(-127,-127);
-	wait1Msec(1500);
-	setDrivePower(0,0);
-
-	setDrivePower(40,40);
-	wait1Msec(300);
-	setDrivePower(0,0);
-
-	turnLeft(Nine+100);
+	Atondrive(-190, drivepower);         // Drive back 190 encoder clicks
 }
 
 //#endregion
 //#region Skills
-task SkillsOne ()
+void SkillsOne ()
 {
 	Preload();
 //////////////////////////////////Section 1 -score first mobile goal
@@ -489,30 +517,30 @@ task SkillsOne ()
 
 	turnLeft(Nine);
 
-	Atondrive(250, drivepower);         // Drive 220 encoder clicks
+	Atondrive(220, drivepower);         // Drive 220 encoder clicks
 
 	turnLeft(Nine+120);
 
 	mobileRRequestedValue = mobileOut+10;  // Set Mobile goal Out
 	WaitieThing();                      // Wait until mobile goal is out
 
-	setDrivePower(-40, -40);            // Dead Recon to bar for accuracy
+	setDrivePower(-30, -40);            // Dead Recon to bar for accuracy
 	wait1Msec(1000);
 	setDrivePower(0, 0);
 
-	Atondrive(450, drivepower);         // Drive 420 encoder clicks
+	Atondrive(550, drivepower);         // Drive 420 encoder clicks
 
 	mobileRRequestedValue = mobileMid;  // Set mobile goal OUT
 	WaitieThing();                      // Wait until mobile goal is out
 
-	turnRight(full-10);
+	turnRight(full);
 
-	Atondrive(470, drivepower);         // Drive 450 encoder clicks
+	Atondrive(520, drivepower);         // Drive 450 encoder clicks
 
 	mobileRRequestedValue = mobileOut;  // Set Mobile goal Out
 	WaitieThing();                      // Wait until mobile goal is out
 
-	Atondrive(-40, drivepower);         // Drive back 40 encoder clicks
+	Atondrive(-50, drivepower);         // Drive back 40 encoder clicks
 
 	mobileRRequestedValue = mobileMid;  // Set mobile goal to middle position
 	Atondrive(-50, drivepower);         // Drive back 50 encoder clicks
@@ -522,7 +550,7 @@ task SkillsOne ()
 
 	mobileRRequestedValue = mobileOut;  // Set mobile goal out
 
-	setDrivePower(-40, -40);            // Dead recon to bar for accuacy
+	setDrivePower(-30, -40);            // Dead recon to bar for accuacy
 	wait1Msec(1600);
 	setDrivePower(0, 0);
 
@@ -546,7 +574,7 @@ task SkillsOne ()
 
 	mobileRRequestedValue = mobileOut;  // Multi task to save time/outtake
 
-	turnRight(Nine+390);
+	turnRight(Nine+360);
 
 	Atondrive(600, drivepower);         // Drive 600 encoder clicks
 
@@ -572,16 +600,12 @@ task SkillsOne ()
 	mobileRRequestedValue = mobileMid;  // Bring lift in so it can turn around
 	WaitieThing();											// Wait until it does so
 
-	turnLeft(Nine+50);
-
-	Atondrive(300, drivepower);
-
-	turnLeft(Nine-250);
+	turnLeft(Nine+300);
 
 	mobileRRequestedValue = mobileOut;  // Set Mobile goal Out to place in 10pt
 	WaitieThing();
 
-	Atondrive(600, drivepower);
+	Atondrive(900, drivepower);
 
 	mobileRRequestedValue = mobileMid;  // Bring lift in so it can turn around
 	WaitieThing();											// Wait until it does so
@@ -595,12 +619,12 @@ task SkillsOne ()
 	mobileRRequestedValue = mobileOut;  // Bring lift in so it can turn around
 }
 
-task SkillsTwo ()
+void SkillsTwo ()
 {
 }
 //#endregion
 //#region Red Aton Programs
-task LeftRed ()
+void LeftRed ()
 {
 	//--------------------------//
 	setIntakePower(15);                   //
@@ -614,7 +638,7 @@ task LeftRed ()
 
 	setChainPower(20);
 
-	Atondrive(780, 127);
+	Atondrive(850, 127);
 
 	wait1Msec(200);
 
@@ -631,7 +655,7 @@ task LeftRed ()
 
 	//--------------------------//
 
-	Atondrive(-550, 127);
+	Atondrive(-800, 127);
 
 	liftRRequestedValue = 3000;
 	wait1Msec(200);
@@ -650,7 +674,7 @@ task LeftRed ()
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	Atondrive(-80, drivepower);
+	Atondrive(-200, drivepower);
 
 	mobileRRequestedValue = mobileIn;
 	WaitieThing();
@@ -670,7 +694,7 @@ task LeftRed ()
 	wait1Msec(2000);
 	setDrivePower(0,0);
 }
-task RightRed ()
+void RightRed ()
 {
 	//--------------------------//
 	liftRRequestedValue = 2600;           // PRESETS
@@ -713,14 +737,14 @@ task RightRed ()
 	liftRRequestedValue = 2600;
 
 
-	turnRight(full-300);
+	turnRight(full-400);
 
-	Atondrive(100, drivepower)
+	Atondrive(80, drivepower);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	Atondrive(-100, drivepower);
+	Atondrive(-120, drivepower);
 
 	mobileRRequestedValue = mobileIn;
 	WaitieThing();
@@ -740,10 +764,9 @@ task RightRed ()
 	turnRight(Nine+100);
 }
 
-task LeftRedTwo ()
+void LeftRedTwo ()
 {
 	//--------------------------//
-	//chainRRequestedValue = StraitUpChain; //
 	liftRRequestedValue = 2600;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
@@ -752,68 +775,9 @@ task LeftRedTwo ()
 
 	liftRRequestedValue = 3000;
 
-	Atondrive(700, 127);
+	setChainPower(20);
 
-	wait1Msec(200);
-
-	liftRRequestedValue = 2910;
-	//chainRRequestedValue = OutPositionChain; //score pre-load
-
-	wait1Msec(600);
-
-	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
-	wait1Msec(1);
-	mobileRRequestedValue = mobileMid;
-	wait1Msec(500);
-
-
-	//--------------------------//
-
-	Atondrive(-560, 127);
-
-	turnLeft(full-500);
-
-	Atondrive(200, 127);
-
-	mobileRRequestedValue = mobileOut;
-	WaitieThing();
-
-	Atondrive(-80, drivepower);
-
-	mobileRRequestedValue = mobileIn;
-	WaitieThing();
-
-	//--------------------------//
-
-	turnLeft(110);
-
-	Atondrive(-130, drivepower);
-
-	turnRight(180);
-
-	setDrivePower(-127,-127);
-	wait1Msec(500);
-
-	setDrivePower(-80,-80);
-	wait1Msec(2000);
-	setDrivePower(0,0);
-
-
-}
-task RightRedTwo ()
-{
-	//--------------------------//
-	//chainRRequestedValue = StraitUpChain; //
-	liftRRequestedValue = 2600;           // PRESETS
-	mobileRRequestedValue = mobileIn;     //
-
-	mobileRRequestedValue = mobileOut;
-	WaitieThing();
-
-	liftRRequestedValue = 3000;
-
-	Atondrive(590, 127);
+	Atondrive(780, 127);
 
 	wait1Msec(200);
 
@@ -825,76 +789,134 @@ task RightRedTwo ()
 	//chainRRequestedValue = StraitUpChain;
 	liftRRequestedValue = 2600;
 	wait1Msec(1);
-	mobileRRequestedValue = mobileMid;
+	mobileRRequestedValue = mobileIn;
+	wait1Msec(500);
+
+	//--------------------------//
+
+	Atondrive(-650, 127);
+
+	liftRRequestedValue = 3000;
+	wait1Msec(200);
+
+
+	setIntakePower(-127);                   //
+	wait1Msec(250);
+	setIntakePower(0);                   //
+
+	liftRRequestedValue = 2600;
+
+	turnLeft((Nine/2)-100);
+
+	Atondrive(-200, 127);
+
+	turnLeft(Nine);
+
+	Atondrive(300, drivepower);         // Drive 300 encoder clicks
+
+	setDrivePower(20,20);							  // Set drive still speed
+
+	mobileRRequestedValue = mobileOut;  // Outake mobile goal
+	WaitieThing();										  // Wait for Mobile Goal
+
+	Atondrive(-75, drivepower);         // Drive 175 encoder clicks
+
+	mobileRRequestedValue = mobileIn;
+	WaitieThing();											 // Wait for Mobile Goal
+
+	Atondrive(-190, drivepower);         // Drive back 190 encoder clicks
+
+
+}
+
+void RightRedTwo ()
+{
+	//--------------------------//
+	liftRRequestedValue = 2600;           // PRESETS
+	mobileRRequestedValue = mobileIn;     //
+
+	mobileRRequestedValue = mobileOut;
+	WaitieThing();
+
+	liftRRequestedValue = 3000;
+
+	setChainPower(20);
+
+	Atondrive(650, 127);
+
+	wait1Msec(200);
+
+	liftRRequestedValue = 2910;
+	//chainRRequestedValue = OutPositionChain; //score pre-load
+
+	//chainRRequestedValue = StraitUpChain;
+	liftRRequestedValue = 2600;
+	wait1Msec(1);
+	mobileRRequestedValue = mobileIn;
 	wait1Msec(500);
 
 	//--------------------------//
 
 	Atondrive(-580, 127);
 
-	turnRight(full-300);
+	liftRRequestedValue = 3000;
+	wait1Msec(200);
 
-	Atondrive(150, 127);
 
-	mobileRRequestedValue = mobileOut;
-	WaitieThing();
+	setIntakePower(-127);                   //
+	wait1Msec(250);
+	setIntakePower(0);                   //
 
-	Atondrive(-80, drivepower);
+	liftRRequestedValue = 2600;
+
+	turnRight((Nine/2)-100);
+
+	Atondrive(-250, 127);
+
+	turnRight(Nine);
+
+	Atondrive(300, drivepower);         // Drive 300 encoder clicks
+
+	setDrivePower(20,20);							  // Set drive still speed
+
+	mobileRRequestedValue = mobileOut;  // Outake mobile goal
+	WaitieThing();										  // Wait for Mobile Goal
+
+	Atondrive(-75, drivepower);         // Drive 175 encoder clicks
 
 	mobileRRequestedValue = mobileIn;
-	WaitieThing();
+	WaitieThing();											 // Wait for Mobile Goal
 
-	//--------------------------//
-
-	turnRight(150);
-
-	setDrivePower(-127,-127);
-	wait1Msec(1500);
-	setDrivePower(0,0);
-
-	setDrivePower(40,40);
-	wait1Msec(300);
-	setDrivePower(0,0);
-
-	turnRight(Nine+100);
+	Atondrive(-190, drivepower);         // Drive back 190 encoder clicks
 }
 
 //#endregion
 //#region Other Programs
-task Defensive ()
+void Defensive ()
 {
-	//chainRRequestedValue = StraitUpChain; //
-	liftRRequestedValue = 2600;           // PRESETS
-	mobileRRequestedValue = mobileIn;     //
-	setDrivePower(127,127);
-	wait1Msec(8000);
-	setDrivePower(0,0);
+	setDrivePower(127 , 127);
+	wait1Msec(5000);
+	setDrivePower(0 , 0);
 }
 
-task DoNothing ()
+void DoNothing ()
 {
 	liftRRequestedValue = 2600;           // PRESETS
 }
 
-task DefensiveTwo ()
+void DefensiveTwo ()
 {
-	//chainRRequestedValue = StraitUpChain; //
-	liftRRequestedValue = 2600;           // PRESETS
-	mobileRRequestedValue = mobileIn;     //
-	WaitieThing();
-
-	wait1Msec(200);
-
-	Atondrive(100, 60);
-
-	liftRRequestedValue = 2270;
-	//chainRRequestedValue = 3300;
-	wait1Msec(500);
-	Atondrive(-80, 60);
+	setDrivePower(127 , 127);
+	wait1Msec(5000);
+	setDrivePower(0 , 0);
 }
 
-task DoNothingTwo ()
+void DoNothingTwo ()
+{
+}
+void SpecialAton()
 {
 }
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
+//HI trent

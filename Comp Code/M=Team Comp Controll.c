@@ -26,7 +26,7 @@
 //include both Void programs, and PID
 #include "BackOver Functions 2017-18.c"
 #include "AutonTasks.c"
-#include "Drive PID.c"
+//#include "Drive PID.c"
 
 int liftstillspeed;      //define the liftstillspeed
 int chainstillspeed;      //define the chainstillspeed
@@ -51,9 +51,10 @@ void pre_auton()
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
-	//startTask(chainRController);
 	startTask(liftRController);
 	startTask(mobileRController);  //Start Mobile PID
+	//startTask(LPIDDriveController);
+	//startTask(RPIDDriveController);
 	liftRSensorCurrentValue = SensorValue[ liftP ];
 	//chainRRequestedValue = StraitUpChain;
 	/*
@@ -68,35 +69,35 @@ task autonomous()
 	{
 			if (SensorValue[selectP] == 0) // Defensive - 1
 			{
-				startTask(Defensive);
+				Defensive();
 			}
 			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575) // Right Blue - 2
 			{
-				startTask(RightBlue);
+				RightBlue();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185) //Left Blue - 3
 			{
-				startTask(LeftBlue);
+				LeftBlue();
 			}
 			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)//Skils 1 - 4
 			{
-				startTask(SkillsOne);
+				SkillsOne();
 			}
 			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)//Skills 2 - 5
 			{
-				startTask(SkillsTwo);
+				SkillsTwo();
 			}
 			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)//Left Red - 6
 			{
-				startTask(LeftRed);
+				LeftRed();
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)//Right Red - 7
 			{
-				startTask(RightRed);
+				RightRed();
 			}
 			if (SensorValue[selectP] == 4095)//Do Nothing - 8
 			{
-				startTask(DoNothing);
+				DoNothing();
 			}
 
 	}
@@ -104,35 +105,31 @@ task autonomous()
 	{
 			if (SensorValue[selectP] == 0) // Defensive - 1
 			{
-				startTask(DefensiveTwo);
+				DefensiveTwo();
 			}
 			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575) // Right Blue - 2
 			{
-				startTask(RightBlueTwo);
+				RightBlueTwo();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185) //Left Blue - 3
 			{
-				startTask(LeftBlueTwo);
+				LeftBlueTwo();
 			}
-			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)//Skils 1 - 4
+			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 2410)//Special Aton
 			{
-				startTask(SkillsOne);
-			}
-			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)//Skills 2 - 5
-			{
-				startTask(SkillsTwo);
+				SkillsOne();
 			}
 			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)//Left Red - 6
 			{
-				startTask(LeftRedTwo);
+				LeftRedTwo();
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)//Right Red - 7
 			{
-				startTask(RightRedTwo);
+				RightRedTwo();
 			}
 			if (SensorValue[selectP] == 4095)//Do Nothing - 8
 			{
-				startTask(DoNothingTwo);
+				DoNothingTwo();
 			}
 
 	}
@@ -185,17 +182,19 @@ startTask(drive);
 			setLiftPower(127);
 			liftstillspeed=15;
 		}
-		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D to lift Down
+		/*
+		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5D to lift Down
 		{
 			setLiftPower(-127);
 			liftstillspeed=-15;
 		}
 
-		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5U to lift Up
+		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5U to lift Up
 		{
 			setLiftPower(127);
 			liftstillspeed=15;
-		}
+		}*/
+
 		else
 		{
 			setLiftPower(liftstillspeed);
@@ -212,15 +211,17 @@ startTask(drive);
 		{
 			setIntakePower(-127);
 		}
-		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		/*
+		else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
 		{
 			setIntakePower(127);
 		}
-
-		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn6D to Outtake Cone
+		else if( vexRT[Btn8DXmtr2] == 1)      // Setting Btn6D to Outtake Cone
 		{
 			setIntakePower(-127);
-		}
+		}*/
+	/*	else if (setIntakePower(Ch3Xmtr2)) {}// Setting Btn 6U to Intake Cone*/
+
 		else
 		{
 			setIntakePower(20);   // Else, set a intake still speed to hold cone in
@@ -236,12 +237,30 @@ startTask(drive);
 		{
 			setMobilePower(-127);
 		}
+		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(-127);
+		}
+		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(127);
+		}
+		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(-64);
+		}
+		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		{
+			setMobilePower(64);
+		}
+
+
 		else
 		{
 			setMobilePower(0);      // Else, stop mobile motors
 		}
 
-		//----------------------PIV Control ------------------------//
+		//----------------------Four Bar Control ------------------------//
 		if( vexRT[Btn8D] == 1)
 		{
 			setChainPower(127);
@@ -252,18 +271,19 @@ startTask(drive);
 		{
 			setChainPower(-127);
 			chainstillspeed=-20;
-		}
-		else if( vexRT[Btn8DXmtr2] == 1)
+		}/*
+		else if( vexRT[Btn6DXmtr2] == 1)
 		{
 			setChainPower(127);
 			chainstillspeed=20;
 		}
 
-		else if( vexRT[Btn8RXmtr2] == 1)
+		else if( vexRT[Btn6UXmtr2] == 1)
 		{
 			setChainPower(-127);
 			chainstillspeed=-20;
 		}
+*/
 
 		else
 		{
@@ -284,10 +304,12 @@ startTask(drive);
     }
     initalize=0;
 
+    	setChainPower(20);
+
     //---------------------PreLoad Task-----------------------------//
     if (vexRT[Btn7R] == 1)
     {
-    	Preload();
+    	//Preload();
     }
 			//----------------------Moblie Goal Lift------------------------//
 			if( vexRT[Btn6U] == 1)      // Setting Btn7U to Extend Goal
