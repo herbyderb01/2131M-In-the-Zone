@@ -1,14 +1,15 @@
 //#region global variables
 float wheelDiameter = 4;
-int driveStraightError = 100;
+int driveStraightError = 50;
 
 //Drive ramp values
-int rampInterval = 5;
-int normalRampSpeed = 1;
+int rampInterval = 1;
+int normalRampSpeed = 7;
 int highRampSpeed = 30;
 int deadband = 10;
 
 // Ramping Vars
+/*
 int RDriveRampRequest;
 int RDriveRampSgn;
 int RDriveRampCurrent;
@@ -16,7 +17,7 @@ int RDriveRampCurrent;
 int LDriveRampRequest;
 int LDriveRampSgn;
 int LDriveRampCurrent;
-
+*/
 float  DriveRDrive;
 float lastDriveRError;
 float  DriveLDrive;
@@ -24,6 +25,7 @@ float lastDriveLError;
 
 //#endregion
 //#region Ramping
+/**
 task rightDriveRamping()
 {
 
@@ -83,7 +85,7 @@ task leftDriveRamping()
   setDrivePowerLeft(DriveLDrive);
 }
 }
-
+*/
 //#endregion
 //#region Right Drive PID
 //----------------------Right Drive PID----------------------//
