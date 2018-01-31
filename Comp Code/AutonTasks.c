@@ -9,9 +9,9 @@ int drivepower = 127;
 float  liftRSensorCurrentValue;																																//GO LINE TRACK YOURSELF.
 
 // PID Mobile Variables
-int mobileIn = 955;
-int mobileOut = 3260;
-int mobileMid = 1860;
+int mobileIn = 1051;
+int mobileOut = 3340;
+int mobileMid = 2456;
 int mobileSMid = 2770;
 
 // PID Lift variables
@@ -177,8 +177,7 @@ void RightBlue () // Auton task to grab moble base on the right and score it
 {
 	//--------------------------//
 	setIntakePower(15);                   //
-	liftRRequestedValue = ParallelLift;           // PRESETS
-	mobileRRequestedValue = mobileIn;     //
+	liftRRequestedValue = 1880;           // PRESETS
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();

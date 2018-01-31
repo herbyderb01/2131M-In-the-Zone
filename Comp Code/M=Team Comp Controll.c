@@ -57,14 +57,14 @@ task autonomous()
 	//startTask(RPIDDriveController);
 	liftRSensorCurrentValue = SensorValue[ liftP ];
 	//chainRRequestedValue = StraitUpChain;
-	/*
+
 	SensorType[Gyro] = sensorNone;
 	wait1Msec(500);
 	SensorType[Gyro] = sensorGyro;
 	SensorScale[Gyro] = 125;
 	SensorFullCount[Gyro] = 3600;
 	wait1Msec(2000);
-*/
+
 	if (SensorValue[selecttwoP] < 2045) //=========== Score 10's ==========//
 	{
 			if (SensorValue[selectP] == 0) // Defensive - 1
