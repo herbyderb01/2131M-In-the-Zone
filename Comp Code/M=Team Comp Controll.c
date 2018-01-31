@@ -299,7 +299,7 @@ startTask(drive);
     if (initalize==1)
     {
       startTask(liftRController);
-      liftRRequestedValue=2770;
+      liftRRequestedValue=SkillsLift;
       //chainRRequestedValue = StraitUpChain;
     }
     initalize=0;
