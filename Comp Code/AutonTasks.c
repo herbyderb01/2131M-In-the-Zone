@@ -13,6 +13,13 @@ int mobileIn = 955;
 int mobileOut = 3260;
 int mobileMid = 1860;
 int mobileSMid = 2770;
+
+// PID Lift variables
+int BottomLift = 2290;
+int TopLift = 855;
+int ParallelLift = 1880;
+int SkillsLift = 2140;
+
 //#endregion
 //#region Autonomous Voids
 //--------------------Autonomous Voids-----------------------//
@@ -135,7 +142,7 @@ void Preload()
 	setChainPower(20);
 
 	//chainRRequestedValue = StraitUpChain; //
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;   // Open Mobile goal to grab 1st goal
@@ -151,7 +158,7 @@ void Preload()
 	mobileRRequestedValue = mobileIn;
 	WaitieThing();											 // Wait for Mobile Goal
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = BottomLift;
 
 	setChainPower(127);
 	wait1Msec(250);
@@ -170,13 +177,13 @@ void RightBlue () // Auton task to grab moble base on the right and score it
 {
 	//--------------------------//
 	setIntakePower(15);                   //
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 
 	setChainPower(20);
 
@@ -184,13 +191,8 @@ void RightBlue () // Auton task to grab moble base on the right and score it
 
 	wait1Msec(200);
 
-	liftRRequestedValue = 2910;
-	//chainRRequestedValue = OutPositionChain; //score pre-load
-
-	wait1Msec(1);
-
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(600);
@@ -199,7 +201,7 @@ void RightBlue () // Auton task to grab moble base on the right and score it
 
 	Atondrive(-550, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(200);
 
 
@@ -207,7 +209,7 @@ void RightBlue () // Auton task to grab moble base on the right and score it
 	wait1Msec(250);
 	setIntakePower(0);                   //
 
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 
 	turnRight(full-400);
 
@@ -242,27 +244,22 @@ void RightBlue () // Auton task to grab moble base on the right and score it
 void LeftBlue ()
 {
 	//--------------------------//
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 
 	setChainPower(20);
 
 	Atondrive(650, 127);
 
-	wait1Msec(200);
-
-	liftRRequestedValue = 2910;
-	//chainRRequestedValue = OutPositionChain; //score pre-load
-
 	wait1Msec(540);
 
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(500);
@@ -271,7 +268,7 @@ void LeftBlue ()
 
 	Atondrive(-580, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(200);
 
 
@@ -279,7 +276,7 @@ void LeftBlue ()
 	wait1Msec(250);
 	setIntakePower(0);                   //
 
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 
 
 	turnLeft(full-360);
@@ -315,13 +312,13 @@ void RightBlueTwo () // Auton task to grab moble base on the right and score it
 {
 	//--------------------------//
 	setIntakePower(15);                   //
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 
 	setChainPower(20);
 
@@ -329,13 +326,8 @@ void RightBlueTwo () // Auton task to grab moble base on the right and score it
 
 	wait1Msec(200);
 
-	liftRRequestedValue = 2910;
-	//chainRRequestedValue = OutPositionChain; //score pre-load
-
-	wait1Msec(1);
-
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(600);
@@ -344,7 +336,7 @@ void RightBlueTwo () // Auton task to grab moble base on the right and score it
 
 	Atondrive(-600, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(200);
 
 
@@ -352,7 +344,7 @@ void RightBlueTwo () // Auton task to grab moble base on the right and score it
 	wait1Msec(250);
 	setIntakePower(0);                   //
 
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 
 	turnRight(Nine/2-100);
 
@@ -378,27 +370,22 @@ void RightBlueTwo () // Auton task to grab moble base on the right and score it
 void LeftBlueTwo ()
 {
 	//--------------------------//
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 
 	setChainPower(20);
 
 	Atondrive(650, 127);
 
-	wait1Msec(200);
-
-	liftRRequestedValue = 2910;
-	//chainRRequestedValue = OutPositionChain; //score pre-load
-
 	wait1Msec(540);
 
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(500);
@@ -407,14 +394,14 @@ void LeftBlueTwo ()
 
 	Atondrive(-580, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(200);
 
 	setIntakePower(-127);                   //
 	wait1Msec(250);
 	setIntakePower(0);                   //
 
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 
 	turnLeft((Nine/2)-100);
 
@@ -443,7 +430,7 @@ void SkillsOne ()
 {
 	Preload();
 //////////////////////////////////Section 1 -score first mobile goal
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = SkillsLift;           // PRESETS
 
 	mobileRRequestedValue = mobileIn;    // Intake mobile goal
 	WaitieThing();											 // Wait for Mobile Goal
@@ -628,13 +615,13 @@ void LeftRed ()
 {
 	//--------------------------//
 	setIntakePower(15);                   //
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = BottomLift;
 
 	setChainPower(20);
 
@@ -642,13 +629,10 @@ void LeftRed ()
 
 	wait1Msec(200);
 
-	liftRRequestedValue = 2910;
-	//chainRRequestedValue = OutPositionChain; //score pre-load
-
 	wait1Msec(1);
 
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(600);
@@ -657,9 +641,8 @@ void LeftRed ()
 
 	Atondrive(-800, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = BottomLift;
 	wait1Msec(200);
-
 
 	setIntakePower(-127);                   //
 	wait1Msec(250);
@@ -697,13 +680,13 @@ void LeftRed ()
 void RightRed ()
 {
 	//--------------------------//
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = BottomLift;
 
 	setChainPower(20);
 
@@ -711,13 +694,13 @@ void RightRed ()
 
 	wait1Msec(200);
 
-	liftRRequestedValue = 2910;
+	liftRRequestedValue = SkillsLift;
 	//chainRRequestedValue = OutPositionChain; //score pre-load
 
 	wait1Msec(540);
 
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(500);
@@ -726,7 +709,7 @@ void RightRed ()
 
 	Atondrive(-580, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(200);
 
 
@@ -734,7 +717,7 @@ void RightRed ()
 	wait1Msec(250);
 	setIntakePower(0);                   //
 
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 
 
 	turnRight(full-400);
@@ -767,13 +750,13 @@ void RightRed ()
 void LeftRedTwo ()
 {
 	//--------------------------//
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = BottomLift;
 
 	setChainPower(20);
 
@@ -781,13 +764,13 @@ void LeftRedTwo ()
 
 	wait1Msec(200);
 
-	liftRRequestedValue = 2910;
+	liftRRequestedValue = SkillsLift;
 	//chainRRequestedValue = OutPositionChain; //score pre-load
 
 	wait1Msec(540);
 
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(500);
@@ -796,7 +779,7 @@ void LeftRedTwo ()
 
 	Atondrive(-650, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = BottomLift;
 	wait1Msec(200);
 
 
@@ -804,7 +787,7 @@ void LeftRedTwo ()
 	wait1Msec(250);
 	setIntakePower(0);                   //
 
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = SkillsLift;
 
 	turnLeft((Nine/2)-100);
 
@@ -832,13 +815,11 @@ void LeftRedTwo ()
 void RightRedTwo ()
 {
 	//--------------------------//
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
 	mobileRRequestedValue = mobileIn;     //
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
-
-	liftRRequestedValue = 3000;
 
 	setChainPower(20);
 
@@ -846,11 +827,11 @@ void RightRedTwo ()
 
 	wait1Msec(200);
 
-	liftRRequestedValue = 2910;
+	liftRRequestedValue = SkillsLift;
 	//chainRRequestedValue = OutPositionChain; //score pre-load
 
 	//chainRRequestedValue = StraitUpChain;
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
 	wait1Msec(500);
@@ -859,7 +840,7 @@ void RightRedTwo ()
 
 	Atondrive(-580, 127);
 
-	liftRRequestedValue = 3000;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(200);
 
 
@@ -867,7 +848,7 @@ void RightRedTwo ()
 	wait1Msec(250);
 	setIntakePower(0);                   //
 
-	liftRRequestedValue = 2600;
+	liftRRequestedValue = ParallelLift;
 
 	turnRight((Nine/2)-100);
 
@@ -901,7 +882,9 @@ void Defensive ()
 
 void DoNothing ()
 {
-	liftRRequestedValue = 2600;           // PRESETS
+	liftRRequestedValue = ParallelLift;           // PRESETS
+
+
 }
 
 void DefensiveTwo ()
