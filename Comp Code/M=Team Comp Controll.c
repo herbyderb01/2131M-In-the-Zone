@@ -57,82 +57,159 @@ task autonomous()
 	//startTask(RPIDDriveController);
 	liftRSensorCurrentValue = SensorValue[ liftP ];
 	//chainRRequestedValue = StraitUpChain;
-
+/*
 	SensorType[Gyro] = sensorNone;
 	wait1Msec(500);
 	SensorType[Gyro] = sensorGyro;
 	SensorScale[Gyro] = 125;
 	SensorFullCount[Gyro] = 3600;
 	wait1Msec(2000);
-
-	if (SensorValue[selecttwoP] < 2045) //=========== Score 10's ==========//
+*/
+	if (SensorValue[selecttwoP] < 1023) //=========== Score 5's ==========//
 	{
-			if (SensorValue[selectP] == 0) // Defensive - 1
+			if (SensorValue[selectP] == 0)
 			{
-				Defensive();
+
 			}
-			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575) // Right Blue - 2
+			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
 			{
-				RightBlue();
+
 			}
-			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185) //Left Blue - 3
+			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
 			{
-				LeftBlue();
+
 			}
-			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)//Skils 1 - 4
+			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
 			{
-				SkillsOne();
+
 			}
-			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)//Skills 2 - 5
+			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)
 			{
-				SkillsTwo();
+
 			}
-			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)//Left Red - 6
+			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
 			{
-				LeftRed();
+
 			}
-			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)//Right Red - 7
+			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
 			{
-				RightRed();
+
 			}
-			if (SensorValue[selectP] == 4095)//Do Nothing - 8
+			if (SensorValue[selectP] == 4095)
 			{
-				DoNothing();
+
 			}
 
 	}
-		if (SensorValue[selecttwoP] > 2045) //=========== Score 20's ==========//
+	if (SensorValue[selecttwoP] > 1023 && SensorValue[selecttwoP] < 2046) //=========== Score 10's ==========//
 	{
-			if (SensorValue[selectP] == 0) // Defensive - 1
+			if (SensorValue[selectP] == 0)
 			{
-				DefensiveTwo();
+				RightBlueFive();
 			}
-			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575) // Right Blue - 2
+			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
 			{
-				RightBlueTwo();
+
 			}
-			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185) //Left Blue - 3
+			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
 			{
-				LeftBlueTwo();
+
 			}
-			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 2410)//Special Aton
+			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
 			{
-				SkillsOne();
+
 			}
-			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)//Left Red - 6
+			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)
 			{
-				LeftRedTwo();
+
 			}
-			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)//Right Red - 7
+			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
 			{
-				RightRedTwo();
+
 			}
-			if (SensorValue[selectP] == 4095)//Do Nothing - 8
+			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
 			{
-				DoNothingTwo();
+
+			}
+			if (SensorValue[selectP] == 4095)
+			{
+
 			}
 
 	}
+	if (SensorValue[selecttwoP] > 2046 && SensorValue[selecttwoP] < 3069) //=========== Score 20's ==========//
+	{
+			if (SensorValue[selectP] == 0)
+			{
+				RightBlueTen();
+			}
+			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
+			{
+				LeftBlueTen();
+			}
+			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
+			{
+
+			}
+			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
+			{
+
+			}
+			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)
+			{
+
+			}
+			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
+			{
+
+			}
+			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
+			{
+				LeftRedTen();
+			}
+			if (SensorValue[selectP] == 4095)
+			{
+				RightRedTen();
+			}
+
+	}
+	if (SensorValue[selecttwoP] < 3069) //=========== Score Special's ==========//
+	{
+			if (SensorValue[selectP] == 0)
+			{
+				RightBlueTwenty();
+			}
+			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
+			{
+				LeftBlueTwenty();
+			}
+			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
+			{
+
+			}
+			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
+			{
+
+			}
+			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)
+			{
+
+			}
+			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
+			{
+
+			}
+			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
+			{
+				LeftRedTwenty();
+			}
+			if (SensorValue[selectP] == 4095)
+			{
+				RightRedTwenty();
+			}
+
+	}
+
 }
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -230,12 +307,14 @@ startTask(drive);
 		//----------------------Moblie Goal Lift------------------------//
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
 		{
-			setMobilePower(127);
+				setMobilePower(127);
+				mobilestillspeed=15;
 		}
 
 		else if( vexRT[Btn7D] == 1)      // Setting Btn7D to Intake Goal
 		{
-			setMobilePower(-127);
+				setMobilePower(-127);
+				mobilestillspeed=-15;
 		}
 		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
 		{
@@ -254,10 +333,9 @@ startTask(drive);
 			setMobilePower(64);
 		}
 
-
 		else
 		{
-			setMobilePower(0);      // Else, stop mobile motors
+			setMobilePower(mobilestillspeed);      // Else, stop mobile motors
 		}
 
 		//----------------------Four Bar Control ------------------------//
