@@ -34,6 +34,10 @@ int mobilestillspeed;    //define the mobilegoalstillspeed
 int skillsVar;           //skills toggle variable
 int usertoggle;          //usertoggle variable
 int initalize=0;         //initializeing the toggle variable
+int curentteir = 1;
+bool stackReadyAdd = true;
+bool stackReadySubtract = true;
+
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
 /*                                                                           */
@@ -259,18 +263,18 @@ startTask(drive);
 			setLiftPower(127);
 			liftstillspeed=15;
 		}
-		/*
-		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5D to lift Down
+
+		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D to lift Down
 		{
 			setLiftPower(-127);
 			liftstillspeed=-15;
 		}
 
-		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5U to lift Up
+		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5U to lift Up
 		{
 			setLiftPower(127);
 			liftstillspeed=15;
-		}*/
+		}
 
 		else
 		{
@@ -288,7 +292,7 @@ startTask(drive);
 		{
 			setIntakePower(-127);
 		}
-		/*
+
 		else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
 		{
 			setIntakePower(127);
@@ -296,7 +300,7 @@ startTask(drive);
 		else if( vexRT[Btn8DXmtr2] == 1)      // Setting Btn6D to Outtake Cone
 		{
 			setIntakePower(-127);
-		}*/
+		}
 	/*	else if (setIntakePower(Ch3Xmtr2)) {}// Setting Btn 6U to Intake Cone*/
 
 		else
@@ -315,7 +319,7 @@ startTask(drive);
 		{
 				setMobilePower(-127);
 				mobilestillspeed=-15;
-		}
+		}/*
 		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
 		{
 			setMobilePower(-127);
@@ -332,7 +336,7 @@ startTask(drive);
 		{
 			setMobilePower(64);
 		}
-
+*/
 		else
 		{
 			setMobilePower(mobilestillspeed);      // Else, stop mobile motors
@@ -349,7 +353,7 @@ startTask(drive);
 		{
 			setChainPower(-127);
 			chainstillspeed=-20;
-		}/*
+		}
 		else if( vexRT[Btn6DXmtr2] == 1)
 		{
 			setChainPower(127);
@@ -361,13 +365,464 @@ startTask(drive);
 			setChainPower(-127);
 			chainstillspeed=-20;
 		}
-*/
 
 		else
 		{
 			setChainPower(chainstillspeed);
 		}
+
+//-=-=-=-==-=-=-=--=-=-Auto Stacking-=-=-=-=-=-=-=-=-=-=-=//
+
+	if (vexRT[Btn7DXmtr2] == 1)
+	{
+		if(curentteir == 1)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightOneTwo-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightOneTwo+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightOneTwo;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 2)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightOneTwo-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightOneTwo+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightOneTwo;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 3)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightThree-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightThree+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightThree;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 4)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightFour-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightFour+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightFour;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 5)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightFive-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightFive+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightFive;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 6)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightSix-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightSix+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightSix;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 7)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightSeven-300;
+					wait1Msec(260);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightSeven+250;
+					wait1Msec(550);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightSeven;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 8)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightEight-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightEight+350;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightEight;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 9)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightNine-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightNine+300;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightNine;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 10)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightTen-320;
+					wait1Msec(260);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightTen+340;
+					wait1Msec(530);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightTen;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 11)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightEleven-320;
+					wait1Msec(260);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightEleven+400;
+					wait1Msec(560);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightEleven;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 12)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightTwelve-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightTwelve+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightTwelve;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 13)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightThirteen-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightThirteen+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightThirteen;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 14)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightFourteen-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightFourteen+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightFourteen;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
+
+		if(curentteir == 15)
+		{
+			startTask(liftRController);
+
+					setIntakePower(127);
+					wait1Msec(250);
+					setIntakePower(10);
+					wait1Msec(100);
+
+					liftRRequestedValue = teirHeightFifteen-300;
+					wait1Msec(240);
+					setChainPower(127);
+					liftRRequestedValue = teirHeightFifteen+200;
+					wait1Msec(500);
+					setChainPower(15);
+
+					setIntakePower(-127);
+					liftRRequestedValue = teirHeightFifteen;
+					wait1Msec(300);
+					setIntakePower(-10);
+
+					setChainPower(-127);
+					wait1Msec(500);
+					setChainPower(10);
+
+			stopTask(liftRController);
+		}
 	}
+
+	if (vexRT[Btn7LXmtr2] == 1 && stackReadyAdd == true)
+	{
+		curentteir++;
+		stackReadyAdd = false;
+	}
+		else if (vexRT[Btn7LXmtr2] == 0)
+	{
+		stackReadyAdd = true;
+	}
+	if (vexRT[Btn7RXmtr2] == 1 && stackReadySubtract == true)
+	{
+		curentteir--;
+		stackReadySubtract = false;
+	}
+		else if (vexRT[Btn7RXmtr2] == 0)
+	{
+		stackReadySubtract = true;
+	}
+
+	if (vexRT[Btn7UXmtr2] == 1)
+	{
+		curentteir = 1;
+	}
+
+}
+//-=-=-=-==-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+
 
 //===========================================================================//
 
