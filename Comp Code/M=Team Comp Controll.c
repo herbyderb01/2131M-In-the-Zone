@@ -794,6 +794,7 @@ startTask(drive);
 
 			stopTask(liftRController);
 		}
+		curentteir++;
 	}
 
 	if (vexRT[Btn7LXmtr2] == 1 && stackReadyAdd == true)
