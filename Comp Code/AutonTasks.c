@@ -20,6 +20,22 @@ int TopLift = 855;
 int ParallelLift = 1880;
 int SkillsLift = 2140;
 
+// Auto Stack teir variables
+int teirHeightOneTwo = 2138;
+int teirHeightThree = 2020;
+int teirHeightFour = 1902;
+int teirHeightFive = 1720;
+int teirHeightSix = 1596;
+int teirHeightSeven = 1540;
+int teirHeightEight = 1460;
+int teirHeightNine = 1380;
+int teirHeightTen = 1260;
+int teirHeightEleven = 1110;
+int teirHeightTwelve = 940;
+int teirHeightThirteen = 940;
+int teirHeightFourteen = 940;
+int teirHeightFifteen = 940;
+
 //#endregion
 //#region Autonomous Voids
 //--------------------Autonomous Voids-----------------------//
@@ -93,12 +109,12 @@ void turnLeft(int ticks) // void to turn the robot left as much as you want
 }
 
 task drive() //Redirecting Drive into a task
-{/*
+{
 	while(true)
 	{
 	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
 	}
-	*/
+	/*
 	while (true)
 	{
 	if (abs(vexRT[Ch3])+ abs(vexRT[Ch2])>10)
@@ -113,7 +129,7 @@ task drive() //Redirecting Drive into a task
 		}
 				//setDrivePower(vexRT[Ch3]+vexRT[Ch3Xmtr2],vexRT[Ch2]+vexRT[Ch2Xmtr2]);
 
-		wait1Msec(25); //dont hog cpu
+		wait1Msec(25); //dont hog cpu*/
 	}
 
 	task IntakeCone()
@@ -131,6 +147,75 @@ task drive() //Redirecting Drive into a task
 	}
 
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
+//#endregion
+//#region AutoStack Teirs
+/*//vars
+
+//Toggle teirs var
+int curentteir = 1;
+
+//teirOne
+int Stack Height 1
+int GrabHeight
+
+task StackNewCone() // button to stack new cone
+{
+
+  sequence in "if's" to stack new cone with variables to differentiate the different teirs
+	- then changes currentteir varable to next teir 1-4
+
+	if (vexRT[Btn7DXmtr2] == 1)
+	{
+		if(curentteir = 1)
+		{
+			startTask(liftRController);
+		//run stack sequence with its specific teir
+			stopTask(liftRController);
+		}
+
+		if(curentteir = 2)
+		{
+			startTask(liftRController);
+		//run stack sequence with its specific teir
+			stopTask(liftRController);
+		}
+
+		if(curentteir = 3)
+		{
+			startTask(liftRController);
+		//run stack sequence with its specific teir
+			stopTask(liftRController);
+		}
+
+		if(curentteir = 4)
+		{
+			startTask(liftRController);
+		//run stack sequence with its specific teir
+			stopTask(liftRController);
+		}
+
+		if(curentteir = 5)
+		{
+			startTask(liftRController);
+		//run stack sequence with its specific teir
+			stopTask(liftRController);
+		}
+	}
+
+	else if (vexRT[Btn7LXmtr2] == 1)
+	{
+		curentteir+1;
+	}
+
+	else if (vexRT[Btn7RXmtr2] == 1)
+	{
+		curentteir-1;
+	}
+	else if (vexRT[Btn7UXmtr2] == 1)
+	{
+		curentteir = 1;
+	}
+}*/
 //#endregion
 //#region Special Auto Stack Voids
 //--------------------Special Auto Stack Voids-----------------------//

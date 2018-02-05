@@ -1,0 +1,78 @@
+//vars
+
+//Toggle teirs var
+int currentteir = 1;
+
+//teirOne
+int Stack Height 1
+int GrabHeight
+
+task StackNewCone() // button to stack new cone
+{
+
+ /* sequence in "if's" to stack new cone with variables to differentiate the different teirs
+	- then changes currentteir varable to next teir 1-4
+
+	if (stack button is pressed 7D)
+	{
+		if(currentteir = 1)
+		{
+ 		startLift Pid();
+		
+		//run stack sequence with its specific teir
+
+ 		stopLift Pid();
+		}
+
+		if(currentteir = 2)
+		{
+ 		startLift Pid();
+		
+		//run stack sequence with its specific teir
+
+ 		stopLift Pid();
+		}
+
+		if(currentteir = 3)
+		{
+ 		startLift Pid();
+		
+		//run stack sequence with its specific teir
+
+ 		stopLift Pid();
+		}
+
+		if(currentteir = 4)
+		{
+ 		startLift Pid();
+		
+		//run stack sequence with its specific teir
+
+ 		stopLift Pid();
+		}
+
+		if(currentteir = 5)
+		{
+ 		startLift Pid();
+		
+		//run stack sequence with its specific teir
+
+ 		stopLift Pid();
+		}
+
+	}
+
+	else if (add teir button is pressed)
+	{
+		currentteir+1; 		
+	}
+
+	else if (subtract teir button is pressed)
+	{
+		currentteir-1; 
+	}
+	else if (subtract teir button is pressed)
+	{
+		currentteir = 1;
+	}
+}
