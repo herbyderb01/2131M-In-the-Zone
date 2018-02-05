@@ -53,7 +53,9 @@ static float  liftR_Kd = 1;			// Requested Guess Value
 float liftRD;
 float liftRP;
 float lastliftRError;
+int waitLiftRerror = 80;
 float liftRDF;
+float liftRSensorCurrentValue;
 
 task liftRController()
 {
@@ -147,11 +149,19 @@ task mobileRController()
 	}
 }
 //#endregion
-//#region WaityThing for mobilegoal
+//#region WaityThing for mobilegoal and lift
 void WaitieThing()
 {
 	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
 		|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
 		{}
 }
+/*
+void WaitieThingLift()
+{
+	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
+		|| liftRSensorCurrentValue <= liftRRequestedValue - waitMobliERerror)
+		{}
+}
+*/
 //#endregion

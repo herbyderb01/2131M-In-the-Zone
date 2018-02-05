@@ -295,18 +295,18 @@ startTask(drive);
 
 		else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
 		{
-			setIntakePower(127);
+			startTask(IntakeCone);
 		}
 		else if( vexRT[Btn8DXmtr2] == 1)      // Setting Btn6D to Outtake Cone
 		{
-			setIntakePower(-127);
+			startTask(OutakeCone);
 		}
 	/*	else if (setIntakePower(Ch3Xmtr2)) {}// Setting Btn 6U to Intake Cone*/
-
+/*
 		else
 		{
 			setIntakePower(0);   // Else, set a intake still speed to hold cone in
-		}
+		}*/
 
 		//----------------------Moblie Goal Lift------------------------//
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
@@ -398,7 +398,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -426,7 +426,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -454,7 +454,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -482,7 +482,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -510,7 +510,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -538,7 +538,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -566,7 +566,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -581,7 +581,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightEight-300;
-					wait1Msec(240);
+					wait1Msec(260);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightEight+350;
 					wait1Msec(500);
@@ -594,7 +594,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -609,7 +609,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightNine-310;
-					wait1Msec(240);
+					wait1Msec(270);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightNine+320;
 					wait1Msec(500);
@@ -622,7 +622,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -637,7 +637,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightTen-320;
-					wait1Msec(260);
+					wait1Msec(300);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightTen+340;
 					wait1Msec(530);
@@ -650,7 +650,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -665,7 +665,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightEleven-320;
-					wait1Msec(260);
+					wait1Msec(310);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightEleven+400;
 					wait1Msec(560);
@@ -678,7 +678,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -693,7 +693,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightTwelve-300;
-					wait1Msec(240);
+					wait1Msec(320);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightTwelve+200;
 					wait1Msec(500);
@@ -706,7 +706,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -721,7 +721,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightThirteen-300;
-					wait1Msec(240);
+					wait1Msec(330);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightThirteen+200;
 					wait1Msec(500);
@@ -734,7 +734,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -749,7 +749,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightFourteen-300;
-					wait1Msec(240);
+					wait1Msec(340);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightFourteen+200;
 					wait1Msec(500);
@@ -762,7 +762,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -777,7 +777,7 @@ startTask(drive);
 					wait1Msec(100);
 
 					liftRRequestedValue = teirHeightFifteen-300;
-					wait1Msec(240);
+					wait1Msec(350);
 					setChainPower(127);
 					liftRRequestedValue = teirHeightFifteen+200;
 					wait1Msec(500);
@@ -790,7 +790,7 @@ startTask(drive);
 
 					setChainPower(-127);
 					wait1Msec(500);
-					setChainPower(10);
+					setChainPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -823,7 +823,6 @@ startTask(drive);
 
 }
 //-=-=-=-==-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-
 
 //===========================================================================//
 

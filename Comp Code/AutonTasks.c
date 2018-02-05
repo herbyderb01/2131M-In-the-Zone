@@ -6,7 +6,6 @@
 int Nine = 750;
 int full = 1750;
 int drivepower = 127;
-float  liftRSensorCurrentValue;																																//GO LINE TRACK YOURSELF.
 
 // PID Mobile Variables
 int mobileIn = 1051;
@@ -28,8 +27,8 @@ int teirHeightFive = 1720;
 int teirHeightSix = 1596;
 int teirHeightSeven = 1540;
 int teirHeightEight = 1460;
-int teirHeightNine = 1360;
-int teirHeightTen = 1260;
+int teirHeightNine = 1340;
+int teirHeightTen = 1210;
 int teirHeightEleven = 1110;
 int teirHeightTwelve = 940;
 int teirHeightThirteen = 940;
