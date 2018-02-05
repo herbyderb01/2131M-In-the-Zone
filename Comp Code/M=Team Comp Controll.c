@@ -499,7 +499,7 @@ startTask(drive);
 					liftRRequestedValue = teirHeightFive-300;
 					wait1Msec(240);
 					setChainPower(127);
-					liftRRequestedValue = teirHeightFive+200;
+					liftRRequestedValue = teirHeightFive+300;
 					wait1Msec(500);
 					setChainPower(15);
 
@@ -527,7 +527,7 @@ startTask(drive);
 					liftRRequestedValue = teirHeightSix-300;
 					wait1Msec(240);
 					setChainPower(127);
-					liftRRequestedValue = teirHeightSix+200;
+					liftRRequestedValue = teirHeightSix+320;
 					wait1Msec(500);
 					setChainPower(15);
 
@@ -608,10 +608,10 @@ startTask(drive);
 					setIntakePower(10);
 					wait1Msec(100);
 
-					liftRRequestedValue = teirHeightNine-300;
+					liftRRequestedValue = teirHeightNine-310;
 					wait1Msec(240);
 					setChainPower(127);
-					liftRRequestedValue = teirHeightNine+300;
+					liftRRequestedValue = teirHeightNine+320;
 					wait1Msec(500);
 					setChainPower(15);
 
