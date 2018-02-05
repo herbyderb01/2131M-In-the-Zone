@@ -281,12 +281,12 @@ startTask(drive);
 
 		if( vexRT[Btn6U] == 1)      // Setting Btn 6U to Intake Cone
 		{
-			setIntakePower(127);
+			startTask(IntakeCone);
 		}
 
 		else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Outtake Cone
 		{
-			setIntakePower(-127);
+			startTask(OutakeCone);
 		}
 		/*
 		else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
@@ -301,7 +301,7 @@ startTask(drive);
 
 		else
 		{
-			setIntakePower(20);   // Else, set a intake still speed to hold cone in
+			setIntakePower(0);   // Else, set a intake still speed to hold cone in
 		}
 
 		//----------------------Moblie Goal Lift------------------------//

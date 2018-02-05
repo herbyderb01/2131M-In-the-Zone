@@ -116,6 +116,19 @@ task drive() //Redirecting Drive into a task
 		wait1Msec(25); //dont hog cpu
 	}
 
+	task IntakeCone()
+	{
+		setIntakePower (127);
+		wait1Msec (25);
+		setIntakePower (20);
+	}
+
+	task OutakeCone()
+	{
+		setIntakePower (-127);
+	wait1Msec (1000);
+	setIntakePower (20);
+	}
 
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
