@@ -69,43 +69,7 @@ task autonomous()
 	SensorFullCount[Gyro] = 3600;
 	wait1Msec(2000);
 */
-	if (SensorValue[selecttwoP] < 1023) //=========== Score 5's ==========//
-	{
-			if (SensorValue[selectP] == 0)
-			{
-
-			}
-			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
-			{
-
-			}
-			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
-			{
-
-			}
-			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
-			{
-
-			}
-			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)
-			{
-
-			}
-			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
-			{
-
-			}
-			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
-			{
-
-			}
-			if (SensorValue[selectP] == 4095)
-			{
-
-			}
-
-	}
-	if (SensorValue[selecttwoP] > 1023 && SensorValue[selecttwoP] < 2046) //=========== Score 10's ==========//
+	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795) //=========== Score 5's ==========//
 	{
 			if (SensorValue[selectP] == 0)
 			{
@@ -113,7 +77,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
 			{
-
+				LeftBlueFive();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
 			{
@@ -133,15 +97,15 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
 			{
-
+				LeftRedFive();
 			}
 			if (SensorValue[selectP] == 4095)
 			{
-
+				RightRedFive();
 			}
 
 	}
-	if (SensorValue[selecttwoP] > 2046 && SensorValue[selecttwoP] < 3069) //=========== Score 20's ==========//
+	if (SensorValue[selecttwoP] > 1795 && SensorValue[selecttwoP] < 3530) //=========== Score 10's ==========//
 	{
 			if (SensorValue[selectP] == 0)
 			{
@@ -177,7 +141,7 @@ task autonomous()
 			}
 
 	}
-	if (SensorValue[selecttwoP] < 3069) //=========== Score Special's ==========//
+	if (SensorValue[selecttwoP] > 3530) //=========== Score 20's ==========//
 	{
 			if (SensorValue[selectP] == 0)
 			{
@@ -210,6 +174,42 @@ task autonomous()
 			if (SensorValue[selectP] == 4095)
 			{
 				RightRedTwenty();
+			}
+
+	}
+	if (SensorValue[selecttwoP] < 300) //=========== Score Special's ==========//
+	{
+			if (SensorValue[selectP] == 0)
+			{
+				SkillsOne();
+			}
+			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
+			{
+				SkillsTwo();
+			}
+			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
+			{
+
+			}
+			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
+			{
+
+			}
+			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)
+			{
+
+			}
+			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
+			{
+
+			}
+			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
+			{
+				//LeftRedTwenty();
+			}
+			if (SensorValue[selectP] == 4095)
+			{
+				//RightRedTwenty();
 			}
 
 	}
