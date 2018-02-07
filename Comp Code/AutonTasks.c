@@ -585,13 +585,15 @@ void RightBlueTen()
 
 	//--------------------------//
 
-	Atondrive(-670, 127);
+	Atondrive(-800, 127);
 
 	liftRRequestedValue = ParallelLift;
 
-	turnRight(full-500);
+	turnRight(Nine+80);
 
-	Atondrive(150, 127);
+	setDrivePower(80,80);
+	wait1Msec(120);
+	setDrivePower(0,0);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
@@ -623,7 +625,7 @@ void LeftBlueTen()
 	liftRRequestedValue = 1880;           // PRESETS
 
 	liftRRequestedValue = SkillsLift;
-
+	wait1Msec(100);
 	mobileRRequestedValue = mobileOut;
 	//WaitieThing();
 
@@ -652,22 +654,22 @@ void LeftBlueTen()
 	wait1Msec(600);
 	setChainPower(0);
 
-	setDrivePower(80,30);
+	setDrivePower(30,80);
 	wait1Msec(120);
 	setDrivePower(0,0);
-	Atondrive(100, 120);
+	Atondrive(90, 120);
 
 	AutoStackUp(); 											//Second Cone pickup
 
 	//--------------------------//
 
-	Atondrive(-670, 127);
+	Atondrive(-800, 127);
 
 	liftRRequestedValue = ParallelLift;
 
-	turnLeft(full-500);
+	turnLeft(full-410);
 
-	Atondrive(150, 127);
+	Atondrive(75, 127);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
@@ -680,7 +682,7 @@ void LeftBlueTen()
 
 	turnLeft(110);
 
-	Atondrive(-300, drivepower);
+	Atondrive(-250, drivepower);
 
 	turnRight(150);
 
@@ -816,28 +818,22 @@ void LeftRedTen()
 
 	//--------------------------//
 
-	Atondrive(-800, 127);
+	Atondrive(-810, 127);
 
-	liftRRequestedValue = BottomLift;
-	wait1Msec(200);
+	liftRRequestedValue = ParallelLift;
 
-	setIntakePower(-127);                   //
-	wait1Msec(250);
-	setIntakePower(0);                   //
+	turnLeft(Nine+330);
 
-	liftRRequestedValue = 2600;
-
-	turnLeft(full-400);
-
-	Atondrive(130, 127);
+	setDrivePower(80,80);
+	wait1Msec(260);
+	setDrivePower(0,0);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	Atondrive(-200, drivepower);
+	Atondrive(-120, drivepower);
 
-	mobileRRequestedValue = mobileIn;
-	WaitieThing();
+	liftRRequestedValue = SkillsLift;
 
 	//--------------------------//
 
@@ -845,13 +841,13 @@ void LeftRedTen()
 
 	Atondrive(-300, drivepower);
 
-	turnRight(190);
+	turnRight(150);
 
 	setDrivePower(-127,-127);
 	wait1Msec(500);
 
 	setDrivePower(-80,-80);
-	wait1Msec(2000);
+	wait1Msec(1800);
 	setDrivePower(0,0);
 }
 
@@ -879,7 +875,27 @@ void RightBlueTwenty() // Auton task to grab moble base on the right and score i
 	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
+	WaityThing();
+
+	liftRRequestedValue = SkillsLift + 350;
+	wait1Msec(200);
+
+	setIntakePower(-127);                   //
+	wait1Msec(300);
+	setIntakePower(0);                   //
+
+	liftRRequestedValue = ParallelLift;
+
+	setChainPower(127);
 	wait1Msec(600);
+	setChainPower(0);
+
+	setDrivePower(80,30);
+	wait1Msec(120);
+	setDrivePower(0,0);
+	Atondrive(100, 120);
+
+	AutoStackUp(); 											//Second Cone pickup
 
 	//--------------------------//
 
@@ -937,7 +953,27 @@ void LeftBlueTwenty()
 	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
-	wait1Msec(500);
+	WaityThing();
+
+	liftRRequestedValue = SkillsLift + 350;
+	wait1Msec(200);
+
+	setIntakePower(-127);                   //
+	wait1Msec(300);
+	setIntakePower(0);                   //
+
+	liftRRequestedValue = ParallelLift;
+
+	setChainPower(127);
+	wait1Msec(600);
+	setChainPower(0);
+
+	setDrivePower(80,30);
+	wait1Msec(120);
+	setDrivePower(0,0);
+	Atondrive(100, 120);
+
+	AutoStackUp(); 											//Second Cone pickup
 
 	//--------------------------//
 
@@ -995,7 +1031,27 @@ void RightRedTwenty()
 	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
-	wait1Msec(500);
+	WaityThing();
+
+	liftRRequestedValue = SkillsLift + 350;
+	wait1Msec(200);
+
+	setIntakePower(-127);                   //
+	wait1Msec(300);
+	setIntakePower(0);                   //
+
+	liftRRequestedValue = ParallelLift;
+
+	setChainPower(127);
+	wait1Msec(600);
+	setChainPower(0);
+
+	setDrivePower(80,30);
+	wait1Msec(120);
+	setDrivePower(0,0);
+	Atondrive(100, 120);
+
+	AutoStackUp(); 											//Second Cone pickup
 
 	//--------------------------//
 
@@ -1058,7 +1114,27 @@ void LeftRedTwenty()
 	liftRRequestedValue = ParallelLift;
 	wait1Msec(1);
 	mobileRRequestedValue = mobileIn;
-	wait1Msec(500);
+	WaityThing();
+
+	liftRRequestedValue = SkillsLift + 350;
+	wait1Msec(200);
+
+	setIntakePower(-127);                   //
+	wait1Msec(300);
+	setIntakePower(0);                   //
+
+	liftRRequestedValue = ParallelLift;
+
+	setChainPower(127);
+	wait1Msec(600);
+	setChainPower(0);
+
+	setDrivePower(80,30);
+	wait1Msec(120);
+	setDrivePower(0,0);
+	Atondrive(100, 120);
+
+	AutoStackUp(); 											//Second Cone pickup
 
 	//--------------------------//
 
