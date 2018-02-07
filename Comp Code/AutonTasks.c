@@ -701,13 +701,13 @@ void RightRedTen()
 	liftRRequestedValue = 1880;           // PRESETS
 
 	liftRRequestedValue = SkillsLift;
-
+	wait1Msec(300);
 	mobileRRequestedValue = mobileOut;
 	//WaitieThing();
 
 	setChainPower(20);
 
-	Atondrive(750, 127);
+	Atondrive(730, 127);
 
 	wait1Msec(200);
 
@@ -730,7 +730,7 @@ void RightRedTen()
 	wait1Msec(600);
 	setChainPower(0);
 
-	setDrivePower(90,30);
+	setDrivePower(80,30);
 	wait1Msec(120);
 	setDrivePower(0,0);
 	Atondrive(100, 120);
@@ -739,38 +739,35 @@ void RightRedTen()
 
 	//--------------------------//
 
-	Atondrive(-580, 127);
-
-	setIntakePower(0);                   //
+	Atondrive(-675, 127);
 
 	liftRRequestedValue = ParallelLift;
 
-
 	turnRight(full-400);
 
-	Atondrive(80, drivepower);
+	Atondrive(150, 127);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
 	Atondrive(-120, drivepower);
 
-	mobileRRequestedValue = mobileIn;
-	WaitieThing();
+	liftRRequestedValue = SkillsLift;
 
 	//--------------------------//
 
-	turnRight(150);
+	turnRight(110);
+
+	Atondrive(-300, drivepower);
+
+	turnLeft(150);
 
 	setDrivePower(-127,-127);
-	wait1Msec(1500);
-	setDrivePower(0,0);
+	wait1Msec(500);
 
-	setDrivePower(40,40);
-	wait1Msec(300);
+	setDrivePower(-80,-80);
+	wait1Msec(1800);
 	setDrivePower(0,0);
-
-	turnRight(Nine+100);
 }
 
 void LeftRedTen()
