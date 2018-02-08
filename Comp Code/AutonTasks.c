@@ -585,14 +585,14 @@ void RightBlueTen()
 
 	//--------------------------//
 
-	Atondrive(-800, 127);
+	Atondrive(-650, 127);
 
 	liftRRequestedValue = ParallelLift;
 
-	turnRight(Nine+80);
+	turnRight(Nine+250);
 
 	setDrivePower(80,80);
-	wait1Msec(120);
+	wait1Msec(200);
 	setDrivePower(0,0);
 
 	mobileRRequestedValue = mobileOut;
@@ -625,7 +625,7 @@ void LeftBlueTen()
 	liftRRequestedValue = 1880;           // PRESETS
 
 	liftRRequestedValue = SkillsLift;
-	wait1Msec(100);
+	wait1Msec(300);
 	mobileRRequestedValue = mobileOut;
 	//WaitieThing();
 
@@ -654,7 +654,7 @@ void LeftBlueTen()
 	wait1Msec(600);
 	setChainPower(0);
 
-	setDrivePower(30,80);
+	setDrivePower(80,30);
 	wait1Msec(120);
 	setDrivePower(0,0);
 	Atondrive(90, 120);
@@ -663,7 +663,7 @@ void LeftBlueTen()
 
 	//--------------------------//
 
-	Atondrive(-800, 127);
+	Atondrive(-650, 127);
 
 	liftRRequestedValue = ParallelLift;
 
@@ -674,7 +674,7 @@ void LeftBlueTen()
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
 
-	Atondrive(-120, drivepower);
+	Atondrive(-200, drivepower);
 
 	liftRRequestedValue = SkillsLift;
 
@@ -739,13 +739,13 @@ void RightRedTen()
 
 	//--------------------------//
 
-	Atondrive(-675, 127);
+	Atondrive(-625, 127);
 
 	liftRRequestedValue = ParallelLift;
 
-	turnRight(full-400);
+	turnRight(full-500);
 
-	Atondrive(150, 127);
+	Atondrive(110, 127);
 
 	mobileRRequestedValue = mobileOut;
 	WaitieThing();
@@ -815,13 +815,13 @@ void LeftRedTen()
 
 	//--------------------------//
 
-	Atondrive(-810, 127);
+	Atondrive(-675, 127);
 
 	liftRRequestedValue = ParallelLift;
 
-	turnLeft(Nine+330);
+	turnLeft(full-500);
 
-	setDrivePower(80,80);
+	setDrivePower(100,100);
 	wait1Msec(260);
 	setDrivePower(0,0);
 
@@ -1356,9 +1356,10 @@ void SkillsTwo ()
 //#region Other Programs
 void Defensive ()
 {
-	setDrivePower(127 , 127);
-	wait1Msec(5000);
-	setDrivePower(0 , 0);
+	mobileRRequestedValue = mobileIn;     //
+	liftRRequestedValue = ParallelLift;           // PRESETS
+
+	Atondrive(500,127);
 }
 
 void DoNothing ()

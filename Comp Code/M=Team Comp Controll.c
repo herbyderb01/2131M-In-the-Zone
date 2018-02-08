@@ -117,7 +117,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
 			{
-
+				Defensive();
 			}
 			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
 			{
