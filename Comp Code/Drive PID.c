@@ -105,7 +105,7 @@ task LPIDDriveController()
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
-static float  DriveT_Kp = 0.5; 	//Power Tuning Value
+static float  DriveT_Kp = 0.4; 	//Power Tuning Value
 static float  DriveTRequestedValue;
 static float  DriveT_Kd = 2.5;			// Requested Guess Value
 
@@ -177,7 +177,7 @@ void droveStraight(float distance, bool waity = false)
   }
 }
 
-void TurnPID (int turnAmount,int waity=false)
+void TurnPID (int turnAmount, bool waity=false)
 {
   //stopTask(RPIDDriveController);
   //stopTask(LPIDDriveController);

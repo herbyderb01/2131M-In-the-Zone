@@ -1,11 +1,13 @@
 #include "BackOver Functions 2017-18.c"
-//#include "Drive PID.c"
+#include "Drive PID.c"
 //#region Variables
 //-------------Variables--------------//
 // Random variable for turn and drive
 int Nine = 750;
 int full = 1750;
 int drivepower = 127;
+int NineP = 930;
+int FullP = 1860;
 
 // PID Mobile Variables
 int mobileIn = 1051;
@@ -1353,20 +1355,98 @@ void SkillsTwo ()
 {
 	//------------------------------------------------------------//
 			setIntakePower(15);                   //
-			liftRRequestedValue = ParallelLift;           // PRESETS
-			mobileRRequestedValue = mobileIn;     //
-
+			liftRRequestedValue = 2160;
+			wait1Msec(500);
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
-
-			liftRRequestedValue = SkillsLift;
 
 			setChainPower(20);
 
 			Atondrive(750, 127);
 
-			wait1Msec(200);
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(100);
 
+			Atondrive(-500, 127);
+
+			TurnPID(-NineP/2, true);
+
+			Atondrive(-160, 127);
+
+			TurnPID(-NineP, true);
+
+			Atondrive(300, 127);
+
+			liftRRequestedValue = SkillsLift;
+
+			setIntakePower(-127);                   //
+			setDrivePower(80,80);
+			wait1Msec(300);
+			setDrivePower(0,0);
+			setIntakePower(0);                   //
+			wait1Msec(300);
+
+			liftRRequestedValue = 2160;
+			wait1Msec(150);
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			mobileRRequestedValue = mobileIn;
+			//------------------------------------------- Place 2nd
+			Atondrive(-175, drivepower);
+
+			TurnPID(-NineP, true);
+
+			Atondrive(90, drivepower);
+
+			TurnPID(-NineP-10, true);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			Atondrive(400, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(150);
+			Atondrive(-250, drivepower);
+
+			TurnPID(-FullP, true);
+
+			setDrivePower(80,80);
+			wait1Msec(300);
+			setDrivePower(0,0);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+			//------------------------------------------- Place 3rd
+			Atondrive(-350, drivepower);
+
+			mobileRRequestedValue = mobileMid;
+
+			TurnPID(NineP, true);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			Atondrive(300, drivepower);
+
+			mobileRRequestedValue = mobileMid;
+
+			TurnPID(-NineP, true);
+
+			Atondrive(450, drivepower);
+
+			setDrivePower(80,80);
+			wait1Msec(300);
+			setDrivePower(0,0);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			Atondrive(-250, drivepower);
+			//------------------------------------------- Place 3rd
+			TurnPID(FullP, true);
+
+/*
 			//chainRRequestedValue = StraitUpChain;
 			liftRRequestedValue = ParallelLift;
 			wait1Msec(1);
@@ -1425,11 +1505,8 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileIn;
 			WaitieThing();											 // Wait for Mobile Goal
 
-			Atondrive(-190, drivepower);         // Drive back 190 encoder clicks
-
+			Atondrive(-190, drivepower);         // Drive back 190 encoder clicks*/
 	//------------------------------------------------------------//
-	TurnPID(900, true);
-	TurnPID(-900, true);
 }
 //#endregion
 //#region Other Programs
