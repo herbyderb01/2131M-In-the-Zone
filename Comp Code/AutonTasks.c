@@ -1351,6 +1351,85 @@ void SkillsOne ()
 
 void SkillsTwo ()
 {
+	//------------------------------------------------------------//
+			setIntakePower(15);                   //
+			liftRRequestedValue = ParallelLift;           // PRESETS
+			mobileRRequestedValue = mobileIn;     //
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			liftRRequestedValue = SkillsLift;
+
+			setChainPower(20);
+
+			Atondrive(750, 127);
+
+			wait1Msec(200);
+
+			//chainRRequestedValue = StraitUpChain;
+			liftRRequestedValue = ParallelLift;
+			wait1Msec(1);
+			mobileRRequestedValue = mobileIn;
+			WaityThing();
+
+			liftRRequestedValue = SkillsLift + 350;
+			wait1Msec(200);
+
+			setIntakePower(-127);                   //
+			wait1Msec(300);
+			setIntakePower(0);                   //
+
+			liftRRequestedValue = ParallelLift;
+
+			setChainPower(127);
+			wait1Msec(600);
+			setChainPower(0);
+
+			setDrivePower(80,30);
+			wait1Msec(120);
+			setDrivePower(0,0);
+			Atondrive(100, 120);
+
+			AutoStackUp(); 											//Second Cone pickup
+
+			//--------------------------//
+
+			Atondrive(-600, 127);
+
+			liftRRequestedValue = SkillsLift;
+			wait1Msec(200);
+
+
+			setIntakePower(-127);                   //
+			wait1Msec(250);
+			setIntakePower(0);                   //
+
+			liftRRequestedValue = ParallelLift;
+
+			turnRight(Nine/2-100);
+
+			Atondrive(-200, 127);
+
+			turnRight(Nine);
+
+			Atondrive(300, drivepower);         // Drive 300 encoder clicks
+
+			setDrivePower(20,20);							  // Set drive still speed
+
+			mobileRRequestedValue = mobileOut;  // Outake mobile goal
+			WaitieThing();										  // Wait for Mobile Goal
+
+			Atondrive(-75, drivepower);         // Drive 175 encoder clicks
+
+			mobileRRequestedValue = mobileIn;
+			WaitieThing();											 // Wait for Mobile Goal
+
+			Atondrive(-190, drivepower);         // Drive back 190 encoder clicks
+
+	//------------------------------------------------------------//
+	TurnPID(900, true);
+	TurnPID(-900, true);
 }
 //#endregion
 //#region Other Programs

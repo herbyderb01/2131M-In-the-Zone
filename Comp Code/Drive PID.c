@@ -177,10 +177,10 @@ void droveStraight(float distance, bool waity = false)
   }
 }
 
-void Turn (int turnAmount,int waity=false)
+void TurnPID (int turnAmount,int waity=false)
 {
-  stopTask(RPIDDriveController);
-  stopTask(LPIDDriveController);
+  //stopTask(RPIDDriveController);
+  //stopTask(LPIDDriveController);
 
   startTask(TPIDDriveController);
 
@@ -194,5 +194,6 @@ void Turn (int turnAmount,int waity=false)
       wait1Msec(200);
   }
   wait1Msec(25);
+  startTask(TPIDDriveController);
 }
 //#endregion
