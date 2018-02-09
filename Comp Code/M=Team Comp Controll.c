@@ -21,7 +21,7 @@
 #pragma platform(VEX2)
 // Select Download method as "competition"
 #pragma competitionControl(Competition)
-//Main competition background code...do not modify!
+//Main competition .background code...do not modify!
 #include "Vex_Competition_Includes.c"
 //include both Void programs, and PID
 #include "BackOver Functions 2017-18.c"

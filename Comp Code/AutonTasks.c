@@ -1374,7 +1374,7 @@ void SkillsTwo ()
 			TurnPID(-NineP/2, true);
 			setIntakePower(0);                   //
 
-			Atondrive(-190, 127);
+			Atondrive(-260, 127);
 
 			liftRRequestedValue = 2000;
 
@@ -1389,13 +1389,13 @@ void SkillsTwo ()
 
 			mobileRRequestedValue = mobileIn;
 			//------------------------------------------- Place 2nd
-			Atondrive(-190, drivepower);
+			Atondrive(-230, drivepower);
 
 			TurnPID(-NineP, true);
 
-			Atondrive(120, drivepower);
+			Atondrive(180, drivepower);
 
-			TurnPID(-NineP+10, true);
+			TurnPID(-NineP+35, true);
 
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
@@ -1406,12 +1406,10 @@ void SkillsTwo ()
 			wait1Msec(150);
 			Atondrive(-250, drivepower);
 
-			TurnPID(FullP, true);
+			TurnPID(FullP+40, true);
 
 			Atondrive(90, 127);
 
-			setDrivePower(100,100);
-			wait1Msec(300);
 			setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
@@ -1432,10 +1430,7 @@ void SkillsTwo ()
 
 			TurnPID(-NineP-30, true);
 
-			Atondrive(650, drivepower);
-
-			setDrivePower(100,100);
-			wait1Msec(300);
+			Atondrive(600, drivepower);
 			setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
