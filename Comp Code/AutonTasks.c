@@ -11,7 +11,6 @@ int FullP = 1860;
 
 // PID Mobile Variables
 int mobileIn = 1051;
-
 int mobileOut = 3340;
 int mobileMid = 2456;
 int mobileSMid = 2770;
