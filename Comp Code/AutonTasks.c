@@ -1019,7 +1019,7 @@ void RightRedTwenty()
 
 	setChainPower(20);
 
-	Atondrive(650, 127);
+	Atondrive(660, 127);
 
 	wait1Msec(200);
 
@@ -1387,7 +1387,7 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 
-			mobileRRequestedValue = mobileIn; 
+			mobileRRequestedValue = mobileIn;
 			//------------------------------------------- Place 2nd
 			Atondrive(-230, drivepower);
 
