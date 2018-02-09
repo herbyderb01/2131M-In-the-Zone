@@ -194,6 +194,6 @@ void TurnPID (int turnAmount, bool waity=false)
       wait1Msec(200);
   }
   wait1Msec(25);
-  startTask(TPIDDriveController);
+  stopTask(TPIDDriveController);
 }
 //#endregion
