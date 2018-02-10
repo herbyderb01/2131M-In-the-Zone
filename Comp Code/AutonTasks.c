@@ -1366,7 +1366,7 @@ void SkillsTwo ()
 
 			mobileRRequestedValue = mobileMid;
 
-			Atondrive(650, drivepower);
+			Atondrive(680, drivepower);
 
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
