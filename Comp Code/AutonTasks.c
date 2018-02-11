@@ -1272,7 +1272,7 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(200);
 
-			Atondrive(-600, 127);
+			Atondrive(-585, 127);
 			liftRRequestedValue = 2600;
 			wait1Msec(200);
 			setIntakePower(-127);                   //
@@ -1280,11 +1280,11 @@ void SkillsTwo ()
 			TurnPID(-NineP/2, true);
 			setIntakePower(0);                   //
 
-			Atondrive(-270, 127);
+			Atondrive(-260, 127);
 
 			liftRRequestedValue = 2000;
 
-			TurnPID(-NineP-10, true);
+			TurnPID(-NineP-30, true);
 
 			Atondrive(285, 127);
 
@@ -1299,7 +1299,7 @@ void SkillsTwo ()
 
 			TurnPID(-NineP, true);
 
-			Atondrive(200, drivepower);
+			Atondrive(183, drivepower);
 
 			TurnPID(-NineP, true);
 
@@ -1313,7 +1313,7 @@ void SkillsTwo ()
 			wait1Msec(400);
 			Atondrive(-250, drivepower);
 
-			TurnPID(-FullP-40, true);
+			TurnPID(-FullP-20, true);
 
 			Atondrive(90, 127);
 
@@ -1336,7 +1336,7 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(500);
 
-			TurnPID(-NineP-60, true);
+			TurnPID(-NineP-70, true);
 
 			Atondrive(600, drivepower);
 			setDrivePower(40,40);
@@ -1344,16 +1344,16 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 			Atondrive(-80, drivepower);
-			mobileRRequestedValue = mobileMid;
+			mobileRRequestedValue = mobileMid-100;
 			setDrivePower(40,40);
-			wait1Msec(500);
+			wait1Msec(800);
 
 			Atondrive(-170, drivepower);
 
 			mobileRRequestedValue = mobileMid;
 
 			//------------------------------------------- Place 4rd
-			TurnPID(FullP, true);
+			TurnPID(FullP+50, true);
 
 			mobileRRequestedValue = mobileOut;
 
@@ -1371,11 +1371,11 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 			//------------------------------------------- Place 5th
-			Atondrive(-110, drivepower);
+			Atondrive(-130, drivepower);
 
 			mobileRRequestedValue = mobileMid;
 
-			TurnPID(-1225, true);
+			TurnPID(-1230, true);
 
 			mobileRRequestedValue = mobileOut;
 
@@ -1384,11 +1384,11 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(600);
 
-			Atondrive(-655, drivepower);
+			Atondrive(-700, drivepower);
 
 			TurnPID(390, true);
 
-			Atondrive(-210, drivepower);
+			Atondrive(-200, drivepower);
 
 			TurnPID(NineP+30, true);
 
@@ -1407,21 +1407,21 @@ void SkillsTwo ()
 
 			TurnPID(NineP+8, true);
 
-			Atondrive(220, drivepower);
+			Atondrive(200, drivepower);
 
 			mobileRRequestedValue = mobileOut;
 
 			TurnPID(NineP+15, true);
 			setDrivePower(-40,-40);
-			wait1Msec(500);
+			wait1Msec(1000);
 
 
-			Atondrive(355, drivepower);
+			Atondrive(480, drivepower);
 
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(600);
 
-			Atondrive(-355, drivepower);
+			Atondrive(-360, drivepower);
 
 			TurnPID(-FullP-20, true);
 
@@ -1445,20 +1445,20 @@ void SkillsTwo ()
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(600);
 
-			Atondrive(-700, drivepower);
+			Atondrive(-810, drivepower);
 
-			TurnPID(-360, true);
+			TurnPID(-FullP, true);
 
-			Atondrive(-210, drivepower);
+			//Atondrive(-210, drivepower);
 
-			TurnPID(-NineP-10, true);
+			//TurnPID(-NineP-10, true);
 
-			setDrivePower(40,40);
+			setDrivePower(60,60);
 
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 
-			Atondrive(-80, drivepower);
+			Atondrive(-150, drivepower);
 
 			/////////////////////////////////////////
 			/*
@@ -1549,10 +1549,29 @@ void SkillsTwo ()
 //#region Other Programs
 void Defensive ()
 {
-	mobileRRequestedValue = mobileIn;     //
-	liftRRequestedValue = ParallelLift;           // PRESETS
+	setIntakePower(15);                   //
+	liftRRequestedValue = 2000;
+	wait1Msec(700);
+	mobileRRequestedValue = mobileIn;
 
-	Atondrive(500,127);
+	setChainPower(20);
+
+	Atondrive(100, drivepower);
+
+	TurnPID(NineP/2,true);
+
+	mobileRRequestedValue = mobileOut;
+
+	Atondrive(600, drivepower);
+
+	Atondrive(-150 , drivepower);
+
+	TurnPID(NineP/2,true);
+
+	Atondrive(300, drivepower);
+
+	mobileRRequestedValue = mobileIn;
+
 }
 
 void DoNothing ()
@@ -1567,9 +1586,28 @@ void DoNothing ()
 
 void DefensiveTwo ()
 {
-	setDrivePower(127 , 127);
-	wait1Msec(5000);
-	setDrivePower(0 , 0);
+	setIntakePower(15);                   //
+	liftRRequestedValue = 2000;
+	wait1Msec(700);
+	mobileRRequestedValue = mobileIn;
+
+	setChainPower(20);
+
+	Atondrive(100, drivepower);
+
+	TurnPID(-NineP/2,true);
+
+	mobileRRequestedValue = mobileOut;
+
+	Atondrive(600, drivepower);
+
+	Atondrive(-150 , drivepower);
+
+	TurnPID(-NineP/2,true);
+
+	Atondrive(300, drivepower);
+
+	mobileRRequestedValue = mobileIn;
 }
 
 void DoNothingTwo ()
@@ -1577,6 +1615,9 @@ void DoNothingTwo ()
 }
 void SpecialAton()
 {
+	setDrivePower(127 , 127);
+	wait1Msec(5000);
+	setDrivePower(0 , 0);
 }
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion

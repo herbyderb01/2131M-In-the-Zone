@@ -201,15 +201,15 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
 			{
-
+				SpecialAton();
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
 			{
-				//LeftRedTwenty();
+				DefensiveTwo();
 			}
 			if (SensorValue[selectP] == 4095)
 			{
-				//RightRedTwenty();
+				Defensive();
 			}
 
 	}
@@ -223,6 +223,7 @@ task autonomous()
 task usercontrol()
 {
 startTask(drive);
+setChainPower(20);
 
 	while (3.1415926535897932384626433832795028841971==3.1415926535897932384626433832795028841971)
   //starting while loop to always run during userconroll
@@ -247,6 +248,7 @@ startTask(drive);
     if (initalize==0)
     {
       stopTask(liftRController);
+      setChainPower(20);
     }
     initalize=1;
 
@@ -832,12 +834,15 @@ startTask(drive);
     if (initalize==1)
     {
       startTask(liftRController);
-      liftRRequestedValue=SkillsLift;
+      liftRRequestedValue=2000;
       //chainRRequestedValue = StraitUpChain;
+     	setChainPower(127);
+			wait1Msec(200);
+			setChainPower(15);
+
+
     }
     initalize=0;
-
-    	setChainPower(20);
 
     //---------------------PreLoad Task-----------------------------//
     if (vexRT[Btn7R] == 1)
@@ -860,6 +865,14 @@ startTask(drive);
 			{
 				setMobilePower(mobilestillspeed);      // Else, stop mobile motors
 			}
+
+				//----------------------Intake Control------------------------//
+
+			if( vexRT[Btn5D] == 1)      // Setting Btn6D to Outtake Cone
+			{
+				startTask(OutakeCone);
+			}
+
 
 			//----------------------PIV Control with PID------------------------//
 			if( vexRT[Btn8D] == 1)      // Setting Btn8D PID, to Strait Up
