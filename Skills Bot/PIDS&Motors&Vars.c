@@ -9,7 +9,7 @@ int leftTurn = 900;
 int liftStillSpeed;
 int liftWaityError = 150;
 
-int clawWaityError = 50;
+int mobileWaityError = 50;
 
 //#endregion
 //#region Motor Port Voids
@@ -39,9 +39,9 @@ void setDrivePowerRight(int power)
 	motor[RDriveTwo] = power;	//Define this motor as the right 3 motor drive
 }
 
-void setClawPower(int Cpower)
+void setmobilePower(int Cpower)
 {
-	motor[Claw] = Cpower;
+	motor[mobile] = Cpower;
 }
 
 void setLiftPower(int Lpower)
@@ -118,69 +118,69 @@ void LiftTo (int Height, bool waity = false)
 	wait1Msec(25);
 }
 //#endregion
-//#region CLaw PID
-//----------------------Claw PID----------------------//
+*/
+//#region mobile PID
+//----------------------Mobile PID----------------------//
 
-static float  calw_Kp = 0.30; //Power Tuning Value
-static float  calwRequestedValue;
-static float  calw_Kd = 0.5; // Requested Guess Value
+static float  mobile_Kp = 0.30; //Power Tuning Value
+static float  mobileRequestedValue;
+static float  mobile_Kd = 0.5; // Requested Guess Value
 
-float calwD;						//Establishing variables
-float calwP;
-float lastcalwError;
-float calwDF;
+float mobileD;						//Establishing variables
+float mobileP;
+float lastmobileError;
+float mobileDF;
 int waitMobliERerror = 100;
-float  calwSensorCurrentValue;
+float  mobileSensorCurrentValue;
 
-task calwController()
+task mobileController()
 {
 	//float  calwSensorCurrentValue;
-	float  calwError;
-	float  calwDrive;
+	float  mobileError;
+	float  mobileDrive;
 
 	while( true )
 	{
 		// Read the sensor value and scale
-		calwSensorCurrentValue = SensorValue[ clawp ];
+		mobileSensorCurrentValue = SensorValue[ mobilep ];
 		// calculate error
-		calwError =  calwRequestedValue - calwSensorCurrentValue;
+		mobileError =  mobileRequestedValue - mobileSensorCurrentValue;
 
 		// calculate drive
-		calwP = (calw_Kp * calwError);
+		mobileP = (mobile_Kp * mobileError);
 
-		calwD = calwError- lastcalwError;
-		calwDF = (calw_Kd * calwD);
+		mobileD = mobileError- lastmobileError;
+		mobileDF = (mobile_Kd * mobileD);
 
-		calwDrive = calwP + calwDF;
+		mobileDrive = mobileP + mobileDF;
 
 		// limit drive
-		if( calwDrive > 127 )
-			calwDrive = 127;
-		if( calwDrive < (-127) )
-			calwDrive = (-127);
+		if( mobileDrive > 127 )
+			mobileDrive = 127;
+		if( mobileDrive < (-127) )
+			mobileDrive = (-127);
 
 		// send to motor
 
-		motor[ Claw ] = calwDrive;
+		motor[ mobile ] = mobileDrive;
 
-		lastcalwError = calwError;
+		lastmobileError = mobileError;
 		// Don't hog cpu
 		wait1Msec( 25 );
 	}
 }
 
-void setClawTo (int position, bool waity = false)
+void setmobileTo (int position, bool waity = false)
 {
-	calwRequestedValue = position;
+	mobileRequestedValue = position;
 
 	if (waity)
 	{
 	//  distance = abs(distance); //help
-		while( SensorValue[ liftPot ] >= calwRequestedValue + clawWaityError
-		|| SensorValue[ liftPot ] <= calwRequestedValue - clawWaityError){}
+		while( SensorValue[ liftPot ] >= mobileRequestedValue + mobileWaityError
+		|| SensorValue[ liftPot ] <= mobileRequestedValue - mobileWaityError){}
 		wait1Msec(200);
 	}
 	wait1Msec(25);
 }
 //#endregion
-*/
