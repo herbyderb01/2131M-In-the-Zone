@@ -2,7 +2,6 @@
 //#region Old Drive Void
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //--------------------Autonomous Voids-----------------------//
-/*
 void AutoStrait(int distance, int power)
  // Creating a function to make sure the robot drives forward
 {
@@ -45,7 +44,6 @@ void Atondrive(int ticks, int power)
 	motor[RexDrive] = -20 * sgn(ticks);
 	wait1Msec(100);
 }
-*/
 //#endregion
 //#region Turn Voids
 void turnRight(int ticks) // void to turn the robot right as much as you want

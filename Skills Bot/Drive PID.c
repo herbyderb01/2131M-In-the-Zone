@@ -24,8 +24,9 @@ float  DriveLDrive;
 float lastDriveLError;
 
 //#endregion
+/*
 //#region Ramping
-/**
+
 task rightDriveRamping()
 {
 
@@ -85,14 +86,15 @@ task leftDriveRamping()
   setDrivePowerLeft(DriveLDrive);
 }
 }
-*/
+
 //#endregion
+*/
 //#region Right Drive PID
 //----------------------Right Drive PID----------------------//
 
-static float  DriveR_Kp = 0.15; 	//Power Tuning Value
+static float  DriveR_Kp = 0.6; 	//Power Tuning Value
 static float  DriveRRequestedValue;
-static float  DriveR_Kd = .025;			// Requested Guess Value
+static float  DriveR_Kd = .4;			// Requested Guess Value
 
 float DriveRD;
 float DriveRP;
@@ -144,9 +146,9 @@ task RPIDDriveController()
 //#region Left Drive PID
 //----------------------Left Drive PID----------------------//
 
-static float  DriveL_Kp = 0.15; 	//Power Tuning Value
+static float  DriveL_Kp = 0.6; 	//Power Tuning Value
 static float  DriveLRequestedValue;
-static float  DriveL_Kd = .025;			// Requested Guess Value
+static float  DriveL_Kd = 4;			// Requested Guess Value
 
 float DriveLD;
 float DriveLP;
@@ -197,7 +199,7 @@ task LPIDDriveController()
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
-static float  DriveT_Kp = 0.5; 	//Power Tuning Value
+static float  DriveT_Kp = 0.4; 	//Power Tuning Value
 static float  DriveTRequestedValue;
 static float  DriveT_Kd = 2.5;			// Requested Guess Value
 
@@ -277,11 +279,8 @@ void droveStraight(float distance, bool waity = false)
   wait1Msec(25);
 }
 
-void Turn (int turnAmount,int waity=false)
+void TurnPID (int turnAmount, bool waity=false)
 {
-  stopTask(RPIDDriveController);
-  stopTask(LPIDDriveController);
-
   startTask(TPIDDriveController);
 
   SensorValue[Gyro] = 0;
@@ -294,5 +293,6 @@ void Turn (int turnAmount,int waity=false)
       wait1Msec(200);
   }
   wait1Msec(25);
+  stopTask(TPIDDriveController);
 }
 //#endregion

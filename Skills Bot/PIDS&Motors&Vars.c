@@ -51,6 +51,7 @@ void setLiftPower(int Lpower)
 	motor[LThree] = Lpower;
 }
 //#endregion
+/*
 //#region Lift PID
 //----------------------LIFT PID----------------------//
 
@@ -182,3 +183,4 @@ void setClawTo (int position, bool waity = false)
 	wait1Msec(25);
 }
 //#endregion
+*/
