@@ -6,8 +6,8 @@ int drivepowerPID = 127;
 int rightTurn = -900;
 int leftTurn = 900;
 
-int liftStillSpeed;
-int liftWaityError = 150;
+int MobileStillSpeed;
+//int liftWaityError = 150;
 
 int mobileWaityError = 50;
 
@@ -39,16 +39,10 @@ void setDrivePowerRight(int power)
 	motor[RDriveTwo] = power;	//Define this motor as the right 3 motor drive
 }
 
-void setmobilePower(int Cpower)
+void setMobilePower(int power)
 {
-	motor[mobile] = Cpower;
-}
-
-void setLiftPower(int Lpower)
-{
-	motor[LOne] = Lpower;
-	motor[LTwo] = Lpower;
-	motor[LThree] = Lpower;
+	motor[LMobile] = power;
+	motor[RMobile] = power;
 }
 //#endregion
 /*
@@ -142,7 +136,7 @@ task mobileController()
 	while( true )
 	{
 		// Read the sensor value and scale
-		mobileSensorCurrentValue = SensorValue[ mobilep ];
+		mobileSensorCurrentValue = SensorValue[ MobileP ];
 		// calculate error
 		mobileError =  mobileRequestedValue - mobileSensorCurrentValue;
 
@@ -162,7 +156,8 @@ task mobileController()
 
 		// send to motor
 
-		motor[ mobile ] = mobileDrive;
+		motor[ LMobile ] = mobileDrive;
+		motor[ RMobile ] = mobileDrive;
 
 		lastmobileError = mobileError;
 		// Don't hog cpu
@@ -170,15 +165,15 @@ task mobileController()
 	}
 }
 
-void setmobileTo (int position, bool waity = false)
+void setMobileTo (int position, bool waity = false)
 {
 	mobileRequestedValue = position;
 
 	if (waity)
 	{
 	//  distance = abs(distance); //help
-		while( SensorValue[ liftPot ] >= mobileRequestedValue + mobileWaityError
-		|| SensorValue[ liftPot ] <= mobileRequestedValue - mobileWaityError){}
+		while( SensorValue[ MobileP ] >= mobileRequestedValue + mobileWaityError
+		|| SensorValue[ MobileP ] <= mobileRequestedValue - mobileWaityError){}
 		wait1Msec(200);
 	}
 	wait1Msec(25);

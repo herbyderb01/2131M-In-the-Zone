@@ -3,7 +3,7 @@
 #include "AtonVoids.c"
 //#region Skills
  void Skills ()
-{
+{/*
   LiftTo(1240);
   setClawTo(1222);
 
@@ -34,6 +34,7 @@
 
   calwRequestedValue = 1220;
   wait1Msec(200);
+  */
 
 //  droveStraight(-,true);
 
