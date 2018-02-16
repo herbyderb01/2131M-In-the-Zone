@@ -1,6 +1,6 @@
 float wheelDiameter = 4;
 int driveStraightError = 100;
-
+//#region Drive PID
 //----------------------Right Drive PID----------------------//
 
 static float  DriveR_Kp = 0.6; 	//Power Tuning Value
@@ -101,7 +101,7 @@ task LPIDDriveController()
   		wait1Msec( 25 );
   	}
 }
-
+//#endregion
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
