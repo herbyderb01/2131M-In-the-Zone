@@ -332,31 +332,29 @@ void RightBlueFive()
 	wait1Msec(600);
 	setChainPower(0);
 
-	setDrivePower(30,80);
+	/*setDrivePower(30,70);
 	wait1Msec(120);
 	setDrivePower(0,0);
 	Atondrive(100, 120);
 
-	AutoStackUp(); 											//Second Cone pickup
+	AutoStackUp(); 	*/										//Second Cone pickup
 
-	Atondrive(-650, drivepower);
+	Atondrive(-610, drivepower);
 
-	turnPID(-NineP*1.5, true);
+	turnPID(-NineP*1.575, true);
 
 	setDrivePower(10,10);							  // Set drive still speed
 
 	mobileRRequestedValue = mobileOut;  // Outake mobile goal
 	WaitieThing();										  // Wait for Mobile Goal
 
-	Atondrive(-650, drivepower);        // Drive backwards for 2nd Goal
+	Atondrive(-675, drivepower);        // Drive backwards for 2nd Goal
 	wait1Msec(100);
-	Atondrive(75, drivepower);        // Drive backwards for 2nd Goal
+	Atondrive(100, drivepower);        // Drive backwards for 2nd Goal
 
-	turnPID(-NineP*1.45, true);
+	turnPID(-NineP*1.5, true);
 
-	Atondrive(250, drivepower);         // Drive into Goal
-
-	mobileRRequestedValue = mobileIn;
+	Atondrive(300, drivepower);         // Drive into Goal
 }
 
 void LeftBlueFive()
@@ -395,29 +393,29 @@ void LeftBlueFive()
 	wait1Msec(600);
 	setChainPower(0);
 
-	setDrivePower(80,30);
+	/*setDrivePower(30,70);
 	wait1Msec(120);
 	setDrivePower(0,0);
 	Atondrive(100, 120);
 
-	AutoStackUp(); 											//Second Cone pickup
+	AutoStackUp(); 	*/										//Second Cone pickup
 
-	Atondrive(-620, drivepower);
+	Atondrive(-610, drivepower);
 
-	turnLeft(1200);
+	turnPID(NineP*1.575, true);
 
 	setDrivePower(10,10);							  // Set drive still speed
 
 	mobileRRequestedValue = mobileOut;  // Outake mobile goal
 	WaitieThing();										  // Wait for Mobile Goal
 
-	Atondrive(-550, drivepower);        // Drive backwards for 2nd Goal
+	Atondrive(-675, drivepower);        // Drive backwards for 2nd Goal
+	wait1Msec(100);
+	Atondrive(100, drivepower);        // Drive backwards for 2nd Goal
 
-	turnLeft(1175);											// Turn to Goal
+	turnPID(NineP*1.5, true);
 
-	Atondrive(220, drivepower);         // Drive into Goal
-
-	mobileRRequestedValue = mobileIn;
+	Atondrive(300, drivepower);         // Drive into Goal
 }
 
 void RightRedFive()
@@ -456,29 +454,29 @@ void RightRedFive()
 	wait1Msec(600);
 	setChainPower(0);
 
-	setDrivePower(90,30);
+	/*setDrivePower(30,70);
 	wait1Msec(120);
 	setDrivePower(0,0);
 	Atondrive(100, 120);
 
-	AutoStackUp(); 											//Second Cone pickup
+	AutoStackUp(); 	*/										//Second Cone pickup
 
-	Atondrive(-620, drivepower);
+	Atondrive(-610, drivepower);
 
-	turnRight(1175);
+	turnPID(-NineP*1.575, true);
 
 	setDrivePower(10,10);							  // Set drive still speed
 
 	mobileRRequestedValue = mobileOut;  // Outake mobile goal
 	WaitieThing();										  // Wait for Mobile Goal
 
-	Atondrive(-500, drivepower);        // Drive backwards for 2nd Goal
+	Atondrive(-675, drivepower);        // Drive backwards for 2nd Goal
+	wait1Msec(100);
+	Atondrive(100, drivepower);        // Drive backwards for 2nd Goal
 
-	turnRight(1125);										// Turn to Goal
+	turnPID(-NineP*1.5, true);
 
-	Atondrive(250, drivepower);         // Drive into Goal
-
-	mobileRRequestedValue = mobileIn;
+	Atondrive(300, drivepower);         // Drive into Goal
 }
 
 void LeftRedFive()
@@ -517,29 +515,29 @@ void LeftRedFive()
 	wait1Msec(600);
 	setChainPower(0);
 
-	setDrivePower(80,30);
+	/*setDrivePower(30,70);
 	wait1Msec(120);
 	setDrivePower(0,0);
 	Atondrive(100, 120);
 
-	AutoStackUp(); 											//Second Cone pickup
+	AutoStackUp(); 	*/										//Second Cone pickup
 
-	Atondrive(-600, drivepower);
+	Atondrive(-610, drivepower);
 
-	turnLeft(1200);
+	turnPID(NineP*1.575, true);
 
 	setDrivePower(10,10);							  // Set drive still speed
 
 	mobileRRequestedValue = mobileOut;  // Outake mobile goal
 	WaitieThing();										  // Wait for Mobile Goal
 
-	Atondrive(-550, drivepower);        // Drive backwards for 2nd Goal
+	Atondrive(-675, drivepower);        // Drive backwards for 2nd Goal
+	wait1Msec(100);
+	Atondrive(100, drivepower);        // Drive backwards for 2nd Goal
 
-	turnLeft(1150);											// Turn to Goal
+	turnPID(NineP*1.5, true);
 
-	Atondrive(220, drivepower);         // Drive into Goal
-
-	mobileRRequestedValue = mobileIn;
+	Atondrive(300, drivepower);         // Drive into Goal
 }
 
 //#endregion
