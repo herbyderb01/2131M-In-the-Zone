@@ -61,6 +61,8 @@ task autonomous()
 	//startTask(RPIDDriveController);
 	liftRSensorCurrentValue = SensorValue[ liftP ];
 	//chainRRequestedValue = StraitUpChain;
+	//SensorScale[Gyro] = 150;
+
 /*
 	SensorType[Gyro] = sensorNone;
 	wait1Msec(500);
