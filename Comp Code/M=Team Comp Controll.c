@@ -847,10 +847,16 @@ setChainPower(20);
     initalize=0;
 
     //---------------------PreLoad Task-----------------------------//
-    if (vexRT[Btn7R] == 1)
+    if (vexRT[Btn5U] == 1)
     {
-    	//Preload();
+    	startTask(OutakePreload);
     }
+    if (vexRT[Btn5D] == 1)
+    {
+    	startTask(AutoStackUpSimple);
+    }
+
+    //--------------------Simple Auto Stack-------------------------//
 			//----------------------Moblie Goal Lift------------------------//
 			if( vexRT[Btn6U] == 1)      // Setting Btn7U to Extend Goal
 			{

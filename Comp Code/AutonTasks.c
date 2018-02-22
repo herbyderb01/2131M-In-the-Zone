@@ -142,9 +142,49 @@ task drive() //Redirecting Drive into a task
 
 	task OutakeCone()
 	{
-		setIntakePower (-127);
+	setIntakePower (-127);
 	wait1Msec (1000);
 	setIntakePower (20);
+	}
+
+	task OutakePreload()
+	{
+		liftRRequestedValue = SkillsLift + 500;
+		wait1Msec(100);
+		setIntakePower (-127);
+		wait1Msec(300);
+		setIntakePower (20);
+		liftRRequestedValue=2000;
+	}
+
+	task AutoStackUpSimple()									// Simple Auto stack cone up
+	{
+		liftRRequestedValue = ParallelLift;
+
+		setChainPower(-127);
+		wait1Msec(500);
+		setChainPower(-10);
+
+		liftRRequestedValue = SkillsLift + 400;
+
+		setIntakePower(127);
+		wait1Msec(400);
+		setIntakePower(20);
+		wait1Msec(100);
+
+		liftRRequestedValue = ParallelLift;
+
+		setChainPower(127);
+		wait1Msec(750);
+		setChainPower(20);
+
+		liftRRequestedValue = SkillsLift + 500;
+		wait1Msec(400);
+		setIntakePower(-127);
+		wait1Msec(200);
+		liftRRequestedValue = ParallelLift;
+		wait1Msec(300);
+		setIntakePower(10);
 	}
 
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
