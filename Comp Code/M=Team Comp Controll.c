@@ -73,11 +73,11 @@ task autonomous()
 */
 	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795) //=========== Score 5's ==========//
 	{
-			if (SensorValue[selectP] == 0)
+			if (SensorValue[selectP] < 15)
 			{
 				RightBlueFive();
 			}
-			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
+			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 575)
 			{
 				LeftBlueFive();
 			}
@@ -109,11 +109,11 @@ task autonomous()
 	}
 	if (SensorValue[selecttwoP] > 1795 && SensorValue[selecttwoP] < 3530) //=========== Score 10's ==========//
 	{
-			if (SensorValue[selectP] == 0)
+			if (SensorValue[selectP] < 15)
 			{
 				RightBlueTen();
 			}
-			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
+			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 575)
 			{
 				LeftBlueTen();
 			}
@@ -145,11 +145,11 @@ task autonomous()
 	}
 	if (SensorValue[selecttwoP] > 3530) //=========== Score 20's ==========//
 	{
-			if (SensorValue[selectP] == 0)
+			if (SensorValue[selectP] < 15)
 			{
 				RightBlueTwenty();
 			}
-			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
+			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 575)
 			{
 				LeftBlueTwenty();
 			}
@@ -181,11 +181,11 @@ task autonomous()
 	}
 	if (SensorValue[selecttwoP] < 300) //=========== Score Special's ==========//
 	{
-			if (SensorValue[selectP] == 0)
+			if (SensorValue[selectP] < 15)
 			{
 				SkillsOne();
 			}
-			if (SensorValue[selectP] > 1 && SensorValue[selectP] < 575)
+			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 575)
 			{
 				SkillsTwo();
 			}
