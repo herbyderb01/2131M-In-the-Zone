@@ -55,19 +55,14 @@ void pre_auton()
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
-	startTask(liftRController);
+	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
-	//startTask(LPIDDriveController);
-	//startTask(RPIDDriveController);
 	liftRSensorCurrentValue = SensorValue[ liftP ];
-	//chainRRequestedValue = StraitUpChain;
-	//SensorScale[Gyro] = 150;
-
 /*
 	SensorType[Gyro] = sensorNone;
-	wait1Msec(500);
-	SensorType[Gyro] = sensorGyro;
-	SensorScale[Gyro] = 125;
+	wait1Msec(500);											//
+	SensorType[Gyro] = sensorGyro;      // To correct Gyro Drift
+	SensorScale[Gyro] = 125;						//
 	SensorFullCount[Gyro] = 3600;
 	wait1Msec(2000);
 */
@@ -199,7 +194,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 1780 && SensorValue[selectP] < 2410)
 			{
-
+				DoNothing();
 			}
 			if (SensorValue[selectP] > 2410 && SensorValue[selectP] < 3110)
 			{
@@ -217,6 +212,7 @@ task autonomous()
 	}
 
 }
+
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /*                              User Control Task                            */
@@ -230,25 +226,26 @@ setChainPower(20);
 	while (3.1415926535897932384626433832795028841971==3.1415926535897932384626433832795028841971)
   //starting while loop to always run during userconroll
 	{
-		if (vexRT[Btn7L]==0)
-		{
-		usertoggle=1;
-		}
-		if (vexRT[Btn7L]==1 && skillsVar==1 && usertoggle==1)
-		{
-			skillsVar=0;
-			usertoggle=0;
-		}
-		if (vexRT[Btn7L]==1 && skillsVar==0 && usertoggle==1)
-		{
-			skillsVar=1;
-			usertoggle=0;
-		}
+		if (vexRT[Btn7L]==0)																	//
+		{																											//
+		usertoggle=1;																					//
+		}																											//
+		if (vexRT[Btn7L]==1 && skillsVar==1 && usertoggle==1) //
+		{																											//  USER CONTROL TOGGLE
+			skillsVar=0;																				//		- To switch between
+			usertoggle=0;																				//			our two different
+		}																											//			modes
+		if (vexRT[Btn7L]==1 && skillsVar==0 && usertoggle==1)	//
+		{																											//
+			skillsVar=1;																				//
+			usertoggle=0;																				//
+		}																											//
+
 	//=========================Normal Match Control===========================//
 	if (skillsVar == 0)
 	{
-    if (initalize==0)
-    {
+    if (initalize==0)																			// To Initalize Normal
+    {																											// match Code
       stopTask(liftRController);
       setChainPower(20);
     }
@@ -268,13 +265,13 @@ setChainPower(20);
 			liftstillspeed=15;
 		}
 
-		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D to lift Down
+		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D on Secondary to lift Down
 		{
 			setLiftPower(-127);
 			liftstillspeed=-15;
 		}
 
-		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5U to lift Up
+		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5U on Secondary to lift Up
 		{
 			setLiftPower(127);
 			liftstillspeed=15;
@@ -282,7 +279,7 @@ setChainPower(20);
 
 		else
 		{
-			setLiftPower(liftstillspeed);
+			setLiftPower(liftstillspeed);				// Setting the Still Speed when no commands
 		}
 
 	//----------------------Intake Control------------------------//
@@ -305,12 +302,6 @@ setChainPower(20);
 		{
 			startTask(OutakeCone);
 		}
-	/*	else if (setIntakePower(Ch3Xmtr2)) {}// Setting Btn 6U to Intake Cone*/
-/*
-		else
-		{
-			setIntakePower(0);   // Else, set a intake still speed to hold cone in
-		}*/
 
 		//----------------------Moblie Goal Lift------------------------//
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
@@ -833,30 +824,30 @@ setChainPower(20);
   if (skillsVar == 1)
   //--------------------------Specialties-Contol----------------------------//
   {
-    if (initalize==1)
-    {
-      startTask(liftRController);
-      liftRRequestedValue=2000;
-      //chainRRequestedValue = StraitUpChain;
-     	setChainPower(127);
-			wait1Msec(200);
-			setChainPower(15);
+    if (initalize==1)															//
+    {																							//
+      startTask(liftRController);									//   SPECIALTIES CONTOLL
+      liftRRequestedValue=2000;										//		TOGGLE
+     	setChainPower(127);													//
+			wait1Msec(200);															//
+			setChainPower(15);													//
 
 
     }
-    initalize=0;
+
+    initalize=0;																	// initalize for toggle
 
     //---------------------PreLoad Task-----------------------------//
     if (vexRT[Btn5U] == 1)
     {
     	startTask(OutakePreload);
     }
+    //--------------------Simple Auto Stack-------------------------//
     if (vexRT[Btn5D] == 1)
     {
     	startTask(AutoStackUpSimple);
     }
 
-    //--------------------Simple Auto Stack-------------------------//
 			//----------------------Moblie Goal Lift------------------------//
 			if( vexRT[Btn6U] == 1)      // Setting Btn7U to Extend Goal
 			{
@@ -873,14 +864,6 @@ setChainPower(20);
 			{
 				setMobilePower(mobilestillspeed);      // Else, stop mobile motors
 			}
-
-				//----------------------Intake Control------------------------//
-
-			if( vexRT[Btn5D] == 1)      // Setting Btn6D to Outtake Cone
-			{
-				startTask(OutakeCone);
-			}
-
 
 			//----------------------PIV Control with PID------------------------//
 			if( vexRT[Btn8D] == 1)      // Setting Btn8D PID, to Strait Up
