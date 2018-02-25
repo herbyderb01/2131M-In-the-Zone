@@ -589,7 +589,7 @@ void RightBlueTen()
 	liftRRequestedValue = 1880;           // PRESETS
 
 	liftRRequestedValue = SkillsLift;
-
+	wait1Msec(500);
 	mobileRRequestedValue = mobileOut;
 	//WaitieThing();
 
@@ -673,7 +673,7 @@ void LeftBlueTen()
 	liftRRequestedValue = 1880;           // PRESETS
 
 	liftRRequestedValue = SkillsLift;
-	wait1Msec(300);
+	wait1Msec(500);
 	mobileRRequestedValue = mobileOut;
 	//WaitieThing();
 
@@ -1322,11 +1322,11 @@ void SkillsOne ()
 
 			TurnPID(-NineP, true);
 
-			Atondrive(160, drivepower);
+			Atondrive(170, drivepower);
 
 			mobileRRequestedValue = mobileOut;
 
-			TurnPID(-NineP, true);
+			TurnPID(-NineP-15, true);
 
 			//mobileRRequestedValue = mobileOut;
 			//WaitieThing();
@@ -1340,7 +1340,7 @@ void SkillsOne ()
 			wait1Msec(400);
 			Atondrive(-260, drivepower);
 
-			TurnPID(-FullP+30, true);
+			TurnPID(-FullP+5, true);
 
 			Atondrive(115, 127);
 
@@ -1358,12 +1358,12 @@ void SkillsOne ()
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 
-			Atondrive(448, drivepower);
+			Atondrive(420, drivepower);
 
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(500);
 
-			TurnPID(-NineP-10, true);
+			TurnPID(-NineP-30, true);
 
 			Atondrive(590, drivepower);
 			//setDrivePower(40,40);
@@ -1378,7 +1378,7 @@ void SkillsOne ()
 			//Atondrive(-170, drivepower);
 
 			//------------------------------------------- Place 4rd
-			TurnPID(FullP+25, true);
+			TurnPID(FullP+35, true);
 
 			mobileRRequestedValue = mobileOut;
 
@@ -1397,7 +1397,7 @@ void SkillsOne ()
 			setDrivePower(20,20);
 			WaitieThing();
 			//------------------------------------------- Place 5th
-			Atondrive(-530, drivepower);
+			Atondrive(-545, drivepower);
 
 			mobileRRequestedValue = mobileMid;
 
@@ -1411,28 +1411,28 @@ void SkillsOne ()
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(500);
 
-			TurnPID(-NineP-35, true);
+			TurnPID(-NineP-42, true);
 
-			Atondrive(580, drivepower);
+			Atondrive(565, drivepower);
 			//setDrivePower(20,20);
 
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 			Atondrive(-120, drivepower);
 			//------------------------------------------- Place 6th
-			TurnPID(1305 , true);
+			TurnPID(1320 , true);
 
-			Atondrive(605, 127);
+			Atondrive(620, 127);
 
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(200);
 
-			Atondrive(-570, 127);
+			Atondrive(-585, 127);
 
 			TurnPID(-NineP/2, true);
 			setIntakePower(0);                   //
 
-			Atondrive(-255, 127);
+			Atondrive(-250, 127);
 
 			TurnPID(-NineP-30, true);
 
