@@ -1,0 +1,203 @@
+void SkillsOne ()
+{
+	//------------------------------------------------------------//
+			setIntakePower(15);                   //
+			liftRRequestedValue = 2000;
+			wait1Msec(700);
+			mobileRRequestedValue = mobileOut;
+
+			setChainPower(20);
+
+			Atondrive(610, 127);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(200);
+
+			Atondrive(-560, 127);
+			liftRRequestedValue = 2600;
+			wait1Msec(300);
+			setIntakePower(-127);                   //
+			liftRRequestedValue = 2000;
+
+			TurnPID(-NineP/2, true);
+			setIntakePower(0);                   //
+
+			Atondrive(-265, 127);
+
+			TurnPID(-NineP-30, true);
+
+			Atondrive(285, 127);
+
+			setDrivePower(40,40);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			mobileRRequestedValue = mobileIn;
+			//------------------------------------------- Place 2nd
+			Atondrive(-230, drivepower);
+
+			TurnPID(-NineP, true);
+
+			Atondrive(180, drivepower);
+
+			TurnPID(-NineP, true);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			/*setDrivePower(-30,-30);
+			wait1Msec(1200);*/
+
+			Atondrive(300, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(400);
+			Atondrive(-250, drivepower);
+
+			TurnPID(-FullP+30, true);
+
+			Atondrive(105, 127);
+
+			//setDrivePower(40,40);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+			//------------------------------------------- Place 3rd
+			Atondrive(-530, drivepower);
+
+			mobileRRequestedValue = mobileMid;
+
+			TurnPID(NineP-10, true);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			Atondrive(470, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(500);
+
+			TurnPID(-NineP-20, true);
+
+			Atondrive(580, drivepower);
+			//setDrivePower(40,40);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+			Atondrive(-100, drivepower);
+			mobileRRequestedValue = mobileMid-100;
+			//setDrivePower(40,40);
+			wait1Msec(300);
+
+			//Atondrive(-170, drivepower);
+
+			//------------------------------------------- Place 4rd
+			TurnPID(FullP+50, true);
+
+			mobileRRequestedValue = mobileOut;
+
+			//////////////
+			//setDrivePower(-80,-80);
+			//wait1Msec(2000);
+			//////////////
+
+			Atondrive(760, drivepower);
+
+			mobileRRequestedValue = mobileMid;
+
+			Atondrive(680, drivepower);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+			//------------------------------------------- Place 5th
+			Atondrive(-130, drivepower);
+
+			mobileRRequestedValue = mobileMid;
+
+			TurnPID(-1230, true);
+
+			mobileRRequestedValue = mobileOut;
+
+			Atondrive(660, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(600);
+
+			Atondrive(-800, drivepower);
+
+			TurnPID(390, true);
+
+			Atondrive(-130, drivepower);
+
+			TurnPID(NineP+30, true);
+
+			Atondrive(285, 127);
+
+			setDrivePower(40,40);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			Atondrive(-80, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			//------------------------------------------- Place 6th
+			Atondrive(-200, drivepower);
+
+			TurnPID(NineP+8, true);
+
+			Atondrive(150, drivepower);
+
+			mobileRRequestedValue = mobileOut;
+
+			TurnPID(NineP+15, true);
+			//setDrivePower(-40,-40);
+			//wait1Msec(1000);
+
+			Atondrive(480, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(600);
+
+			Atondrive(-360, drivepower);
+
+			TurnPID(-FullP-20, true);
+
+			Atondrive(90, 127);
+
+			setDrivePower(40,40);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+			//------------------------------------------- Place 7th
+			Atondrive(-80, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(600);
+
+			mobileRRequestedValue = mobileOut;
+			TurnPID(1350, true);
+
+			Atondrive(700, drivepower);
+
+			mobileRRequestedValue = mobileIn;
+			wait1Msec(600);
+
+			Atondrive(-730, drivepower);
+
+			TurnPID(-FullP, true);
+
+			//Atondrive(-210, drivepower);
+
+			//TurnPID(-NineP-10, true);
+
+			setDrivePower(60,60);
+
+			mobileRRequestedValue = mobileOut;
+			WaitieThing();
+
+			Atondrive(-150, drivepower);
+
+
+}
