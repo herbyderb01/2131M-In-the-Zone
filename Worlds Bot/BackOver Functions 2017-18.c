@@ -26,9 +26,9 @@ void setLiftPower(int power)
 	motor[liftL] = power;
 }
 
-void setChainPower(int cpower)
-{// Defining all of the motors for the -CHAIN BAR-
-	motor[chain] = cpower;
+void setFourBarPower(int cpower)
+{// Defining all of the motors for the -FourBar BAR-
+	motor[FourBar] = cpower;
 }
 
 void setIntakePower(int Ipower)

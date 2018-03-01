@@ -1,5 +1,5 @@
 #pragma config(Sensor, in1,    liftP,          sensorPotentiometer)
-#pragma config(Sensor, in2,    chainP,         sensorPotentiometer)
+#pragma config(Sensor, in2,    FourBarP,         sensorPotentiometer)
 #pragma config(Sensor, in3,    selectP,        sensorPotentiometer)
 #pragma config(Sensor, in4,    Gyro,           sensorGyro)
 #pragma config(Sensor, in5,    mobileP,        sensorPotentiometer)
@@ -7,7 +7,7 @@
 #pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
 #pragma config(Motor,  port1,           DriveR,        tmotorVex393_HBridge, openLoop)
-#pragma config(Motor,  port2,           chain,         tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port2,           FourBar,         tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           INtake,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           liftL,         tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port5,           liftR,         tmotorVex393_MC29, openLoop)
@@ -26,18 +26,7 @@
 //include both Void programs, and PID
 #include "BackOver Functions 2017-18.c"
 #include "AutonTasks.c"
-#include "Drive PID.c"
-
-int liftstillspeed;      //define the liftstillspeed
-int chainstillspeed;      //define the chainstillspeed
-int mobilestillspeed;    //define the mobilegoalstillspeed
-int skillsVar;           //skills toggle variable
-int usertoggle;          //usertoggle variable
-int initalize=0;         //initializeing the toggle variable
-int curentteir = 1;
-bool stackReadyAdd = true;
-bool stackReadySubtract = true;
-
+#include "Turn PID.c"
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
 /*                                                                           */
@@ -46,6 +35,7 @@ void pre_auton()
 {
 	SensorValue[rightEncoder] = 0;  ///
   SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
+	SensorValue[Gyro] = 0;					///
   bStopTasksBetweenModes = true;  ///
 }
 /*---------------------------------------------------------------------------*/
@@ -70,11 +60,11 @@ task autonomous()
 	{
 			if (SensorValue[selectP] < 15)
 			{
-				RightBlueFive();
+				RightFive();
 			}
 			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 575)
 			{
-				LeftBlueFive();
+				LeftFive();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
 			{
@@ -94,11 +84,11 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
 			{
-				LeftRedFive();
+
 			}
 			if (SensorValue[selectP] == 4095)
 			{
-				RightRedFive();
+
 			}
 
 	}
@@ -106,15 +96,15 @@ task autonomous()
 	{
 			if (SensorValue[selectP] < 15)
 			{
-				RightBlueTen();
+				RightBTen();
 			}
 			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 575)
 			{
-				LeftBlueTen();
+				LeftTen();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
 			{
-				Defensive();
+
 			}
 			if (SensorValue[selectP] > 1185 && SensorValue[selectP] < 1780)
 			{
@@ -130,11 +120,11 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
 			{
-				LeftRedTen();
+
 			}
 			if (SensorValue[selectP] == 4095)
 			{
-				RightRedTen();
+
 			}
 
 	}
@@ -142,11 +132,11 @@ task autonomous()
 	{
 			if (SensorValue[selectP] < 15)
 			{
-				RightBlueTwenty();
+				RightTwenty();
 			}
 			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 575)
 			{
-				LeftBlueTwenty();
+				LeftTwenty();
 			}
 			if (SensorValue[selectP] > 575 && SensorValue[selectP] < 1185)
 			{
@@ -166,11 +156,11 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 3110 && SensorValue[selectP] < 4094)
 			{
-				LeftRedTwenty();
+
 			}
 			if (SensorValue[selectP] == 4095)
 			{
-				RightRedTwenty();
+
 			}
 
 	}
@@ -208,11 +198,8 @@ task autonomous()
 			{
 				Defensive();
 			}
-
 	}
-
 }
-
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /*                              User Control Task                            */
@@ -221,7 +208,7 @@ task autonomous()
 task usercontrol()
 {
 startTask(drive);
-setChainPower(20);
+setFourBarPower(20);
 
 	while (3.1415926535897932384626433832795028841971==3.1415926535897932384626433832795028841971)
   //starting while loop to always run during userconroll
@@ -247,7 +234,7 @@ setChainPower(20);
     if (initalize==0)																			// To Initalize Normal
     {																											// match Code
       stopTask(liftRController);
-      setChainPower(20);
+      setFourBarPower(20);
     }
     initalize=1;
 
@@ -279,7 +266,7 @@ setChainPower(20);
 
 		else
 		{
-			setLiftPower(liftstillspeed);				// Setting the Still Speed when no commands
+			setLiftPower(liftstillspeed);	// Setting the Still Speed when no commands
 		}
 
 	//----------------------Intake Control------------------------//
@@ -331,39 +318,39 @@ setChainPower(20);
 		{
 			setMobilePower(64);
 		}
-*/
+		*/
 		else
 		{
-			setMobilePower(mobilestillspeed);      // Else, stop mobile motors
+			setMobilePower(mobilestillspeed);// Setting the Still Speed when no commands
 		}
 
 		//----------------------Four Bar Control ------------------------//
-		if( vexRT[Btn8D] == 1)
+		if( vexRT[Btn8D] == 1)      // Setting Btn8D to Extend Four Bar
 		{
-			setChainPower(127);
-			chainstillspeed=20;
+			setFourBarPower(127);
+			FourBarstillspeed=20;
 		}
 
-		else if( vexRT[Btn8R] == 1)
+		else if( vexRT[Btn8R] == 1)      // Setting Btn8R to bring in Four Bar
 		{
-			setChainPower(-127);
-			chainstillspeed=-20;
+			setFourBarPower(-127);
+			FourBarstillspeed=-20;
 		}
-		else if( vexRT[Btn6DXmtr2] == 1)
+		else if( vexRT[Btn6DXmtr2] == 1) // Setting Btn8D on 2nd to Extend Four Bar
 		{
-			setChainPower(127);
-			chainstillspeed=20;
+			setFourBarPower(127);
+			FourBarstillspeed=20;
 		}
 
-		else if( vexRT[Btn6UXmtr2] == 1)
+		else if( vexRT[Btn6UXmtr2] == 1)// Setting Btn8D on 2nd to bring in Four Bar
 		{
-			setChainPower(-127);
-			chainstillspeed=-20;
+			setFourBarPower(-127);
+			FourBarstillspeed=-20;
 		}
 
 		else
 		{
-			setChainPower(chainstillspeed);
+			setFourBarPower(FourBarstillspeed);// Setting the Still Speed when no commands
 		}
 
 //-=-=-=-==-=-=-=--=-=-Auto Stacking-=-=-=-=-=-=-=-=-=-=-=//
@@ -381,19 +368,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightOneTwo-300;
 					wait1Msec(240);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightOneTwo+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightOneTwo;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -409,19 +396,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightOneTwo-300;
 					wait1Msec(240);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightOneTwo+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightOneTwo;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -437,19 +424,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightThree-300;
 					wait1Msec(240);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightThree+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightThree;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -465,19 +452,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightFour-300;
 					wait1Msec(240);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightFour+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightFour;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -493,19 +480,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightFive-300;
 					wait1Msec(240);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightFive+300;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightFive;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -521,19 +508,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightSix-300;
 					wait1Msec(240);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightSix+320;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightSix;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -549,19 +536,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightSeven-300;
 					wait1Msec(260);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightSeven+250;
 					wait1Msec(550);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightSeven;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -577,19 +564,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightEight-300;
 					wait1Msec(260);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightEight+350;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightEight;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -605,19 +592,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightNine-310;
 					wait1Msec(270);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightNine+320;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightNine;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -633,19 +620,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightTen-320;
 					wait1Msec(300);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightTen+340;
 					wait1Msec(530);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightTen;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -661,19 +648,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightEleven-320;
 					wait1Msec(310);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightEleven+400;
 					wait1Msec(560);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightEleven;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -689,19 +676,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightTwelve-300;
 					wait1Msec(320);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightTwelve+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightTwelve;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -717,19 +704,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightThirteen-300;
 					wait1Msec(330);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightThirteen+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightThirteen;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -745,19 +732,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightFourteen-300;
 					wait1Msec(340);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightFourteen+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightFourteen;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -773,19 +760,19 @@ setChainPower(20);
 
 					liftRRequestedValue = teirHeightFifteen-300;
 					wait1Msec(350);
-					setChainPower(127);
+					setFourBarPower(127);
 					liftRRequestedValue = teirHeightFifteen+200;
 					wait1Msec(500);
-					setChainPower(15);
+					setFourBarPower(15);
 
 					setIntakePower(-127);
 					liftRRequestedValue = teirHeightFifteen;
 					wait1Msec(300);
 					setIntakePower(-10);
 
-					setChainPower(-127);
+					setFourBarPower(-127);
 					wait1Msec(500);
-					setChainPower(-10);
+					setFourBarPower(-10);
 
 			stopTask(liftRController);
 		}
@@ -828,9 +815,9 @@ setChainPower(20);
     {																							//
       startTask(liftRController);									//   SPECIALTIES CONTOLL
       liftRRequestedValue=2000;										//		TOGGLE
-     	setChainPower(127);													//
+     	setFourBarPower(127);													//
 			wait1Msec(200);															//
-			setChainPower(15);													//
+			setFourBarPower(15);													//
 
 
     }
@@ -849,13 +836,13 @@ setChainPower(20);
     }
 
 			//----------------------Moblie Goal Lift------------------------//
-			if( vexRT[Btn6U] == 1)      // Setting Btn7U to Extend Goal
+			if( vexRT[Btn6U] == 1)      // Setting Btn6U to Extend Goal
 			{
 				setMobilePower(127);
 				mobilestillspeed=15;
 			}
 
-			else if( vexRT[Btn6D] == 1)      // Setting Btn7D to Intake Goal
+			else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Intake Goal
 			{
 				setMobilePower(-127);
 				mobilestillspeed=-15;
@@ -863,27 +850,6 @@ setChainPower(20);
 			else
 			{
 				setMobilePower(mobilestillspeed);      // Else, stop mobile motors
-			}
-
-			//----------------------PIV Control with PID------------------------//
-			if( vexRT[Btn8D] == 1)      // Setting Btn8D PID, to Strait Up
-			{
-				//chainRRequestedValue = StraitUpChain;
-			}
-
-			else if( vexRT[Btn8R] == 1)      // Setting Btn8R PID, to OutPosition
-			{
-
-				//chainRRequestedValue = OutPositionChain;
-			}
-
-			else if( vexRT[Btn8L] == 1)  // Setting Btn8L PID, to Stationary Position
-			{
-				//chainRRequestedValue = StationaryPositionChain;
-			}
-			else if( vexRT[Btn8U] == 1)      // Setting Btn8U PID, to In Position
-			{
-				//chainRRequestedValue = InPositionChain;
 			}
     }
 	}

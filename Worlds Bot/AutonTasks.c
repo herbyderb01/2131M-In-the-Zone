@@ -2,6 +2,16 @@
 #include "Drive PID.c"
 //#region Variables
 //-------------Variables--------------//
+int liftstillspeed;      //define the liftstillspeed
+int FourBarstillspeed;      //define the FourBarstillspeed
+int mobilestillspeed;    //define the mobilegoalstillspeed
+int skillsVar;           //skills toggle variable
+int usertoggle;          //usertoggle variable
+int initalize=0;         //initializing the toggle variable
+int curentteir = 1;      //initializing a variable to keep track of teir number
+bool stackReadyAdd = true;
+bool stackReadySubtract = true;
+
 //Variables for turn and drive
 int Nine = 750;
 int full = 1750;
@@ -127,9 +137,9 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 {
 	liftRRequestedValue = ParallelLift;
 
-	setChainPower(-127);
+	setFourBarPower(-127);
 	wait1Msec(500);
-	setChainPower(-10);
+	setFourBarPower(-10);
 
 	liftRRequestedValue = SkillsLift + 400;
 
@@ -140,9 +150,9 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 
 	liftRRequestedValue = ParallelLift;
 
-	setChainPower(127);
+	setFourBarPower(127);
 	wait1Msec(750);
-	setChainPower(20);
+	setFourBarPower(20);
 
 	liftRRequestedValue = SkillsLift + 500;
 	wait1Msec(400);
@@ -157,40 +167,7 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 //--------------------Special Auto Stack Voids-----------------------//
 void AutoStackUp()									// Simple Auto stack cone up
 {
-	liftRRequestedValue = ParallelLift;
-
-	setChainPower(-127);
-	wait1Msec(500);
-	setChainPower(-10);
-
-	liftRRequestedValue = SkillsLift + 400;
-
-	setIntakePower(127);
-	wait1Msec(1000);
-	setIntakePower(20);
-	wait1Msec(100);
-
-	liftRRequestedValue = ParallelLift;
-
-	setChainPower(127);
-	wait1Msec(750);
-	setChainPower(20);
-
-	liftRRequestedValue = SkillsLift + 500;
-	wait1Msec(400);
-	setIntakePower(-127);
-	wait1Msec(200);
-	liftRRequestedValue = ParallelLift;
-	wait1Msec(300);
-	setIntakePower(10);
 }
-/*
-void AutoStackDown()									// Simple Auto stack cone down
-{
-//	Atondrive(1000, -100);
-}
-*/
-//_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
 //--------------------Autonomous Programs----------------------------//
 //#region Driver Program Programs
@@ -217,7 +194,7 @@ void LeftTen()
 }
 //#endregion
 //#region Score 20's
-void RightTwenty() // Auton task to grab moble base on the right and score it
+void RightTwenty()
 {
 }
 
@@ -234,7 +211,7 @@ void SkillsOne ()
 			wait1Msec(700);
 			mobileRRequestedValue = mobileOut;
 
-			setChainPower(20);
+			setFourBarPower(20);
 
 			Atondrive(610, 127);
 
@@ -426,97 +403,23 @@ void SkillsTwo ()
 //#region Other Programs
 void Defensive ()
 {
-	setIntakePower(15);                   //
-	liftRRequestedValue = 2000;
-	wait1Msec(700);
-	mobileRRequestedValue = mobileIn;
-
-	setChainPower(20);
-
-	Atondrive(100, drivepower);
-
-	TurnPID(NineP/2,true);
-
-//	mobileRRequestedValue = mobileOut;
-
-	Atondrive(600*1.25, drivepower);
-
-	Atondrive(-150*1.25 , drivepower);
-	mobileRRequestedValue = mobileOut;
-	TurnPID(NineP/2-50,true);
-	wait1Msec(250);
-
-	Atondrive(300, drivepower);
-
-	mobileRRequestedValue = mobileIn;
-	WaitieThing();
-	liftRRequestedValue = SkillsLift + 350;
-	wait1Msec(200);
-
-	setIntakePower(-127);                   //
-	wait1Msec(300);
-	setIntakePower(0);
-	liftRRequestedValue = 2000;                //
-
 }
 
 void DoNothing ()
 {
-	setIntakePower(15);                   //
-	liftRRequestedValue = 1500;
-	wait1Msec(100);
-
-	Atondrive(1000000000, 127);
-	Atondrive(-1000000000, 127);
-
 }
 
 void DefensiveTwo ()
 {
-
-		setIntakePower(15);                   //
-		liftRRequestedValue = 2000;
-		wait1Msec(700);
-		mobileRRequestedValue = mobileIn;
-
-		setChainPower(20);
-
-		Atondrive(140, drivepower);
-
-		TurnPID(-NineP/2,true);
-
-	//	mobileRRequestedValue = mobileOut;
-
-		Atondrive(600*1.25, drivepower);
-
-		Atondrive(-150*1.25 , drivepower);
-		mobileRRequestedValue = mobileOut;
-		TurnPID(-NineP/2+100,true);
-		wait1Msec(250);
-
-		Atondrive(300, drivepower);
-
-		mobileRRequestedValue = mobileIn;
-		WaitieThing();
-		liftRRequestedValue = SkillsLift + 350;
-		wait1Msec(200);
-
-		setIntakePower(-127);                   //
-		wait1Msec(300);
-		setIntakePower(0);                   //
-		liftRRequestedValue = 2000;
 }
 
 void DoNothingTwo ()
 {
 }
+
 void SpecialAton()
 {
-	setDrivePower(127 , 127);
-	wait1Msec(5000);
-	setDrivePower(0 , 0);
 }
-//_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
 //<editor-fold
 
