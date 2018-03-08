@@ -38,13 +38,13 @@ void pre_auton()
   SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
 	SensorValue[Gyro] = 0;					///
   bStopTasksBetweenModes = true;  ///
-  SensorType[Gyro] = sensorNone;
+  /*
 	for(int i = 0; i<2000; i++)
 	{
 		cumBias += SensorValue[Gyro];
 		wait1Msec(1);
 	}
-	debug = cumBias / 2000;
+	debug = cumBias / 2000;*/
 }
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -53,10 +53,25 @@ void pre_auton()
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
+	SensorBias[Gyro] = 249;
+
+	SensorScale[Gyro] = debug;
+
+	TurnPID(900,true);
+	wait1Msec(1000);
+	TurnPID(900,true);
+	wait1Msec(1000);
+	TurnPID(900,true);
+	wait1Msec(1000);
+	TurnPID(900,true);
+	wait1Msec(1000);
+
+
+/*
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
 	liftRSensorCurrentValue = SensorValue[ liftP ];
-	SensorBias[Gyro] = 1927;
+	SensorBias[Gyro] = 249;
 
 	SensorScale[Gyro] = 144;
 
@@ -202,7 +217,7 @@ task autonomous()
 			{
 				Defensive();
 			}
-	}
+	}*/
 }
 /*---------------------------------------------------------------------------*/
 /*                                                                           */

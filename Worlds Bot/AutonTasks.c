@@ -48,6 +48,8 @@ int teirHeightFourteen = 940;
 int teirHeightFifteen = 940;
 
 float wheelDiameter = 3;
+int cumBias;
+int debug;
 
 int InchesToCounts(float value) //converts drive encoder counts into inches
 {
