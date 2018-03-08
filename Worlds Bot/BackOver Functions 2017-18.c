@@ -87,8 +87,8 @@ task liftRController()
 
 		// send to motor
 
-		motor[ liftL ] = -liftRDrive;
-		motor[ liftR ] = -liftRDrive;
+		motor[ liftL ] = liftRDrive;
+		motor[ liftR ] = liftRDrive;
 
 		lastliftRError = liftRError;
 

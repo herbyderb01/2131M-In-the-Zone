@@ -1,8 +1,8 @@
-#pragma config(Sensor, in1,    liftP,          sensorPotentiometer)
-#pragma config(Sensor, in2,    FourBarP,       sensorPotentiometer)
+#pragma config(Sensor, in1,    mobileP,        sensorPotentiometer)
+#pragma config(Sensor, in2,    liftP,          sensorPotentiometer)
 #pragma config(Sensor, in3,    selectP,        sensorPotentiometer)
 #pragma config(Sensor, in4,    Gyro,           sensorGyro)
-#pragma config(Sensor, in5,    mobileP,        sensorPotentiometer)
+#pragma config(Sensor, in5,    ,               sensorPotentiometer)
 #pragma config(Sensor, in6,    selecttwoP,     sensorPotentiometer)
 #pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
@@ -833,7 +833,7 @@ setFourBarPower(20);
     if (initalize==1)															//
     {																							//
       startTask(liftRController);									//   SPECIALTIES CONTOLL
-      liftRRequestedValue=2900;										//		TOGGLE
+      liftRRequestedValue=2000;										//		TOGGLE
      	setFourBarPower(127);													//
 			wait1Msec(200);															//
 			setFourBarPower(15);													//
