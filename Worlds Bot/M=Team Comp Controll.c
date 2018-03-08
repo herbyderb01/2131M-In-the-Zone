@@ -9,10 +9,10 @@
 #pragma config(Motor,  port1,           DriveR,        tmotorVex393_HBridge, openLoop)
 #pragma config(Motor,  port2,           FourBar,       tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           INtake,        tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port4,           liftL,         tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port5,           liftR,         tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port6,           MobileR,       tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port7,           MobileL,       tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port4,           liftL,         tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port5,           liftR,         tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port6,           MobileR,       tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port7,           MobileL,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port8,           RDrive,        tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port9,           LDrive,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port10,          DriveL,        tmotorVex393_HBridge, openLoop)
@@ -815,7 +815,7 @@ setFourBarPower(20);
     if (initalize==1)															//
     {																							//
       startTask(liftRController);									//   SPECIALTIES CONTOLL
-      liftRRequestedValue=2000;										//		TOGGLE
+      liftRRequestedValue=2900;										//		TOGGLE
      	setFourBarPower(127);													//
 			wait1Msec(200);															//
 			setFourBarPower(15);													//
