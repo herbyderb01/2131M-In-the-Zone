@@ -140,8 +140,8 @@ task mobileRController()
 
 		// send to motor
 
-		motor[ MobileL ] = mobileRDrive;
-		motor[ MobileR ] = mobileRDrive;
+		motor[ MobileL ] = -mobileRDrive;
+		motor[ MobileR ] = -mobileRDrive;
 
 		lastmobileRError = mobileRError;
 		// Don't hog cpu

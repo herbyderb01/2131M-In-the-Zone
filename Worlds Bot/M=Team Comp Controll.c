@@ -52,8 +52,8 @@ void pre_auton()
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
 task autonomous()
-{
-	SensorBias[Gyro] = 249;
+{/*
+	SensorBias[Gyro] = 1743;
 
 	SensorScale[Gyro] = debug;
 
@@ -64,17 +64,18 @@ task autonomous()
 	TurnPID(900,true);
 	wait1Msec(1000);
 	TurnPID(900,true);
-	wait1Msec(1000);
+	wait1Msec(1000);*/
 
 
-/*
+
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
 	liftRSensorCurrentValue = SensorValue[ liftP ];
-	SensorBias[Gyro] = 249;
+	//SensorBias[Gyro] = 249;
 
-	SensorScale[Gyro] = 144;
-
+	//SensorScale[Gyro] = 144;
+	SkillsTwo();
+/*
 	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795) //=========== Score 5's ==========//
 	{
 			if (SensorValue[selectP] < 15)
@@ -833,7 +834,7 @@ setFourBarPower(20);
     if (initalize==1)															//
     {																							//
       startTask(liftRController);									//   SPECIALTIES CONTOLL
-      liftRRequestedValue=2000;										//		TOGGLE
+      liftRRequestedValue=SkillsLift;										//		TOGGLE
      	setFourBarPower(127);													//
 			wait1Msec(200);															//
 			setFourBarPower(15);													//

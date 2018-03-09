@@ -16,20 +16,20 @@ bool stackReadySubtract = true;
 int Nine = 750;
 int full = 1750;
 int drivepower = 127;
-int NineP = 933;
+int NineP = 950;
 int FullP = 1860;
 
 // PID Mobile Variables
-int mobileIn = 1051;
-int mobileOut = 3340;
-int mobileMid = 2456;
-int mobileSMid = 2770;
+int mobileIn = 2923;
+int mobileOut = 534;
+int mobileMid = 1920;
+int mobileSMid = 1438;
 
 // PID Lift variables
-int BottomLift = 2290;
-int TopLift = 855;
-int ParallelLift = 1880;
-int SkillsLift = 2140;
+int BottomLift = 1600;
+int TopLift = 3000;
+int ParallelLift = 1910;
+int SkillsLift = 1787;
 
 // Auto Stack teir variables
 int teirHeightOneTwo = 2138;
@@ -65,7 +65,7 @@ void AutoStrait(int distance, int power)
 	distance = abs(distance);
 
  // telling it to do this while you are driving to the disired distance
-	while((abs(SensorValue[rightEncoder])/2) < distance)
+	while((abs(SensorValue[rightEncoder])*(8/3)) < distance)
 	{
 		 // Checking if the right drive is faster than the left drive
 		if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder]))
@@ -86,9 +86,9 @@ void AutoStrait(int distance, int power)
 		motor[RDrive] = 0;
 }
 
-void Atondrive(float inches, int power)
+void Atondrive(/*float inches*/int ticks, int power)
 { //Aton function to move forward by its self
-	int ticks = InchesToCounts(inches);
+	//int ticks = InchesToCounts(inches);
 	  //Clear Encoders
   SensorValue[rightEncoder] = 0;
   SensorValue[leftEncoder] = 0;
@@ -210,7 +210,7 @@ void SkillsOne ()
 	//------------------------------------------------------------//
 			setIntakePower(15);                   //
 			liftRRequestedValue = 2000;
-			wait1Msec(700);
+			wait1Msec(800);
 			mobileRRequestedValue = mobileOut;
 
 			setFourBarPower(20);
@@ -400,6 +400,23 @@ void SkillsOne ()
 
 void SkillsTwo ()
 {
+  setIntakePower(15);                   //
+  liftRRequestedValue = SkillsLift;
+
+  mobileRRequestedValue = mobileOut;
+  WaitieThing();
+
+  Atondrive(610, drivepower);
+  wait1Msec(1000);
+  Atondrive(-610, drivepower);
+
+  mobileRRequestedValue = mobileIn;
+  WaitieThing();
+
+  TurnPID(NineP,true);
+  wait1Msec(1000);
+  TurnPID(-NineP,true);
+
 }
 //#endregion
 //#region Other Programs
