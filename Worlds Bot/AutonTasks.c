@@ -16,12 +16,12 @@ bool stackReadySubtract = true;
 int Nine = 750;
 int full = 1750;
 int drivepower = 127;
-int NineP = 950;
-int FullP = 1860;
+int NineP = 900;
+int FullP = 1800;
 
 // PID Mobile Variables
 int mobileIn = 2923;
-int mobileOut = 534;
+int mobileOut = 529;
 int mobileMid = 1920;
 int mobileSMid = 1438;
 
@@ -48,8 +48,8 @@ int teirHeightFourteen = 940;
 int teirHeightFifteen = 940;
 
 float wheelDiameter = 3;
-int cumBias;
-int debug;
+float cumBias;
+float debug;
 
 int InchesToCounts(float value) //converts drive encoder counts into inches
 {
@@ -65,7 +65,7 @@ void AutoStrait(int distance, int power)
 	distance = abs(distance);
 
  // telling it to do this while you are driving to the disired distance
-	while((abs(SensorValue[rightEncoder])*(8/3)) < distance)
+	while((abs(SensorValue[rightEncoder])*0.375) < distance)
 	{
 		 // Checking if the right drive is faster than the left drive
 		if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder]))
@@ -209,7 +209,7 @@ void SkillsOne ()
 {
 	//------------------------------------------------------------//
 			setIntakePower(15);                   //
-			liftRRequestedValue = 2000;
+			liftRRequestedValue = SkillsLift;
 			wait1Msec(800);
 			mobileRRequestedValue = mobileOut;
 
@@ -221,42 +221,36 @@ void SkillsOne ()
 			wait1Msec(200);
 
 			Atondrive(-550, 127);
-			liftRRequestedValue = 2600;
 			wait1Msec(300);
 			setIntakePower(-127);                   //
-			liftRRequestedValue = 2000;
 
 			TurnPID(-NineP/2, true);
 			setIntakePower(0);                   //
 
-			Atondrive(-290, 127);
+			Atondrive(-300, 127);
 
 			TurnPID(-NineP-30, true);
 
-			Atondrive(285, 127);
+			Atondrive(250, 127);
 
 			setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 
+      Atondrive(-50, drivepower);
+
 			mobileRRequestedValue = mobileIn;
 			//------------------------------------------- Place 2nd
-			Atondrive(-230, drivepower);
+			Atondrive(-300, drivepower);
 
 			TurnPID(-NineP, true);
 
-			Atondrive(170, drivepower);
+			Atondrive(135, drivepower);
 
 			mobileRRequestedValue = mobileOut;
 
-			TurnPID(-NineP-15, true);
-
-			//mobileRRequestedValue = mobileOut;
-			//WaitieThing();
-
-			/*setDrivePower(-30,-30);
-			wait1Msec(1200);*/
+			TurnPID(-NineP, true);
 
 			Atondrive(320, drivepower);
 
@@ -402,16 +396,7 @@ void SkillsTwo ()
 {
   setIntakePower(15);                   //
   liftRRequestedValue = SkillsLift;
-
-  mobileRRequestedValue = mobileOut;
-  WaitieThing();
-
-  Atondrive(610, drivepower);
-  wait1Msec(1000);
-  Atondrive(-610, drivepower);
-
   mobileRRequestedValue = mobileIn;
-  WaitieThing();
 
   TurnPID(NineP,true);
   wait1Msec(1000);

@@ -2,8 +2,7 @@
 #pragma config(Sensor, in2,    liftP,          sensorPotentiometer)
 #pragma config(Sensor, in3,    selectP,        sensorPotentiometer)
 #pragma config(Sensor, in4,    Gyro,           sensorGyro)
-#pragma config(Sensor, in5,    ,               sensorPotentiometer)
-#pragma config(Sensor, in6,    selecttwoP,     sensorPotentiometer)
+#pragma config(Sensor, in5,    selecttwoP,     sensorPotentiometer)
 #pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
 #pragma config(Motor,  port1,           DriveR,        tmotorVex393_HBridge, openLoop)
@@ -38,13 +37,18 @@ void pre_auton()
   SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
 	SensorValue[Gyro] = 0;					///
   bStopTasksBetweenModes = true;  ///
-  /*
+
+/*SensorType[Gyro] = sensorNone;
+
 	for(int i = 0; i<2000; i++)
 	{
-		cumBias += SensorValue[Gyro];
+		cumBias += (float)(SensorValue[Gyro]);
+
 		wait1Msec(1);
 	}
+
 	debug = cumBias / 2000;*/
+
 }
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -52,30 +56,16 @@ void pre_auton()
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
 task autonomous()
-{/*
-	SensorBias[Gyro] = 1743;
-
-	SensorScale[Gyro] = debug;
-
-	TurnPID(900,true);
-	wait1Msec(1000);
-	TurnPID(900,true);
-	wait1Msec(1000);
-	TurnPID(900,true);
-	wait1Msec(1000);
-	TurnPID(900,true);
-	wait1Msec(1000);*/
-
+{
 
 
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
 	liftRSensorCurrentValue = SensorValue[ liftP ];
-	//SensorBias[Gyro] = 249;
+	SensorBias[Gyro] = 1868;
 
-	//SensorScale[Gyro] = 144;
-	SkillsTwo();
-/*
+	SensorScale[Gyro] = 142;
+
 	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795) //=========== Score 5's ==========//
 	{
 			if (SensorValue[selectP] < 15)
@@ -218,7 +208,7 @@ task autonomous()
 			{
 				Defensive();
 			}
-	}*/
+	}
 }
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
