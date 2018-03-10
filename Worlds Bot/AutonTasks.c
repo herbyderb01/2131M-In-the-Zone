@@ -29,7 +29,7 @@ int mobileSMid = 1438;
 int BottomLift = 1600;
 int TopLift = 3000;
 int ParallelLift = 1910;
-int SkillsLift = 1787;
+int SkillsLift = 1800;
 
 // Auto Stack teir variables
 int teirHeightOneTwo = 2138;
@@ -127,7 +127,7 @@ setIntakePower (20);
 
 task OutakePreload()
 {
-	liftRRequestedValue = SkillsLift + 500;
+	liftRRequestedValue = SkillsLift - 500;
 	wait1Msec(100);
 	setIntakePower (-127);
 	wait1Msec(300);
@@ -143,7 +143,7 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	wait1Msec(500);
 	setFourBarPower(-10);
 
-	liftRRequestedValue = SkillsLift + 400;
+	liftRRequestedValue = SkillsLift - 400;
 
 	setIntakePower(127);
 	wait1Msec(400);
@@ -156,7 +156,7 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	wait1Msec(750);
 	setFourBarPower(20);
 
-	liftRRequestedValue = SkillsLift + 500;
+	liftRRequestedValue = SkillsLift - 500;
 	wait1Msec(400);
 	setIntakePower(-127);
 	wait1Msec(200);
@@ -210,9 +210,9 @@ void SkillsOne ()
 	//------------------------------------------------------------//
 			setIntakePower(15);                   //
 			liftRRequestedValue = SkillsLift;
-			wait1Msec(800);
+			wait1Msec(550);
 			mobileRRequestedValue = mobileOut;
-
+      wait1Msec(300);
 			setFourBarPower(20);
 
 			Atondrive(610, 127);
@@ -238,7 +238,7 @@ void SkillsOne ()
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 
-      Atondrive(-50, drivepower);
+      Atondrive(-75, drivepower);
 
 			mobileRRequestedValue = mobileIn;
 			//------------------------------------------- Place 2nd
@@ -246,11 +246,13 @@ void SkillsOne ()
 
 			TurnPID(-NineP, true);
 
-			Atondrive(135, drivepower);
+			Atondrive(145, drivepower);
 
 			mobileRRequestedValue = mobileOut;
 
 			TurnPID(-NineP, true);
+      stopTask(TPIDDriveController);
+      wait1Msec(450);
 
 			Atondrive(320, drivepower);
 
@@ -267,7 +269,7 @@ void SkillsOne ()
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 			//------------------------------------------- Place 3rd
-			Atondrive(-535, drivepower);
+			Atondrive(-530, drivepower);
 
 			mobileRRequestedValue = mobileMid;
 
@@ -276,12 +278,12 @@ void SkillsOne ()
 			mobileRRequestedValue = mobileOut;
 			WaitieThing();
 
-			Atondrive(420, drivepower);
+			Atondrive(390, drivepower);
 
 			mobileRRequestedValue = mobileIn;
 			wait1Msec(500);
 
-			TurnPID(-NineP-30, true);
+			TurnPID(-NineP-10, true);
 
 			Atondrive(590, drivepower);
 			//setDrivePower(40,40);
@@ -394,13 +396,18 @@ void SkillsOne ()
 
 void SkillsTwo ()
 {
-  setIntakePower(15);                   //
-  liftRRequestedValue = SkillsLift;
-  mobileRRequestedValue = mobileIn;
+  setIntakePower(15);
+  liftRRequestedValue = 2000;
+
+  //startTask(TPIDDriveController);
 
   TurnPID(NineP,true);
   wait1Msec(1000);
-  TurnPID(-NineP,true);
+  TurnPID(NineP,true);
+  wait1Msec(1000);
+  TurnPID(NineP,true);
+  wait1Msec(1000);
+  TurnPID(NineP,true);
 
 }
 //#endregion

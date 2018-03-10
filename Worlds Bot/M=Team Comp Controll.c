@@ -36,7 +36,11 @@ void pre_auton()
 	SensorValue[rightEncoder] = 0;  ///
   SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
 	SensorValue[Gyro] = 0;					///
-  bStopTasksBetweenModes = true;  ///
+	SensorType[Gyro] = sensorNone;
+	wait1Msec(1000);											//
+	SensorType[Gyro] = sensorGyro;      // To correct Gyro Drift
+	wait1Msec(1000);
+  //bStopTasksBetweenModes = true;  ///
 
 /*SensorType[Gyro] = sensorNone;
 
@@ -59,12 +63,14 @@ task autonomous()
 {
 
 
+
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
 	liftRSensorCurrentValue = SensorValue[ liftP ];
-	SensorBias[Gyro] = 1868;
 
-	SensorScale[Gyro] = 142;
+	SensorBias[Gyro] = 1861;
+	wait1Msec(1000);
+	SensorScale[Gyro] = 143;
 
 	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795) //=========== Score 5's ==========//
 	{

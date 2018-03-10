@@ -2,7 +2,7 @@ int driveStraightError = 100;
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
-static float  DriveT_Kp = 0.5; 	//Power Tuning Value
+static float  DriveT_Kp = 0.45; 	//Power Tuning Value
 static float  DriveTRequestedValue;
 static float  DriveT_Kd = 2.5;			// Requested Guess Value
 
