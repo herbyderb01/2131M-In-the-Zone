@@ -830,10 +830,10 @@ setFourBarPower(20);
     if (initalize==1)															//
     {																							//
       startTask(liftRController);									//   SPECIALTIES CONTOLL
-      liftRRequestedValue=SkillsLift;										//		TOGGLE
-     	setFourBarPower(127);													//
+      liftRRequestedValue=SkillsLift;							//		TOGGLE
+     	setFourBarPower(127);												//
 			wait1Msec(200);															//
-			setFourBarPower(15);													//
+			setFourBarPower(15);												//
 
 
     }

@@ -132,7 +132,7 @@ task OutakePreload()
 	setIntakePower (-127);
 	wait1Msec(300);
 	setIntakePower (20);
-	liftRRequestedValue=2000;
+	liftRRequestedValue=SkillsLift;
 }
 
 task AutoStackUpSimple()									// Simple Auto stack cone up
@@ -160,7 +160,7 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	wait1Msec(400);
 	setIntakePower(-127);
 	wait1Msec(200);
-	liftRRequestedValue = ParallelLift;
+	liftRRequestedValue = SkillsLift;
 	wait1Msec(300);
 	setIntakePower(10);
 }
@@ -401,13 +401,13 @@ void SkillsTwo ()
 
   //startTask(TPIDDriveController);
 
-  TurnPID(NineP,true);
+  /*TurnPID(NineP,true);
   wait1Msec(1000);
   TurnPID(NineP,true);
   wait1Msec(1000);
   TurnPID(NineP,true);
   wait1Msec(1000);
-  TurnPID(NineP,true);
+  TurnPID(NineP,true);*/
 
 }
 //#endregion
