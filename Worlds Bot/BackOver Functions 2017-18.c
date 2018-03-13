@@ -48,7 +48,7 @@ void setMobilePower(int Mpower)
 
 static float  liftR_Kp = 0.2; 	//Power Tuning Value
 static float  liftRRequestedValue;
-static float  liftR_Kd = .95;			// Requested Guess Value
+static float  liftR_Kd = .2;			// Requested Guess Value
 
 float liftRD;
 float liftRP;
@@ -108,7 +108,7 @@ float mobileRD;						//Establishing variables
 float mobileRP;
 float lastmobileRError;
 float mobileRDF;
-int waitMobliERerror = 100;
+int waitMobliERerror = 50;
 float  mobileRSensorCurrentValue;
 
 task mobileRController()
@@ -150,18 +150,22 @@ task mobileRController()
 }
 //#endregion
 //#region WaityThing for mobilegoal and lift
-void WaitieThing()
+void goalRequest(int position, bool waity = false)
 {
-	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
-		|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
-		{}
+	mobileRRequestedValue = position;
+		if(waity)
+		{	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
+				|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
+				{} wait1Msec(150);
+		}
 }
-/*
-void WaitieThingLift()
+void liftRequest(int position, bool waity = false)
 {
-	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
-		|| liftRSensorCurrentValue <= liftRRequestedValue - waitMobliERerror)
-		{}
+	liftRRequestedValue = position;
+		if(waity)
+		{	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
+			|| liftRSensorCurrentValue <= liftRRequestedValue - waitLiftRerror)
+			{} wait1Msec(150);
+		}
 }
-*/
 //#endregion

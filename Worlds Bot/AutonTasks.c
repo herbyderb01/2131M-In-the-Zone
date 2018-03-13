@@ -20,8 +20,8 @@ int NineP = 900;
 int FullP = 1800;
 
 // PID Mobile Variables
-int mobileIn = 2923;
-int mobileOut = 529;
+int mobileIn = 2800;
+int mobileOut = 510;
 int mobileMid = 1920;
 int mobileSMid = 1438;
 
@@ -47,7 +47,7 @@ int teirHeightThirteen = 940;
 int teirHeightFourteen = 940;
 int teirHeightFifteen = 940;
 
-float wheelDiameter = 3;
+float wheelDiameter = 4.5;
 float cumBias;
 float debug;
 
@@ -65,7 +65,7 @@ void AutoStrait(int distance, int power)
 	distance = abs(distance);
 
  // telling it to do this while you are driving to the disired distance
-	while((abs(SensorValue[rightEncoder])*0.375) < distance)
+	while((abs(SensorValue[rightEncoder])) < distance)
 	{
 		 // Checking if the right drive is faster than the left drive
 		if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder]))
@@ -86,9 +86,9 @@ void AutoStrait(int distance, int power)
 		motor[RDrive] = 0;
 }
 
-void Atondrive(/*float inches*/int ticks, int power)
+void Atondrive(float inches, int power)
 { //Aton function to move forward by its self
-	//int ticks = InchesToCounts(inches);
+	int ticks = InchesToCounts(inches);
 	  //Clear Encoders
   SensorValue[rightEncoder] = 0;
   SensorValue[leftEncoder] = 0;
@@ -164,13 +164,37 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	wait1Msec(300);
 	setIntakePower(10);
 }
-//#endregion
-//#region Special Auto Stack Voids
-//--------------------Special Auto Stack Voids-----------------------//
-void AutoStackUp()									// Simple Auto stack cone up
+void AutoStackUpSimpleP()
 {
+liftRRequestedValue = ParallelLift;
+
+setFourBarPower(-127);
+wait1Msec(500);
+setFourBarPower(-10);
+
+liftRRequestedValue = SkillsLift - 400;
+
+setIntakePower(127);
+wait1Msec(400);
+setIntakePower(20);
+wait1Msec(100);
+
+liftRRequestedValue = ParallelLift;
+
+setFourBarPower(127);
+wait1Msec(750);
+setFourBarPower(20);
+
+liftRRequestedValue = SkillsLift - 500;
+wait1Msec(400);
+setIntakePower(-127);
+wait1Msec(200);
+liftRRequestedValue = SkillsLift;
+wait1Msec(300);
+setIntakePower(10);
 }
 //#endregion
+//<editor-fold Autonomous Programs
 //--------------------Autonomous Programs----------------------------//
 //#region Driver Program Programs
 void Preload()
@@ -414,10 +438,22 @@ void SkillsTwo ()
 //#region Other Programs
 void Defensive ()
 {
+  liftRequest(2000,false);
+  goalRequest(mobileOut,true);
+  Atondrive(12, 127);
+  goalRequest(mobileIn,true);
+  //Atondrive(-12, 127);
 }
 
 void DoNothing ()
 {
+  liftRequest(2000,false);
+
+  TurnPID(NineP, true);
+  TurnPID(NineP, true);
+  TurnPID(NineP, true);
+  TurnPID(NineP, true);
+
 }
 
 void DefensiveTwo ()
@@ -432,7 +468,4 @@ void SpecialAton()
 {
 }
 //#endregion
-//<editor-fold
-
-
 //</editor-fold>
