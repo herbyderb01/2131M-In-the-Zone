@@ -228,7 +228,7 @@ setFourBarPower(20);
 	{
 		if (vexRT[Btn7L]==0)																	//
 		{																											//
-		usertoggle=1;																					//
+			usertoggle=1;																				//
 		}																											//
 		if (vexRT[Btn7L]==1 && skillsVar==1 && usertoggle==1) //
 		{																											//  USER CONTROL TOGGLE
@@ -265,7 +265,7 @@ setFourBarPower(20);
 			liftstillspeed=15;
 		}
 
-		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D on Secondary to lift Down
+		/*else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D on Secondary to lift Down
 		{
 			setLiftPower(-127);
 			liftstillspeed=-15;
@@ -275,7 +275,7 @@ setFourBarPower(20);
 		{
 			setLiftPower(127);
 			liftstillspeed=15;
-		}
+		}*/
 
 		else
 		{
@@ -294,14 +294,14 @@ setFourBarPower(20);
 			startTask(OutakeCone);
 		}
 
-		else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		/*else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
 		{
 			startTask(IntakeCone);
 		}
 		else if( vexRT[Btn8DXmtr2] == 1)      // Setting Btn6D to Outtake Cone
 		{
 			startTask(OutakeCone);
-		}
+		}*/
 
 		//----------------------Moblie Goal Lift------------------------//
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
@@ -314,24 +314,13 @@ setFourBarPower(20);
 		{
 				setMobilePower(-127);
 				mobilestillspeed=-15;
-		}/*
-		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
-		{
-			setMobilePower(-127);
 		}
-		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn 6U to Intake Cone
+		else if( vexRT[Btn7R] == 1)      // Setting Btn7D to Intake Goal
 		{
-			setMobilePower(127);
+				setMobilePower(-10);
+				mobilestillspeed=15;
+
 		}
-		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn 6U to Intake Cone
-		{
-			setMobilePower(-64);
-		}
-		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn 6U to Intake Cone
-		{
-			setMobilePower(64);
-		}
-		*/
 		else
 		{
 			setMobilePower(mobilestillspeed);// Setting the Still Speed when no commands
@@ -349,7 +338,7 @@ setFourBarPower(20);
 			setFourBarPower(-127);
 			FourBarstillspeed=-20;
 		}
-		else if( vexRT[Btn6DXmtr2] == 1) // Setting Btn8D on 2nd to Extend Four Bar
+		/*else if( vexRT[Btn6DXmtr2] == 1) // Setting Btn8D on 2nd to Extend Four Bar
 		{
 			setFourBarPower(127);
 			FourBarstillspeed=20;
@@ -359,7 +348,7 @@ setFourBarPower(20);
 		{
 			setFourBarPower(-127);
 			FourBarstillspeed=-20;
-		}
+		}*/
 
 		else
 		{
@@ -818,7 +807,6 @@ setFourBarPower(20);
 
 }
 //-=-=-=-==-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-
 //===========================================================================//
 
   if (skillsVar == 1)
@@ -831,12 +819,8 @@ setFourBarPower(20);
      	setFourBarPower(127);												//
 			wait1Msec(200);															//
 			setFourBarPower(15);												//
-
-
     }
-
     initalize=0;																	// initalize for toggle
-
     //---------------------PreLoad Task-----------------------------//
     if (vexRT[Btn5U] == 1)
     {
@@ -848,22 +832,22 @@ setFourBarPower(20);
     	startTask(AutoStackUpSimple);
     }
 
-			//----------------------Moblie Goal Lift------------------------//
-			if( vexRT[Btn6U] == 1)      // Setting Btn6U to Extend Goal
-			{
-				setMobilePower(127);
-				mobilestillspeed=15;
-			}
+		//----------------------Moblie Goal Lift------------------------//
+		if( vexRT[Btn6U] == 1)      // Setting Btn6U to Extend Goal
+		{
+			setMobilePower(127);
+			mobilestillspeed=15;
+		}
 
-			else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Intake Goal
-			{
-				setMobilePower(-127);
-				mobilestillspeed=-15;
-			}
-			else
-			{
-				setMobilePower(mobilestillspeed);      // Else, stop mobile motors
-			}
-    }
-	}
+		else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Intake Goal
+		{
+			setMobilePower(-127);
+			mobilestillspeed=-15;
+		}
+		else
+		{
+			setMobilePower(mobilestillspeed);      // Else, stop mobile motors
+		}
+  }
+}
 }
