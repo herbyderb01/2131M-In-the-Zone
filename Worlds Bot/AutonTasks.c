@@ -241,6 +241,36 @@ liftRRequestedValue = SkillsLift;
 wait1Msec(300);
 setIntakePower(10);
 }
+task StackAton()									// Simple Auto stack cone up aton
+{
+  //liftRequest(ParallelLift,true);
+
+	setFourBarPower(-127);
+	wait1Msec(400);
+	setFourBarPower(-10);
+
+  liftRequest(1590,false);
+
+	setIntakePower(127);
+	wait1Msec(400);
+	setIntakePower(20);
+	wait1Msec(100);
+
+  liftRequest(ParallelLift-50,false);
+  wait1Msec(300);
+	setFourBarPower(127);
+	wait1Msec(500);
+	setFourBarPower(20);
+
+  liftRequest(SkillsLift-500,false);
+	wait1Msec(300);
+	setIntakePower(-127);
+	wait1Msec(100);
+  liftRequest(SkillsLift,false);
+	wait1Msec(300);
+	setIntakePower(10);
+}
+
 //#endregion
 //<editor-fold Autonomous Programs
 //--------------------Autonomous Programs----------------------------//
@@ -252,6 +282,17 @@ void Preload()
 //#region Score 5's
 void RightFive()
 {
+  liftRequest(SkillsLift,false);
+  goalRequest(mobileIn,true);
+
+  goalRequest(mobileOut,true);
+  Atondrive(41, drivepower);
+  goalRequest(mobileIn,true);
+  Atondrive(6, drivepower);
+  startTask(StackAton);
+
+
+
 }
 
 void LeftFive()
