@@ -48,7 +48,7 @@ void setMobilePower(int Mpower)
 
 static float  liftR_Kp = 0.2; 	//Power Tuning Value
 static float  liftRRequestedValue;
-static float  liftR_Kd = .2;			// Requested Guess Value
+static float  liftR_Kd = 1;			// Requested Guess Value
 
 float liftRD;
 float liftRP;
@@ -108,7 +108,7 @@ float mobileRD;						//Establishing variables
 float mobileRP;
 float lastmobileRError;
 float mobileRDF;
-int waitMobliERerror = 50;
+int waitMobliERerror = 75;
 float  mobileRSensorCurrentValue;
 
 task mobileRController()
@@ -156,7 +156,7 @@ void goalRequest(int position, bool waity = false)
 		if(waity)
 		{	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
 				|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
-				{} wait1Msec(150);
+				{} wait1Msec(50);
 		}
 }
 void liftRequest(int position, bool waity = false)
@@ -165,7 +165,7 @@ void liftRequest(int position, bool waity = false)
 		if(waity)
 		{	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
 			|| liftRSensorCurrentValue <= liftRRequestedValue - waitLiftRerror)
-			{} wait1Msec(150);
+			{} wait1Msec(50);
 		}
 }
 //#endregion

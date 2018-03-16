@@ -22,8 +22,8 @@ int NineP = 900;
 int FullP = 1800;
 
 // PID Mobile Variables
-int mobileIn = 2800;
-int mobileOut = 510;
+int mobileIn = 2755;
+int mobileOut = 400;
 int mobileMid = 1920;
 int mobileSMid = 1438;
 
@@ -49,7 +49,7 @@ int teirHeightThirteen = 940;
 int teirHeightFourteen = 940;
 int teirHeightFifteen = 940;
 
-float wheelDiameter = 4.5;
+float wheelDiameter = 3.875;
 float cumBias;
 float debug;
 
@@ -67,7 +67,7 @@ void AutoStrait(int distance, int power)
 	distance = abs(distance);
 
  // telling it to do this while you are driving to the disired distance
-	while((abs(SensorValue[rightEncoder])) < distance)
+	while(abs(SensorValue[rightEncoder]) < distance)
 	{
 		 // Checking if the right drive is faster than the left drive
 		if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder]))
@@ -95,12 +95,12 @@ void Atondrive(float inches, int power)
   SensorValue[rightEncoder] = 0;
   SensorValue[leftEncoder] = 0;
 		///forward
-	AutoStrait(ticks*0.6, power);
-	AutoStrait(ticks*0.8, power/2);
-	AutoStrait(ticks, power/3);
+	/*AutoStrait(ticks*0.6, power);
+	AutoStrait(ticks*0.8, power/2);*/
+	AutoStrait(ticks, power/*/3*/);
 //sudden stop to correct overshooting the value
-	motor[LDrive] = -20 * sgn(ticks);
-	motor[RDrive] = -20 * sgn(ticks);
+	motor[LDrive] = -15 * sgn(ticks);
+  motor[RDrive] = -15 * sgn(ticks);
 	wait1Msec(100);
 }
 //#endregion
@@ -286,13 +286,14 @@ void RightFive()
   goalRequest(mobileIn,true);
 
   goalRequest(mobileOut,true);
-  Atondrive(41, drivepower);
+  Atondrive(43, drivepower);
   goalRequest(mobileIn,true);
+  liftRequest(BottomLift,false);
+  wait1Msec(250);
+  setIntakePower(-127);
   Atondrive(6, drivepower);
+  setIntakePower(0);
   startTask(StackAton);
-
-
-
 }
 
 void LeftFive()
@@ -302,6 +303,12 @@ void LeftFive()
 //#region Score 10's
 void RightTen()
 {
+  liftRequest(SkillsLift,false);
+  goalRequest(mobileIn,true);
+
+  Atondrive(36,127);
+  goalRequest(mobileOut,true);
+  setIntakePower(-127);
 }
 
 void LeftTen()
