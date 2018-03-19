@@ -38,6 +38,17 @@ int curentteir = 1;
 bool stackReadyAdd = true;
 bool stackReadySubtract = true;
 
+task ConeOuttake(){
+		setIntakePower(-127);
+		wait1Msec(1000);
+		setIntakePower(20);
+		}
+
+	task ConeIntake(){
+		setIntakePower(127);
+		wait1Msec(25);
+		setIntakePower(20);
+		}
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
 /*                                                                           */
@@ -283,14 +294,16 @@ startTask(drive);
 
 	//----------------------Intake Control------------------------//
 
+
 		if( vexRT[Btn6U] == 1)      // Setting Btn 6U to Intake Cone
 		{
-			setIntakePower(127);
+			startTask(ConeIntake)
 		}
 
 		else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Outtake Cone
 		{
-			setIntakePower(-127);
+			startTask(ConeOuttake);
+
 		}
 
 		else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
@@ -303,10 +316,10 @@ startTask(drive);
 		}
 	/*	else if (setIntakePower(Ch3Xmtr2)) {}// Setting Btn 6U to Intake Cone*/
 
-		else
+		/*else
 		{
 			setIntakePower(20);   // Else, set a intake still speed to hold cone in
-		}
+		}*/
 
 		//----------------------Moblie Goal Lift------------------------//
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
