@@ -1,6 +1,6 @@
 float wheelDiameter = 4;
 int driveStraightError = 100;
-
+//#region Drive PID
 //----------------------Right Drive PID----------------------//
 
 static float  DriveR_Kp = 0.6; 	//Power Tuning Value
@@ -101,11 +101,11 @@ task LPIDDriveController()
   		wait1Msec( 25 );
   	}
 }
-
+//#endregion
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
-static float  DriveT_Kp = 0.5; 	//Power Tuning Value
+static float  DriveT_Kp = 0.39; 	//Power Tuning Value
 static float  DriveTRequestedValue;
 static float  DriveT_Kd = 2.5;			// Requested Guess Value
 
@@ -177,11 +177,8 @@ void droveStraight(float distance, bool waity = false)
   }
 }
 
-void Turn (int turnAmount,int waity=false)
+void TurnPID (int turnAmount, bool waity=false)
 {
-  stopTask(RPIDDriveController);
-  stopTask(LPIDDriveController);
-
   startTask(TPIDDriveController);
 
   SensorValue[Gyro] = 0;
@@ -192,7 +189,9 @@ void Turn (int turnAmount,int waity=false)
       while( SensorValue[ Gyro ] >= DriveTRequestedValue + driveStraightError
   		|| SensorValue[ Gyro ] <= DriveTRequestedValue - driveStraightError){}
       wait1Msec(200);
+      stopTask(TPIDDriveController);
   }
   wait1Msec(25);
+  stopTask(TPIDDriveController);
 }
 //#endregion

@@ -26,9 +26,9 @@ void setLiftPower(int power)
 	motor[liftL] = power;
 }
 
-void setChainPower(int cpower)
-{// Defining all of the motors for the -CHAIN BAR-
-	motor[chain] = cpower;
+void setFourBarPower(int cpower)
+{// Defining all of the motors for the -FourBar BAR-
+	motor[FourBar] = cpower;
 }
 
 void setIntakePower(int Ipower)
@@ -53,7 +53,7 @@ static float  liftR_Kd = 1;			// Requested Guess Value
 float liftRD;
 float liftRP;
 float lastliftRError;
-int waitLiftRerror = 80;
+int waitLiftRerror = 100;
 float liftRDF;
 float liftRSensorCurrentValue;
 
@@ -87,8 +87,8 @@ task liftRController()
 
 		// send to motor
 
-		motor[ liftL ] = -liftRDrive;
-		motor[ liftR ] = -liftRDrive;
+		motor[ liftL ] = liftRDrive;
+		motor[ liftR ] = liftRDrive;
 
 		lastliftRError = liftRError;
 
@@ -108,7 +108,7 @@ float mobileRD;						//Establishing variables
 float mobileRP;
 float lastmobileRError;
 float mobileRDF;
-int waitMobliERerror = 100;
+int waitMobliERerror = 75;
 float  mobileRSensorCurrentValue;
 
 task mobileRController()
@@ -140,8 +140,8 @@ task mobileRController()
 
 		// send to motor
 
-		motor[ MobileL ] = mobileRDrive;
-		motor[ MobileR ] = mobileRDrive;
+		motor[ MobileL ] = -mobileRDrive;
+		motor[ MobileR ] = -mobileRDrive;
 
 		lastmobileRError = mobileRError;
 		// Don't hog cpu
@@ -150,18 +150,22 @@ task mobileRController()
 }
 //#endregion
 //#region WaityThing for mobilegoal and lift
-void WaitieThing()
+void goalRequest(int position, bool waity = false)
 {
-	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
-		|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
-		{}
+	mobileRRequestedValue = position;
+		if(waity)
+		{	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
+				|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
+				{} wait1Msec(50);
+		}
 }
-/*
-void WaitieThingLift()
+void liftRequest(int position, bool waity = false)
 {
-	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
-		|| liftRSensorCurrentValue <= liftRRequestedValue - waitMobliERerror)
-		{}
+	liftRRequestedValue = position;
+		if(waity)
+		{	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
+			|| liftRSensorCurrentValue <= liftRRequestedValue - waitLiftRerror)
+			{} wait1Msec(50);
+		}
 }
-*/
 //#endregion
