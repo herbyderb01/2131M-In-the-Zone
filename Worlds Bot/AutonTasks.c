@@ -22,16 +22,16 @@ int NineP = 900;
 int FullP = 1800;
 
 // PID Mobile Variables
-int mobileIn = 2755;
-int mobileOut = 400;
+int mobileIn = 2600;
+int mobileOut = 460;
 int mobileMid = 1920;
 int mobileSMid = 1438;
 
 // PID Lift variables
-int BottomLift = 1600;
+int BottomLift = 1470;
 int TopLift = 3000;
 int ParallelLift = 1910;
-int SkillsLift = 1800;
+int SkillsLift = 1700;
 
 // Auto Stack teir variables
 int teirHeightOneTwo = 2138;
@@ -286,18 +286,48 @@ void RightFive()
   goalRequest(mobileIn,true);
 
   goalRequest(mobileOut,true);
-  Atondrive(43, drivepower);
+  Atondrive(44, drivepower);
   goalRequest(mobileIn,true);
   liftRequest(BottomLift,false);
   wait1Msec(250);
   setIntakePower(-127);
-  Atondrive(6, drivepower);
+  Atondrive(12, drivepower);
   setIntakePower(0);
   startTask(StackAton);
+  wait1Msec(500);
+  Atondrive(-43, drivepower);
+  TurnPID(-1350, true);
+  goalRequest(mobileOut,true);
+  Atondrive(-75, drivepower);
+  goalRequest(mobileIn,true);
+  TurnPID(-900, true);
+  goalRequest(mobileOut,true);
+  Atondrive(25, drivepower);
 }
 
 void LeftFive()
 {
+  liftRequest(SkillsLift,false);
+  goalRequest(mobileIn,true);
+
+  goalRequest(mobileOut,true);
+  Atondrive(44, drivepower);
+  goalRequest(mobileIn,true);
+  liftRequest(BottomLift,false);
+  wait1Msec(250);
+  setIntakePower(-127);
+  Atondrive(12, drivepower);
+  setIntakePower(0);
+  startTask(StackAton);
+  wait1Msec(500);
+  Atondrive(-43, drivepower);
+  TurnPID(1350, true);
+  goalRequest(mobileOut,true);
+  Atondrive(-60, drivepower);
+  goalRequest(mobileIn,true);
+  TurnPID(900, true);
+  goalRequest(mobileOut,true);
+  Atondrive(25, drivepower);
 }
 //#endregion
 //#region Score 10's
@@ -306,13 +336,63 @@ void RightTen()
   liftRequest(SkillsLift,false);
   goalRequest(mobileIn,true);
 
-  Atondrive(36,127);
   goalRequest(mobileOut,true);
+  Atondrive(44, drivepower);
+  goalRequest(mobileIn,true);
+  liftRequest(BottomLift,false);
+  wait1Msec(500);
   setIntakePower(-127);
+  Atondrive(12, drivepower);
+  setIntakePower(0);
+  startTask(StackAton);
+  wait1Msec(500);
+  Atondrive(-43, drivepower);
+  TurnPID(-NineP/2, true);
+  Atondrive(-20, drivepower);
+  TurnPID(-NineP, true);
+  Atondrive(5, drivepower);
+  goalRequest(mobileOut,true);
+
+  Atondrive(-16, drivepower);
+  goalRequest(mobileIn,false);
+  TurnPID(-NineP/2, true);
+  Atondrive(-24, drivepower);
+  goalRequest(mobileOut, false)
+  TurnPID(-NineP, true);
+  Atondrive(12, drivepower);
+  goalRequest(mobileIn, true)
 }
 
 void LeftTen()
 {
+  liftRequest(SkillsLift,false);
+  goalRequest(mobileIn,true);
+
+  goalRequest(mobileOut,true);
+  Atondrive(44, drivepower);
+  goalRequest(mobileIn,true);
+  liftRequest(BottomLift,false);
+  wait1Msec(500);
+  setIntakePower(-127);
+  Atondrive(12, drivepower);
+  setIntakePower(0);
+  startTask(StackAton);
+  wait1Msec(500);
+  Atondrive(-43, drivepower);
+  TurnPID(NineP/2, true);
+  Atondrive(-20, drivepower);
+  TurnPID(NineP, true);
+  Atondrive(5, drivepower);
+  goalRequest(mobileOut,true);
+
+  Atondrive(-16, drivepower);
+  goalRequest(mobileIn,false);
+  TurnPID(NineP/2, true);
+  Atondrive(-24, drivepower);
+  goalRequest(mobileOut, false)
+  TurnPID(NineP, true);
+  Atondrive(12, drivepower);
+  goalRequest(mobileIn, true)
 }
 //#endregion
 //#region Score 20's
