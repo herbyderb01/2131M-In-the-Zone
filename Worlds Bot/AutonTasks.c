@@ -250,10 +250,10 @@ task StackAton()									// Simple Auto stack cone up aton
 	wait1Msec(400);
 	setFourBarPower(-10);
 
-  liftRequest(1500,false);
+  liftRequest(1450,false);
 
 	setIntakePower(127);
-	wait1Msec(400);
+	wait1Msec(900);
 	setIntakePower(20);
 	wait1Msec(100);
 
@@ -341,8 +341,9 @@ void LeftFive()
 //#region Score 10's
 void RightTen()
 {
-  liftRequest(SkillsLift,false);
+  liftRequest(SkillsLift+100,false);
   goalRequest(mobileIn,true);
+  setFourBarPower(20);
 
   goalRequest(mobileOut,true);
   Atondrive(45, drivepower);
@@ -351,27 +352,30 @@ void RightTen()
   wait1Msec(300);
   setIntakePower(-127);
   Atondrive(10.5, drivepower);
+  setFourBarPower(20);
   setIntakePower(0);
   startTask(StackAton);
-  wait1Msec(1000);
+  wait1Msec(500);
   Atondrive(-43, drivepower);
   TurnPID(-NineP/2, true);
-  Atondrive(-15, drivepower);
+  Atondrive(-13.5, drivepower);
   TurnPID(-NineP, true);
   Atondrive(5, drivepower);
   goalRequest(mobileOut,true);
+
   Atondrive(-5, drivepower);
   goalRequest(mobileLow,true);
   Atondrive(-10, drivepower);
   goalRequest(mobileIn,false);
   TurnPID(-NineP/2, true);
   Atondrive(-10, drivepower);
-  setDrivePower(-127,-20);
-  goalRequest(mobileOut, false)
-  wait1Msec(2500);
+  TurnPID(NineP/2, true);
+  Atondrive(-44, drivepower);
+  goalRequest(mobileOut,true);
+  setDrivePower(-10,-127);
+  wait1Msec(2000);
   setDrivePower(0,0);
-  Atondrive(12, drivepower);
-  goalRequest(mobileIn, true);
+  Atondrive(20, drivepower);
 }
 
 void LeftTen()
