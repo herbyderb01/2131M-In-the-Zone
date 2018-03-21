@@ -75,14 +75,12 @@ task autonomous()
 			{
 				LeftFive();
 			}
-			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1900)
+			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1850)
 			{
-
 			}
 
-			if (SensorValue[selectP] > 1900 && SensorValue[selectP] < 2200)
+			if (SensorValue[selectP] > 1850 && SensorValue[selectP] < 4000)
 			{
-
 			}
 			if (SensorValue[selectP] > 4000)
 			{
@@ -96,14 +94,14 @@ task autonomous()
 			{
 				LeftTen();
 			}
-			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1900)
+			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1850)
 			{
-
+				LeftTenCones();
 			}
 
-			if (SensorValue[selectP] > 1900 && SensorValue[selectP] < 2200)
+			if (SensorValue[selectP] > 1850 && SensorValue[selectP] < 4000)
 			{
-
+				RightTenCones();
 			}
 			if (SensorValue[selectP] > 4000)
 			{
@@ -117,14 +115,12 @@ task autonomous()
 			{
 				LeftTwenty();
 			}
-			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1900)
+			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1850)
 			{
-
 			}
 
-			if (SensorValue[selectP] > 1900 && SensorValue[selectP] < 2200)
+			if (SensorValue[selectP] > 1850 && SensorValue[selectP] < 4000)
 			{
-
 			}
 			if (SensorValue[selectP] > 4000)
 			{
