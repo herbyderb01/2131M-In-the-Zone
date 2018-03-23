@@ -29,10 +29,10 @@ int mobileLow = 700;
 int mobileOut = 460;
 
 // PID Lift variables
-int BottomLift = 1470;
+int BottomLift = 1328;
 int TopLift = 3000;
-int ParallelLift = 1910;
-int SkillsLift = 1700;
+int ParallelLift = 1850;
+int SkillsLift = 1600;
 
 // Auto Stack teir variables
 int teirHeightOneTwo = 2138;
@@ -195,7 +195,7 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	liftRRequestedValue = SkillsLift - 400;
 
 	setIntakePower(127);
-	wait1Msec(400);
+	wait1Msec(600);
 	setIntakePower(20);
 	wait1Msec(100);
 
