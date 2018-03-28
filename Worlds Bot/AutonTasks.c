@@ -50,7 +50,7 @@ int teirHeightThirteen = 940;
 int teirHeightFourteen = 940;
 int teirHeightFifteen = 940;
 
-float wheelDiameter = 3.875;
+float wheelDiameter = 6.5;
 float cumBias;
 float debug;
 
@@ -756,9 +756,11 @@ void SkillsOne ()
 
 void SkillsTwo ()
 {
-  setIntakePower(15);
-  liftRRequestedValue = 2000;
+  liftRequest(SkillsLift+100,false);
+  goalRequest(mobileIn,true);
+  setFourBarPower(20);
 
+  Atondrive(36, drivepower);
   //startTask(TPIDDriveController);
 
   /*TurnPID(NineP,true);
