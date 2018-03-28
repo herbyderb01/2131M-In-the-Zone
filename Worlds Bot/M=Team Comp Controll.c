@@ -187,6 +187,18 @@ setFourBarPower(20);
     }
     initalize=1;
 
+    if (vexRT[Btn8L]==1)
+  {
+
+  	startTask(drivelock);
+  }
+
+  if (vexRT[Btn8D]==1)
+  {
+  	stopTask(drivelock);
+
+  }
+
 	//----------------------Lift Controll------------------------//
 
 		if( vexRT[Btn5D] == 1)      // Setting Btn5D to lift Down

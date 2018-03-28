@@ -213,6 +213,16 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	wait1Msec(300);
 	setIntakePower(10);
 }
+
+task drivelock()
+{
+
+  setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25)
+
+
+
+  }
+
 void AutoStackUpSimpleP()
 {
 liftRRequestedValue = ParallelLift;
