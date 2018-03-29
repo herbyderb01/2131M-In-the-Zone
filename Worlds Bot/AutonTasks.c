@@ -34,21 +34,8 @@ int TopLift = 3000;
 int ParallelLift = 1850;
 int SkillsLift = 1600;
 
-// Auto Stack teir variables
-int teirHeightOneTwo = 2138;
-int teirHeightThree = 2020;
-int teirHeightFour = 1902;
-int teirHeightFive = 1720;
-int teirHeightSix = 1596;
-int teirHeightSeven = 1540;
-int teirHeightEight = 1460;
-int teirHeightNine = 1340;
-int teirHeightTen = 1210;
-int teirHeightEleven = 1110;
-int teirHeightTwelve = 940;
-int teirHeightThirteen = 940;
-int teirHeightFourteen = 940;
-int teirHeightFifteen = 940;
+// Auto Stack variables
+int SonarsThreshold = 500;
 
 float wheelDiameter = 6.5;
 float cumBias;
@@ -159,7 +146,12 @@ if (powerMode == 0)
   		wait1Msec(25); //dont hog cpu
   }
 }
-
+void ClearAllSensors()
+{
+SensorValue[rightEncoder] = 0;  ///
+SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
+SensorValue[Gyro] = 0;					///
+}
 task IntakeCone()
 {
 	setIntakePower (127);
@@ -184,6 +176,18 @@ task OutakePreload()
 	liftRRequestedValue=SkillsLift;
 }
 
+
+task drivelock()
+{
+  ClearAllSensors();
+while(true)
+{
+setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25);
+}
+}
+
+//#endregion
+//#region Auto Stack Voids and Tasks
 task AutoStackUpSimple()									// Simple Auto stack cone up
 {
 	liftRRequestedValue = ParallelLift;
@@ -214,15 +218,6 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	setIntakePower(10);
 }
 
-task drivelock()
-{
-
-  setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25)
-
-
-
-  }
-
 void AutoStackUpSimpleP()
 {
 liftRRequestedValue = ParallelLift;
@@ -252,10 +247,10 @@ liftRRequestedValue = SkillsLift;
 wait1Msec(300);
 setIntakePower(10);
 }
+
 void StackAtonOne()									// Simple Auto stack cone up aton
 {
   //liftRequest(ParallelLift,true);
-
 	setFourBarPower(-127);
 	wait1Msec(400);
 	setFourBarPower(-10);
@@ -285,7 +280,6 @@ void StackAtonOne()									// Simple Auto stack cone up aton
 task StackAton()									// Simple Auto stack cone up aton
 {
   //liftRequest(ParallelLift,true);
-
 	setFourBarPower(-127);
 	wait1Msec(400);
 	setFourBarPower(-10);
@@ -311,7 +305,57 @@ task StackAton()									// Simple Auto stack cone up aton
 	wait1Msec(300);
 	setIntakePower(10);
 }
+//#endregion
+//#region Sonar Auto Stacking
+task SonarAutoStack()
+{
+stopTask(liftRController);
+int test = 0;
+set roller power to intake
 
+for half a seconed lower lift with power to grab cone
+
+set roller still speed
+
+set lift power to start comming up
+
+	while(test < 6)
+	{
+    if(SensorValue[Sonar] < SonarsThreshold && SensorValue[Sonar] != -1)
+    {
+        test = 0;
+    }
+    if (SensorValue[Sonar] > SonarsThreshold)
+    {
+
+        test += 1;
+    }
+	}
+set a lift still speed
+
+bring four bar up
+
+bring lift down
+while(test < 6)
+{
+  if(SensorValue[Sonar] < SonarsThreshold && SensorValue[Sonar] != -1)
+  {
+      test += 1;
+  }
+  if (SensorValue[Sonar] > SonarsThreshold)
+  {
+
+      test = 0;
+  }
+}
+get rid of the cone with lift comming up
+
+four bar out
+
+starTask(liftRController);
+
+set pid to the grab height
+}
 //#endregion
 //<editor-fold Autonomous Programs
 //--------------------Autonomous Programs----------------------------//

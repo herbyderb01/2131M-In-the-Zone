@@ -187,16 +187,14 @@ setFourBarPower(20);
     }
     initalize=1;
 
-    if (vexRT[Btn8L]==1)
+  if (vexRT[Btn8L]==1)
   {
-
   	startTask(drivelock);
   }
 
-  if (vexRT[Btn8D]==1)
+  if (vexRT[Btn8U]==1)
   {
   	stopTask(drivelock);
-
   }
 
 	//----------------------Lift Controll------------------------//
