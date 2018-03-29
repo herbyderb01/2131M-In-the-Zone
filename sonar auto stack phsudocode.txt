@@ -1,0 +1,29 @@
+task SonarAutoStack()
+{
+stopTask(LiftPID);
+
+set roller power to intake
+
+for half a seconed lower lift with power to grab cone	
+
+set roller still speed
+	while(sonar < 500)
+	{
+	set lift power to start comming up
+	}
+set a lift still speed
+
+bring four bar up
+
+	while(sonar is > 500)
+	{
+	bring lift down
+	}
+get rid of the cone with lift comming up
+
+four bar out
+
+starTask(LiftPID);
+
+set pid to the grab height
+}
