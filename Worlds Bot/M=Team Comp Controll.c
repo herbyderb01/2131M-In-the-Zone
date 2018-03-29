@@ -5,6 +5,7 @@
 #pragma config(Sensor, in5,    selecttwoP,     sensorPotentiometer)
 #pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
+#pragma config(Sensor, dgtl5,  Sonar,          sensorSONAR_raw)
 #pragma config(Motor,  port1,           DriveR,        tmotorVex393_HBridge, openLoop)
 #pragma config(Motor,  port2,           FourBar,       tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           INtake,        tmotorVex393_MC29, openLoop)
