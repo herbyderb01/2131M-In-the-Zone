@@ -95,11 +95,13 @@ void Atondrive(float inches, int power)
 //#region User Control Tasks
 task drive() //Redirecting Drive into a task
 {
-	/*while(true)
+	while(true)
 	{
 	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-  }*/
-  while (true)
+  motor[MobileL] = vexRT[Ch2];
+	motor[MobileR] = vexRT[Ch3];
+  }
+  /*while (true)
   {
   if (vexRT[Btn5UXmtr2]==0)
   {
@@ -144,7 +146,7 @@ if (powerMode == 0)
   		}
   	}
   		wait1Msec(25); //dont hog cpu
-  }
+  }*/
 }
 void ClearAllSensors()
 {
