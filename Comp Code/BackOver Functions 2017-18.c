@@ -150,12 +150,13 @@ task mobileRController()
 }
 //#endregion
 //#region WaityThing for mobilegoal and lift
-void WaitieThing()
+/*void WaitieThing()
 {
 	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
 		|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
 		{}
 }
+*/
 /*
 void WaitieThingLift()
 {

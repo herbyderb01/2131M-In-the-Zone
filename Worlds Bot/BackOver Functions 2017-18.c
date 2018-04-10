@@ -17,7 +17,7 @@ void setDrivePowerRight(int power)
 void setDrivePowerLeft(int power)
 {// Defining all of the motors for the -Left DRIVE-
 	motor[LDrive] = power;		//Define this motor as the left drive
-	motor[MobileL] = power;	//Define this motor as the lefy drive
+	motor[MobileL] = power;	//Define this motor as the left drive
 }
 
 void setLiftPower(int power)
@@ -90,8 +90,7 @@ task liftRController()
 
 		// send to motor
 
-		motor[ liftL ] = liftRDrive;
-		motor[ liftR ] = liftRDrive;
+		setLiftPower (liftRDrive);
 
 		lastliftRError = liftRError;
 

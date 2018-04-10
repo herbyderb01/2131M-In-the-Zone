@@ -98,8 +98,8 @@ task drive() //Redirecting Drive into a task
 	while(true)
 	{
 	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-  motor[MobileL] = vexRT[Ch2];
-	motor[MobileR] = vexRT[Ch3];
+  motor[MobileR] = vexRT[Ch2];
+	motor[MobileL] = vexRT[Ch3];
   }
   /*while (true)
   {

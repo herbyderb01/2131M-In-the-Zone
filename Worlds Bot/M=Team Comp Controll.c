@@ -6,13 +6,13 @@
 #pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
 #pragma config(Sensor, dgtl5,  Sonar,          sensorSONAR_raw)
-#pragma config(Motor,  port1,           MobileR,       tmotorVex393_HBridge, openLoop)
-#pragma config(Motor,  port2,           FourBar,       tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port1,           MobileR,       tmotorVex393_HBridge, openLoop, reversed)
+#pragma config(Motor,  port2,           FourBar,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           INtake,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           UliftL,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port5,           UliftR,        tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port6,           DliftL,        tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port7,           DliftR,        tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port7,           DliftR,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           RDrive,        tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port9,           LDrive,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port10,          MobileL,       tmotorVex393_HBridge, openLoop)
@@ -254,18 +254,18 @@ setFourBarPower(20);
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
 		{
 				setMobilePower(127);
-				mobilestillspeed=15;
+
 		}
 
 		else if( vexRT[Btn7D] == 1)      // Setting Btn7D to Intake Goal
 		{
 				setMobilePower(-127);
-				mobilestillspeed=-15;
+
 		}
 		else if( vexRT[Btn7R] == 1)      // Setting Btn7D to Intake Goal
 		{
 				setMobilePower(-10);
-				mobilestillspeed=15;
+
 
 		}
 		else
