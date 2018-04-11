@@ -53,16 +53,16 @@ void AutoStrait(int distance, int power)
 		 // Checking if the right drive is faster than the left drive
 		if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder]))
 		{
-			setDrivePower(direction * (power + 4), direction * (power - 10));
+			setDrivePowerAton(direction * (power + 4), direction * (power - 10));
 		}
 		// Checking if the left drive is faster than the right drive
 		else if (abs(SensorValue[leftEncoder]) > abs(SensorValue[rightEncoder]))
 		{
-			setDrivePower(direction * (power - 2), direction * power);
+			setDrivePowerAton(direction * (power - 2), direction * power);
 		}
 		else //if the values are the same, keeps motor powers equall
 		{
-			setDrivePower(direction * power, direction * power);
+			setDrivePowerAton(direction * power, direction * power);
 		}
 	}
 		motor[LDrive] = 0; // stops motors when finished with function
@@ -93,27 +93,9 @@ task drive() //Redirecting Drive into a task
 	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
   motor[MobileR] = vexRT[Ch2];
 	motor[MobileL] = vexRT[Ch3];
-  }
+}
   /*while (true)
   {
-  if (vexRT[Btn5UXmtr2]==0)
-  {
-    powerToggle=1;
-  }
-  else if (vexRT[Btn5UXmtr2]==1 && powerMode==1 && powerToggle==1)
-  {
-    powerMode=0;
-    powerToggle=0;
-  }
-  else if (vexRT[Btn5UXmtr2]==1 && powerMode==0 && powerToggle==1)
-  {
-    powerMode=1;
-    powerToggle=0;
-  }
-
-if (powerMode == 0)
-{
-
   	if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
   	{
   		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
@@ -122,23 +104,7 @@ if (powerMode == 0)
 		{
 			setDrivePower(vexRT[Ch3Xmtr2],vexRT[Ch2Xmtr2]);
 		}
-
 		wait1Msec(25); //dont hog cpu
-}
-  /////////////////////////////////////////////////////////////////
-  if (powerMode == 1)
-  {
-
-    	if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
-    	{
-    		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-    	}
-      else
-  		{
-  			setDrivePower((vexRT[Ch3Xmtr2]/2),(vexRT[Ch2Xmtr2]/2));
-  		}
-  	}
-  		wait1Msec(25); //dont hog cpu
   }*/
 }
 void ClearAllSensors()

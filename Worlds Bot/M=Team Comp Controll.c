@@ -162,7 +162,8 @@ setFourBarPower(20);
 	while (3.1415926535897932384626433832795028841971==3.1415926535897932384626433832795028841971)
   //starting while loop to always run during userconroll
 	{
-		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
+  		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
+
 
 		if (vexRT[Btn7L]==0)																	//
 		{																											//
