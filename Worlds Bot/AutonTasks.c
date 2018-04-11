@@ -8,15 +8,8 @@ int mobilestillspeed;    //define the mobilegoalstillspeed
 int skillsVar;           //skills toggle variable
 int usertoggle;          //usertoggle variable
 int initalize=0;         //initializing the toggle variable
-int curentteir = 1;      //initializing a variable to keep track of teir number
-bool stackReadyAdd = true;
-bool stackReadySubtract = true;
 
-int powerMode = 0;
-int powerToggle;
 //Variables for turn and drive
-int Nine = 750;
-int full = 1750;
 int drivepower = 127;
 int NineP = 900;
 int FullP = 1800;
@@ -220,36 +213,6 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	setIntakePower(10);
 }
 
-void AutoStackUpSimpleP()
-{
-liftRRequestedValue = ParallelLift;
-
-setFourBarPower(-127);
-wait1Msec(500);
-setFourBarPower(-10);
-
-liftRRequestedValue = SkillsLift - 400;
-
-setIntakePower(127);
-wait1Msec(400);
-setIntakePower(20);
-wait1Msec(100);
-
-liftRRequestedValue = ParallelLift;
-
-setFourBarPower(127);
-wait1Msec(750);
-setFourBarPower(20);
-
-liftRRequestedValue = SkillsLift - 500;
-wait1Msec(400);
-setIntakePower(-127);
-wait1Msec(200);
-liftRRequestedValue = SkillsLift;
-wait1Msec(300);
-setIntakePower(10);
-}
-
 void StackAtonOne()									// Simple Auto stack cone up aton
 {
   //liftRequest(ParallelLift,true);
@@ -361,11 +324,6 @@ set pid to the grab height
 //#endregion
 //<editor-fold Autonomous Programs
 //--------------------Autonomous Programs----------------------------//
-//#region Driver Program Programs
-void Preload()
-{
-}
-//#endregion
 //#region Score 5's
 void RightFive()
 {
@@ -665,7 +623,7 @@ void SkillsOne ()
 			setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
       Atondrive(-75, drivepower);
 
@@ -696,7 +654,7 @@ void SkillsOne ()
 			//setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 			//------------------------------------------- Place 3rd
 			Atondrive(-530, drivepower);
 
@@ -705,7 +663,7 @@ void SkillsOne ()
 			TurnPID(NineP-5, true);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(390, drivepower);
 
@@ -718,7 +676,7 @@ void SkillsOne ()
 			//setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 			Atondrive(-100, drivepower);
 			mobileRRequestedValue = mobileMid-100;
 			//setDrivePower(40,40);
@@ -744,7 +702,7 @@ void SkillsOne ()
 
 			mobileRRequestedValue = mobileOut;
 			setDrivePower(20,20);
-			WaitieThing();
+			//WaitieThing();
 			//------------------------------------------- Place 5th
 			Atondrive(-545, drivepower);
 
@@ -753,7 +711,7 @@ void SkillsOne ()
 			TurnPID(NineP-10, true);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(460, drivepower);
 
@@ -766,7 +724,7 @@ void SkillsOne ()
 			//setDrivePower(20,20);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 			Atondrive(-120, drivepower);
 			//------------------------------------------- Place 6th
 			TurnPID(1320 , true);
@@ -790,7 +748,7 @@ void SkillsOne ()
 			setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(-10, 127);
 
@@ -817,7 +775,7 @@ void SkillsOne ()
 			setDrivePower(60,60);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(-200, drivepower);
 

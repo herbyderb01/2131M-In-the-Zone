@@ -4,19 +4,27 @@ void setDrivePower(int left, int right)
 {// Defining all of the motors for the -DRIVE-
 	motor[LDrive] = left;		//Define this motor as the left drive
 	motor[RDrive] = right;	//Define this motor as the right drive
-	//motor[MobileL] = left;	//Define this motor as the lefy drive
+	//motor[MobileL] = left;	//Define this motor as the left drive
 	//motor[MobileR] = right;	//Define this motor as the right drive
 }
-
+void setDrivePowerAton(int left, int right)
+{// Defining all of the motors for the -DRIVE-
+	motor[LDrive] = left;		//Define this motor as the left drive
+	motor[RDrive] = right;	//Define this motor as the right drive
+	motor[MobileL] = left;	//Define this motor as the left drive
+	motor[MobileR] = right;	//Define this motor as the right drive
+}
 void setDrivePowerRight(int power)
 {// Defining all of the motors for the -Right DRIVE-
 	motor[RDrive] = power;	//Define this motor as the right drive
+	motor[MobileR] = power;	//Define this motor as the right drive
 	motor[MobileR] = power;	//Define this motor as the right drive
 }
 
 void setDrivePowerLeft(int power)
 {// Defining all of the motors for the -Left DRIVE-
 	motor[LDrive] = power;		//Define this motor as the left drive
+	motor[MobileL] = power;	//Define this motor as the left drive
 	motor[MobileL] = power;	//Define this motor as the left drive
 }
 
