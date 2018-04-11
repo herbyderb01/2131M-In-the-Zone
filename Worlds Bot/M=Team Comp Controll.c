@@ -157,12 +157,14 @@ task autonomous()
 /*---------------------------------------------------------------------------*/
 task usercontrol()
 {
-startTask(drive);
+//startTask(drive);
 setFourBarPower(20);
 
 	while (3.1415926535897932384626433832795028841971==3.1415926535897932384626433832795028841971)
   //starting while loop to always run during userconroll
 	{
+		setDrivePower(vexRT[Ch3],vexRT[Ch2]);\
+
 		if (vexRT[Btn7L]==0)																	//
 		{																											//
 			usertoggle=1;																				//
@@ -254,24 +256,21 @@ setFourBarPower(20);
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
 		{
 				setMobilePower(127);
-
 		}
-
 		else if( vexRT[Btn7D] == 1)      // Setting Btn7D to Intake Goal
 		{
-				setMobilePower(-127);
-
+				//setMobilePower(127);
+			motor[MobileL] = -127;
+			motor[MobileR] = -127;
 		}
-		else if( vexRT[Btn7R] == 1)      // Setting Btn7D to Intake Goal
+		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to brake
 		{
 				setMobilePower(-10);
-
-
 		}
 		else
 		{
-			motor[MobileL] = vexRT[Ch2];
-			motor[MobileR] = vexRT[Ch3];
+			motor[MobileR] = vexRT[Ch2];
+			motor[MobileL] = vexRT[Ch3];
 		}
 
 		//----------------------Four Bar Control ------------------------//
