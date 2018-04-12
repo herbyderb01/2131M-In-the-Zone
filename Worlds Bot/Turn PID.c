@@ -10,6 +10,7 @@ float DriveTD;
 float DriveTP;
 float lastDriveTError;
 float DriveTDF;
+float  DriveTSensorCurrentValue;
 
 task TPIDDriveController()
 {
@@ -62,8 +63,8 @@ void TurnPID (int turnAmount, bool waity=false)
   if (waity)
   {
     //  distance = abs(distance); //help
-      while( SensorValue[ Gyro ] >= DriveTRequestedValue + driveStraightError
-  		|| SensorValue[ Gyro ] <= DriveTRequestedValue - driveStraightError){}
+      while( DriveTSensorCurrentValue >= DriveTRequestedValue + driveStraightError
+  		|| DriveTSensorCurrentValue <= DriveTRequestedValue - driveStraightError){}
       wait1Msec(200);
       stopTask(TPIDDriveController);
   }

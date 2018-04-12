@@ -148,9 +148,7 @@ task mobileRController()
 			mobileRDrive = (-127);
 
 		// send to motor
-
-		motor[ MobileL ] = -mobileRDrive;
-		motor[ MobileR ] = -mobileRDrive;
+		setMobilePower(mobileRDrive);
 
 		lastmobileRError = mobileRError;
 		// Don't hog cpu
@@ -172,8 +170,8 @@ void liftRequest(int position, bool waity = false)
 {
 	liftRRequestedValue = position;
 		if(waity)
-		{	while(SensorValue[liftP] >= liftRRequestedValue + waitLiftRerror
-			|| SensorValue[liftP] <= liftRRequestedValue - waitLiftRerror)
+		{	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
+			|| liftRSensorCurrentValue <= liftRRequestedValue - waitLiftRerror)
 			{} wait1Msec(50);
 		}
 }

@@ -4,7 +4,7 @@
 //-------------Variables--------------//
 int liftstillspeed;      //define the liftstillspeed
 int FourBarstillspeed;      //define the FourBarstillspeed
-int mobilestillspeed;    //define the mobilegoalstillspeed
+
 int skillsVar;           //skills toggle variable
 int usertoggle;          //usertoggle variable
 int initalize=0;         //initializing the toggle variable
@@ -15,11 +15,11 @@ int NineP = 900;
 int FullP = 1800;
 
 // PID Mobile Variables
-int mobileIn = 2600;
-int mobileMid = 1920;
-int mobileSMid = 1438;
-int mobileLow = 700;
-int mobileOut = 460;
+int mobileIn = 875;
+int mobileMid = 1905;
+int mobileSMid = 2500;
+int mobileLow = 2900;
+int mobileOut = 3270;
 
 // PID Lift variables
 int BottomLift = 1350;
@@ -88,24 +88,18 @@ void Atondrive(float inches, int power)
 //#region User Control Tasks
 task drive() //Redirecting Drive into a task
 {
-	while(true)
-	{
-	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-  motor[MobileR] = vexRT[Ch2];
-	motor[MobileL] = vexRT[Ch3];
-}
-  /*while (true)
+  while (true)
   {
-  	if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
-  	{
-  		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-  	}
+    if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
+    {
+    setDrivePower(vexRT[Ch3],vexRT[Ch2]);
+    }
     else
-		{
-			setDrivePower(vexRT[Ch3Xmtr2],vexRT[Ch2Xmtr2]);
-		}
+    {
+    setDrivePower(vexRT[Ch3Xmtr2],vexRT[Ch2Xmtr2]);
+    }
 		wait1Msec(25); //dont hog cpu
-  }*/
+  }
 }
 void ClearAllSensors()
 {
@@ -136,7 +130,6 @@ task OutakePreload()
 	setIntakePower (20);
 	liftRRequestedValue=SkillsLift;
 }
-
 
 task drivelock()
 {
@@ -789,6 +782,9 @@ void DoNothing ()
 
 void DefensiveTwo ()
 {
+  liftRequest(2000,false);
+  goalRequest(mobileOut,true);
+
 }
 
 void DoNothingTwo ()

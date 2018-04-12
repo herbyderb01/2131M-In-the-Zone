@@ -70,7 +70,8 @@ task autonomous()
 	//wait1Msec(1000);
 	SensorScale[Gyro] = 143;
 
-	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795) //=========== Score 5's ==========//
+	 //=========== Score 5's ==========//
+	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795)
 	{
 			if (SensorValue[selectP] < 15)
 			{
@@ -89,7 +90,9 @@ task autonomous()
 			}
 
 	}
-	if (SensorValue[selecttwoP] > 1795 && SensorValue[selecttwoP] < 3530) //=========== Score 10's ==========//
+
+	 //=========== Score 10's ==========//
+	if (SensorValue[selecttwoP] > 1795 && SensorValue[selecttwoP] < 3530)
 	{
 			if (SensorValue[selectP] < 15)
 			{
@@ -110,7 +113,9 @@ task autonomous()
 			}
 
 	}
-	if (SensorValue[selecttwoP] > 3530) //=========== Score 20's ==========//
+
+	 //=========== Score 20's ==========//
+	if (SensorValue[selecttwoP] > 3530)
 	{
 			if (SensorValue[selectP] < 15)
 			{
@@ -129,7 +134,9 @@ task autonomous()
 			}
 
 	}
-	if (SensorValue[selecttwoP] < 300) //=========== Score Special's ==========//
+
+	 //=========== Score Special's ==========//
+	if (SensorValue[selecttwoP] < 300)
 	{
 			if (SensorValue[selectP] < 15)
 			{
@@ -156,14 +163,12 @@ task autonomous()
 /*---------------------------------------------------------------------------*/
 task usercontrol()
 {
-//startTask(drive);
+startTask(drive);
 setFourBarPower(20);
 
 	while (3.1415926535897932384626433832795028841971==3.1415926535897932384626433832795028841971)
   //starting while loop to always run during userconroll
 	{
-  		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-
 
 		if (vexRT[Btn7L]==0)																	//
 		{																											//
@@ -199,6 +204,34 @@ setFourBarPower(20);
 		  {
 		  	stopTask(drivelock);
 		  }
+		//----------------------Moblie Goal------------------------//
+
+		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
+		{
+				setMobilePower(127);
+		}
+		else if( vexRT[Btn7D] == 1)      // Setting Btn7D to Intake Goal
+		{
+				setMobilePower(-127);
+		}
+		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to brake
+		{
+				setMobilePower(-10);
+		}
+		else
+		{
+			if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
+	  	{
+				motor[MobileR] = vexRT[Ch2];
+				motor[MobileL] = vexRT[Ch3];
+			}
+		  else
+			{
+				motor[MobileR] = vexRT[Ch2Xmtr2];
+				motor[MobileL] = vexRT[Ch3Xmtr2];
+			}
+		}
+
 
 	//----------------------Lift Controll------------------------//
 
@@ -250,26 +283,6 @@ setFourBarPower(20);
 		{
 			startTask(OutakeCone);
 		}*/
-
-		//----------------------Moblie Goal Lift------------------------//
-
-		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal
-		{
-				setMobilePower(127);
-		}
-		else if( vexRT[Btn7D] == 1)      // Setting Btn7D to Intake Goal
-		{
-				setMobilePower(-127);
-		}
-		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to brake
-		{
-				setMobilePower(-10);
-		}
-		else
-		{
-			motor[MobileR] = vexRT[Ch2];
-			motor[MobileL] = vexRT[Ch3];
-		}
 
 		//----------------------Four Bar Control ------------------------//
 
@@ -336,11 +349,27 @@ setFourBarPower(20);
 		{
 			setMobilePower(-127);
 		}
+		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn6U to Extend Goal
+		{
+			setMobilePower(127);
+		}
+
+		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn6D to Intake Goal
+		{
+			setMobilePower(-127);
+		}
 		else
 		{
-			motor[MobileR] = vexRT[Ch2];
-			motor[MobileL] = vexRT[Ch3];
-
+			if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
+	  	{
+				motor[MobileR] = vexRT[Ch2];
+				motor[MobileL] = vexRT[Ch3];
+			}
+		  else
+			{
+				motor[MobileR] = vexRT[Ch2Xmtr2];
+				motor[MobileL] = vexRT[Ch3Xmtr2];
+			}
 		}
   }
  }
