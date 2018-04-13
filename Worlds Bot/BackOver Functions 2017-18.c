@@ -63,7 +63,7 @@ static float  liftR_Kd = 1;			// Requested Guess Value
 float liftRD;
 float liftRP;
 float lastliftRError;
-int waitLiftRerror = 100;
+int waitLiftRerror = 150;
 float liftRDF;
 float liftRSensorCurrentValue;
 

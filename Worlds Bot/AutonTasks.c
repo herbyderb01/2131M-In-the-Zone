@@ -782,7 +782,7 @@ void DoNothing ()
 
 void DefensiveTwo ()
 {
-  liftRequest(2000,false);
+  liftRequest(2000,true);
   goalRequest(mobileOut,true);
 
 }
