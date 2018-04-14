@@ -4,26 +4,36 @@ void setDrivePower(int left, int right)
 {// Defining all of the motors for the -DRIVE-
 	motor[LDrive] = left;		//Define this motor as the left drive
 	motor[RDrive] = right;	//Define this motor as the right drive
-	motor[DriveL] = left;		//Define this motor as the left 3 motor drive
-	motor[DriveR] = right;	//Define this motor as the right 3 motor drive
+	//motor[MobileL] = left;	//Define this motor as the left drive
+	//motor[MobileR] = right;	//Define this motor as the right drive
 }
-
-void setDrivePowerRight(int power)
+void setDrivePowerAton(int left, int right)
 {// Defining all of the motors for the -DRIVE-
+	motor[LDrive] = left;		//Define this motor as the left drive
+	motor[RDrive] = right;	//Define this motor as the right drive
+	motor[MobileL] = left;	//Define this motor as the left drive
+	motor[MobileR] = right;	//Define this motor as the right drive
+}
+void setDrivePowerRight(int power)
+{// Defining all of the motors for the -Right DRIVE-
 	motor[RDrive] = power;	//Define this motor as the right drive
-	motor[DriveR] = power;	//Define this motor as the right 3 motor drive
+	motor[MobileR] = power;	//Define this motor as the right drive
+	motor[MobileR] = power;	//Define this motor as the right drive
 }
 
 void setDrivePowerLeft(int power)
-{// Defining all of the motors for the -DRIVE-
+{// Defining all of the motors for the -Left DRIVE-
 	motor[LDrive] = power;		//Define this motor as the left drive
-	motor[DriveL] = power;		//Define this motor as the left 3 motor drive
+	motor[MobileL] = power;	//Define this motor as the left drive
+	motor[MobileL] = power;	//Define this motor as the left drive
 }
 
 void setLiftPower(int power)
 {// Defining all of the motors for the -LIFT-
-	motor[liftR] = power;
-	motor[liftL] = power;
+	motor[UliftR] = power;
+	motor[UliftL] = power;
+	motor[DliftR] = power;
+	motor[DliftL] = power;
 }
 
 void setFourBarPower(int cpower)
@@ -53,7 +63,7 @@ static float  liftR_Kd = 1;			// Requested Guess Value
 float liftRD;
 float liftRP;
 float lastliftRError;
-int waitLiftRerror = 100;
+int waitLiftRerror = 150;
 float liftRDF;
 float liftRSensorCurrentValue;
 
@@ -87,8 +97,7 @@ task liftRController()
 
 		// send to motor
 
-		motor[ liftL ] = liftRDrive;
-		motor[ liftR ] = liftRDrive;
+		setLiftPower(liftRDrive);
 
 		lastliftRError = liftRError;
 
@@ -139,9 +148,7 @@ task mobileRController()
 			mobileRDrive = (-127);
 
 		// send to motor
-
-		motor[ MobileL ] = -mobileRDrive;
-		motor[ MobileR ] = -mobileRDrive;
+		setMobilePower(mobileRDrive);
 
 		lastmobileRError = mobileRError;
 		// Don't hog cpu
@@ -163,8 +170,8 @@ void liftRequest(int position, bool waity = false)
 {
 	liftRRequestedValue = position;
 		if(waity)
-		{	while(SensorValue[liftP] >= liftRRequestedValue + waitLiftRerror
-			|| SensorValue[liftP] <= liftRRequestedValue - waitLiftRerror)
+		{	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
+			|| liftRSensorCurrentValue <= liftRRequestedValue - waitLiftRerror)
 			{} wait1Msec(50);
 		}
 }

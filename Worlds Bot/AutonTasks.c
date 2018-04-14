@@ -4,29 +4,22 @@
 //-------------Variables--------------//
 int liftstillspeed;      //define the liftstillspeed
 int FourBarstillspeed;      //define the FourBarstillspeed
-int mobilestillspeed;    //define the mobilegoalstillspeed
+
 int skillsVar;           //skills toggle variable
 int usertoggle;          //usertoggle variable
 int initalize=0;         //initializing the toggle variable
-int curentteir = 1;      //initializing a variable to keep track of teir number
-bool stackReadyAdd = true;
-bool stackReadySubtract = true;
 
-int powerMode = 0;
-int powerToggle;
 //Variables for turn and drive
-int Nine = 750;
-int full = 1750;
 int drivepower = 127;
 int NineP = 900;
 int FullP = 1800;
 
 // PID Mobile Variables
-int mobileIn = 2600;
-int mobileMid = 1920;
-int mobileSMid = 1438;
-int mobileLow = 700;
-int mobileOut = 460;
+int mobileIn = 875;
+int mobileMid = 1905;
+int mobileSMid = 2500;
+int mobileLow = 2900;
+int mobileOut = 3270;
 
 // PID Lift variables
 int BottomLift = 1350;
@@ -60,16 +53,16 @@ void AutoStrait(int distance, int power)
 		 // Checking if the right drive is faster than the left drive
 		if (abs(SensorValue[rightEncoder]) > abs(SensorValue[leftEncoder]))
 		{
-			setDrivePower(direction * (power + 4), direction * (power - 10));
+			setDrivePowerAton(direction * (power + 4), direction * (power - 10));
 		}
 		// Checking if the left drive is faster than the right drive
 		else if (abs(SensorValue[leftEncoder]) > abs(SensorValue[rightEncoder]))
 		{
-			setDrivePower(direction * (power - 2), direction * power);
+			setDrivePowerAton(direction * (power - 2), direction * power);
 		}
 		else //if the values are the same, keeps motor powers equall
 		{
-			setDrivePower(direction * power, direction * power);
+			setDrivePowerAton(direction * power, direction * power);
 		}
 	}
 		motor[LDrive] = 0; // stops motors when finished with function
@@ -95,55 +88,17 @@ void Atondrive(float inches, int power)
 //#region User Control Tasks
 task drive() //Redirecting Drive into a task
 {
-	/*while(true)
-	{
-	setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-  }*/
   while (true)
   {
-  if (vexRT[Btn5UXmtr2]==0)
-  {
-    powerToggle=1;
-  }
-  else if (vexRT[Btn5UXmtr2]==1 && powerMode==1 && powerToggle==1)
-  {
-    powerMode=0;
-    powerToggle=0;
-  }
-  else if (vexRT[Btn5UXmtr2]==1 && powerMode==0 && powerToggle==1)
-  {
-    powerMode=1;
-    powerToggle=0;
-  }
-
-if (powerMode == 0)
-{
-
-  	if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
-  	{
-  		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-  	}
+    if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
+    {
+    setDrivePower(vexRT[Ch3],vexRT[Ch2]);
+    }
     else
-		{
-			setDrivePower(vexRT[Ch3Xmtr2],vexRT[Ch2Xmtr2]);
-		}
-
+    {
+    setDrivePower(vexRT[Ch3Xmtr2],vexRT[Ch2Xmtr2]);
+    }
 		wait1Msec(25); //dont hog cpu
-}
-  /////////////////////////////////////////////////////////////////
-  if (powerMode == 1)
-  {
-
-    	if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
-    	{
-    		setDrivePower(vexRT[Ch3],vexRT[Ch2]);
-    	}
-      else
-  		{
-  			setDrivePower((vexRT[Ch3Xmtr2]/2),(vexRT[Ch2Xmtr2]/2));
-  		}
-  	}
-  		wait1Msec(25); //dont hog cpu
   }
 }
 void ClearAllSensors()
@@ -175,7 +130,6 @@ task OutakePreload()
 	setIntakePower (20);
 	liftRRequestedValue=SkillsLift;
 }
-
 
 task drivelock()
 {
@@ -216,36 +170,6 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	liftRRequestedValue = SkillsLift;
 	wait1Msec(300);
 	setIntakePower(10);
-}
-
-void AutoStackUpSimpleP()
-{
-liftRRequestedValue = ParallelLift;
-
-setFourBarPower(-127);
-wait1Msec(500);
-setFourBarPower(-10);
-
-liftRRequestedValue = SkillsLift - 400;
-
-setIntakePower(127);
-wait1Msec(400);
-setIntakePower(20);
-wait1Msec(100);
-
-liftRRequestedValue = ParallelLift;
-
-setFourBarPower(127);
-wait1Msec(750);
-setFourBarPower(20);
-
-liftRRequestedValue = SkillsLift - 500;
-wait1Msec(400);
-setIntakePower(-127);
-wait1Msec(200);
-liftRRequestedValue = SkillsLift;
-wait1Msec(300);
-setIntakePower(10);
 }
 
 void StackAtonOne()									// Simple Auto stack cone up aton
@@ -359,11 +283,6 @@ set pid to the grab height
 //#endregion
 //<editor-fold Autonomous Programs
 //--------------------Autonomous Programs----------------------------//
-//#region Driver Program Programs
-void Preload()
-{
-}
-//#endregion
 //#region Score 5's
 void RightFive()
 {
@@ -664,7 +583,7 @@ void SkillsOne ()
 			setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
       Atondrive(-75, drivepower);
 
@@ -695,7 +614,7 @@ void SkillsOne ()
 			//setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 			//------------------------------------------- Place 3rd
 			Atondrive(-530, drivepower);
 
@@ -704,7 +623,7 @@ void SkillsOne ()
 			TurnPID(NineP-5, true);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(390, drivepower);
 
@@ -717,7 +636,7 @@ void SkillsOne ()
 			//setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 			Atondrive(-100, drivepower);
 			mobileRRequestedValue = mobileMid-100;
 			//setDrivePower(40,40);
@@ -743,7 +662,7 @@ void SkillsOne ()
 
 			mobileRRequestedValue = mobileOut;
 			setDrivePower(20,20);
-			WaitieThing();
+			//WaitieThing();
 			//------------------------------------------- Place 5th
 			Atondrive(-545, drivepower);
 
@@ -752,7 +671,7 @@ void SkillsOne ()
 			TurnPID(NineP-10, true);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(460, drivepower);
 
@@ -765,7 +684,7 @@ void SkillsOne ()
 			//setDrivePower(20,20);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 			Atondrive(-120, drivepower);
 			//------------------------------------------- Place 6th
 			TurnPID(1320 , true);
@@ -789,7 +708,7 @@ void SkillsOne ()
 			setDrivePower(40,40);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(-10, 127);
 
@@ -816,7 +735,7 @@ void SkillsOne ()
 			setDrivePower(60,60);
 
 			mobileRRequestedValue = mobileOut;
-			WaitieThing();
+			//WaitieThing();
 
 			Atondrive(-200, drivepower);
 
@@ -864,6 +783,9 @@ void DoNothing ()
 
 void DefensiveTwo ()
 {
+  liftRequest(2000,true);
+  goalRequest(mobileOut,true);
+
 }
 
 void DoNothingTwo ()
