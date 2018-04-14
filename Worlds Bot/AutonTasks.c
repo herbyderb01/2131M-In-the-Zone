@@ -15,11 +15,11 @@ int NineP = 900;
 int FullP = 1800;
 
 // PID Mobile Variables
-int mobileIn = 875;
+int mobileIn = 950;
 int mobileMid = 1905;
 int mobileSMid = 2500;
-int mobileLow = 2900;
-int mobileOut = 3270;
+int mobileLow = 3000;
+int mobileOut = 3280;
 
 // PID Lift variables
 int BottomLift = 1350;
@@ -30,7 +30,7 @@ int SkillsLift = 1600;
 // Auto Stack variables
 int SonarsThreshold = 500;
 
-float wheelDiameter = 6.5;
+float wheelDiameter = 8;
 float cumBias;
 float debug;
 
@@ -58,7 +58,7 @@ void AutoStrait(int distance, int power)
 		// Checking if the left drive is faster than the right drive
 		else if (abs(SensorValue[leftEncoder]) > abs(SensorValue[rightEncoder]))
 		{
-			setDrivePowerAton(direction * (power - 2), direction * power);
+			setDrivePowerAton(direction * (power - 10), direction * power + 4);
 		}
 		else //if the values are the same, keeps motor powers equall
 		{
@@ -357,14 +357,31 @@ void RightTen()
   Atondrive(50, drivepower);
   goalRequest(mobileIn,true);
   liftRequest(BottomLift,false);
-  wait1Msec(500);
+  wait1Msec(1000);
+  setIntakePower(-127)
+  liftRequest(skillslift, false)
+
+
+
+  /*liftRequest(SkillsLift+100,false);
+  goalRequest(mobileIn,true);
+  setFourBarPower(20);
+  setIntakePower(15);
+
+  goalRequest(mobileOut,true);
+  Atondrive(50, drivepower);
+  goalRequest(mobileIn,true);
+  liftRequest(BottomLift,false);
+  wait1Msec(1000);
   Atondrive(-48, drivepower);
   setIntakePower(-127);
-  TurnPID(-NineP/2, true);
+  TurnPID(-NineP/2, false);
+  wait1Msec(1000);
   liftRequest(SkillsLift,false);
   setIntakePower(0);
   Atondrive(-13.5, drivepower);
-  TurnPID(-NineP-50, true);
+  TurnPID(-NineP-50, false);
+  wait1Msec(1000);
   Atondrive(5, drivepower);
   goalRequest(mobileOut,true);
 
@@ -372,15 +389,17 @@ void RightTen()
   goalRequest(mobileLow,true);
   Atondrive(-10, drivepower);
   goalRequest(mobileIn,false);
-  TurnPID(-NineP/2, true);
+  TurnPID(-NineP/2, false);
+  wait1Msec(1000);
   Atondrive(-10, drivepower);
-  TurnPID(NineP/2, true);
+  TurnPID(NineP/2, false);
+  wait1Msec(1000);
   Atondrive(-50, drivepower);
   goalRequest(mobileOut,true);
   setDrivePower(-10,-127);
   wait1Msec(2000);
   setDrivePower(0,0);
-  Atondrive(20, drivepower);
+  Atondrive(20, drivepower);*/
 }
 
 void RightTenCones()
@@ -406,9 +425,11 @@ void RightTenCones()
   wait1Msec(800);
 
   Atondrive(-54, drivepower);
-  TurnPID(-NineP/2, true);
+  TurnPID(-NineP/2, false);
+  Atondrive(36, drivepower);
   Atondrive(-15, drivepower);
-  TurnPID(-NineP-50, true);
+  TurnPID(-NineP-50, false);
+  Atondrive(36, drivepower);
   Atondrive(8, drivepower);
   goalRequest(mobileOut,true);
 
@@ -432,11 +453,13 @@ void LeftTen()
 
   Atondrive(-43, drivepower);
   setIntakePower(-127);
-  TurnPID(NineP/2, true);
+  TurnPID(NineP/2, false);
+  wait1Msec(1000);
   liftRequest(SkillsLift,false);
   setIntakePower(0);
   Atondrive(-13.5, drivepower);
-  TurnPID(NineP-50, true);
+  TurnPID(NineP-50, false);
+  wait1Msec(1000);
   Atondrive(5, drivepower);
   goalRequest(mobileOut,true);
 
@@ -444,9 +467,11 @@ void LeftTen()
   goalRequest(mobileLow,true);
   Atondrive(-10, drivepower);
   goalRequest(mobileIn,false);
-  TurnPID(NineP/2, true);
+  TurnPID(NineP/2, false);
+  wait1Msec(1000);
   Atondrive(-10, drivepower);
-  TurnPID(-NineP/2, true);
+  TurnPID(-NineP/2, false);
+  wait1Msec(1000);
   Atondrive(-50, drivepower);
   goalRequest(mobileOut,true);
   setDrivePower(-10,-127);
@@ -775,17 +800,15 @@ void DoNothing ()
   liftRequest(2000,false);
 
   TurnPID(NineP, true);
-  TurnPID(NineP, true);
-  TurnPID(NineP, true);
-  TurnPID(NineP, true);
-
+  wait1Msec(2000);
 }
 
 void DefensiveTwo ()
 {
-  liftRequest(2000,true);
-  goalRequest(mobileOut,true);
-
+  liftRequest(2000);
+  //TurnPID(Ninep, true);
+  //Atondrive(36, drivepower);
+  setDrivePowerAton(127,127);
 }
 
 void DoNothingTwo ()

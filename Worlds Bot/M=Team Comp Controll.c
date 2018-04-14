@@ -66,7 +66,7 @@ task autonomous()
 	startTask(mobileRController);  //Start Mobile PID
   mobileRRequestedValue = mobileIn;
 
-	SensorBias[Gyro] = 1861;
+	SensorBias[Gyro] = 1862;
 	//wait1Msec(1000);
 	SensorScale[Gyro] = 143;
 
