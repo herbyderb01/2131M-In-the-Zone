@@ -1,4 +1,4 @@
-int driveStraightError = 100;
+int TurnWaitError = 500;
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
@@ -63,12 +63,12 @@ void TurnPID (int turnAmount, bool waity=false)
   if (waity)
   {
     //  distance = abs(distance); //help
-      while( DriveTSensorCurrentValue >= DriveTRequestedValue + driveStraightError
-  		|| DriveTSensorCurrentValue <= DriveTRequestedValue - driveStraightError){}
-      wait1Msec(200);
+      while( DriveTSensorCurrentValue >= DriveTRequestedValue + TurnWaitError
+  		|| DriveTSensorCurrentValue <= DriveTRequestedValue - TurnWaitError)
+      {} wait1Msec(200);
       stopTask(TPIDDriveController);
   }
   wait1Msec(25);
-  stopTask(TPIDDriveController);
+  //stopTask(TPIDDriveController);
 }
 //#endregion

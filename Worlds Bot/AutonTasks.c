@@ -30,7 +30,7 @@ int SkillsLift = 1600;
 // Auto Stack variables
 int SonarsThreshold = 500;
 
-float wheelDiameter = 8;
+float wheelDiameter = 4;
 float cumBias;
 float debug;
 
@@ -71,6 +71,7 @@ void AutoStrait(int distance, int power)
 
 void Atondrive(float inches, int power)
 { //Aton function to move forward by its self
+  stopTask(TPIDDriveController);
 	int ticks = InchesToCounts(inches);
 	  //Clear Encoders
   SensorValue[rightEncoder] = 0;
@@ -357,22 +358,7 @@ void RightTen()
   Atondrive(50, drivepower);
   goalRequest(mobileIn,true);
   liftRequest(BottomLift,false);
-  wait1Msec(1000);
-  setIntakePower(-127)
-  liftRequest(skillslift, false)
-
-
-
-  /*liftRequest(SkillsLift+100,false);
-  goalRequest(mobileIn,true);
-  setFourBarPower(20);
-  setIntakePower(15);
-
-  goalRequest(mobileOut,true);
-  Atondrive(50, drivepower);
-  goalRequest(mobileIn,true);
-  liftRequest(BottomLift,false);
-  wait1Msec(1000);
+  //wait1Msec(1000);
   Atondrive(-48, drivepower);
   setIntakePower(-127);
   TurnPID(-NineP/2, false);
@@ -399,7 +385,7 @@ void RightTen()
   setDrivePower(-10,-127);
   wait1Msec(2000);
   setDrivePower(0,0);
-  Atondrive(20, drivepower);*/
+  Atondrive(20, drivepower);
 }
 
 void RightTenCones()
@@ -792,7 +778,7 @@ void Defensive ()
   goalRequest(mobileOut,true);
   Atondrive(12, 127);
   goalRequest(mobileIn,true);
-  //Atondrive(-12, 127);
+  Atondrive(-12, 127);
 }
 
 void DoNothing ()
@@ -805,10 +791,13 @@ void DoNothing ()
 
 void DefensiveTwo ()
 {
-  liftRequest(2000);
-  //TurnPID(Ninep, true);
-  //Atondrive(36, drivepower);
-  setDrivePowerAton(127,127);
+  liftRequest(1600, false);
+  goalRequest(mobileOut,true);
+
+  TurnPID(Ninep, true);
+  Atondrive(12, drivepower);
+  goalRequest(mobileIn,true);
+  TurnPID(Ninep, true);
 }
 
 void DoNothingTwo ()

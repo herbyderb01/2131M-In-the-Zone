@@ -37,13 +37,13 @@ void pre_auton()
 	SensorValue[rightEncoder] = 0;  ///
   SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
 	SensorValue[Gyro] = 0;					///
-	SensorType[Gyro] = sensorNone;
-	//wait1Msec(1000);											//
+	/*SensorType[Gyro] = sensorNone;
+	wait1Msec(1000);										//
 	SensorType[Gyro] = sensorGyro;      // To correct Gyro Drift
-	//wait1Msec(1000);
-  //bStopTasksBetweenModes = true;  ///
+	wait1Msec(1000);										//
+  bStopTasksBetweenModes = true;  		//
 
-/*SensorType[Gyro] = sensorNone;
+SensorType[Gyro] = sensorNone;
 
 	for(int i = 0; i<2000; i++)
 	{
@@ -52,8 +52,8 @@ void pre_auton()
 		wait1Msec(1);
 	}
 
-	debug = cumBias / 2000;*/
-
+	debug = cumBias / 2000;
+*/
 }
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -67,9 +67,9 @@ task autonomous()
   mobileRRequestedValue = mobileIn;
 
 	SensorBias[Gyro] = 1862;
-	//wait1Msec(1000);
+	wait1Msec(500);
 	SensorScale[Gyro] = 143;
-
+	wait1Msec(500);
 	 //=========== Score 5's ==========//
 	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795)
 	{
