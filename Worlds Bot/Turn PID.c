@@ -1,10 +1,10 @@
-int TurnWaitError = 500;
+int TurnWaitError = 120;
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
 static float  DriveT_Kp = 0.45; 	//Power Tuning Value
 static float  DriveTRequestedValue;
-static float  DriveT_Kd = 2.5;			// Requested Guess Value
+static float  DriveT_Kd = 4;			// Requested Guess Value
 
 float DriveTD;
 float DriveTP;
@@ -21,7 +21,7 @@ task TPIDDriveController()
   	while( true )
   	{
   		// Read the sensor value and scale
-  		DriveTSensorCurrentValue = SensorValue[ Gyro ];
+  		DriveTSensorCurrentValue = SensorValue[Gyro];
 
   		// calculate error
   		DriveTError =  DriveTRequestedValue - DriveTSensorCurrentValue;
@@ -29,16 +29,21 @@ task TPIDDriveController()
   		// calculate drive
   		DriveTP = (DriveT_Kp * DriveTError);
 
-  		DriveTD = DriveTError- lastDriveTError;
+  		DriveTD = DriveTError - lastDriveTError;
   		DriveTDF = (DriveT_Kd * DriveTD);
 
   		DriveTDrive = DriveTP + DriveTDF;
 
   		// limit drive
   		if( DriveTDrive > 127 )
-  			DriveTDrive = 127;
+        DriveTDrive = 127;
   		if( DriveTDrive < (-127) )
-  			DriveTDrive = (-127);
+        DriveTDrive = (-127);
+      if( DriveTDrive > (-45) && DriveTDrive < (0))
+        DriveTDrive = (-45);
+      if( DriveTDrive < (45) && DriveTDrive > (0))
+          DriveTDrive = (45);
+
 
   		// send to motor
 
@@ -54,21 +59,22 @@ task TPIDDriveController()
 //#endregion
 //#region Called functions
 
-void TurnPID (int turnAmount, bool waity=false)
+void TurnPID (int turnAmount, bool waity=true)
 {
-  startTask(TPIDDriveController);
-
   SensorValue[Gyro] = 0;
   DriveTRequestedValue = turnAmount;
+  startTask(TPIDDriveController);
   if (waity)
   {
     //  distance = abs(distance); //help
-      while( DriveTSensorCurrentValue >= DriveTRequestedValue + TurnWaitError
-  		|| DriveTSensorCurrentValue <= DriveTRequestedValue - TurnWaitError)
-      {} wait1Msec(200);
+      while( SensorValue[Gyro] >= DriveTRequestedValue + TurnWaitError
+  		|| SensorValue[Gyro] <= DriveTRequestedValue - TurnWaitError)
+      {}
+      //wait1Msec(200);
       stopTask(TPIDDriveController);
+      setDrivePowerLeft(0);
+      setDrivePowerRight(0);
   }
   wait1Msec(25);
-  //stopTask(TPIDDriveController);
 }
 //#endregion

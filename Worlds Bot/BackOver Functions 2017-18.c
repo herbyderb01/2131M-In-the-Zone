@@ -170,8 +170,8 @@ void liftRequest(int position, bool waity = false)
 {
 	liftRRequestedValue = position;
 		if(waity)
-		{	while(liftRSensorCurrentValue >= liftRRequestedValue + waitLiftRerror
-			|| liftRSensorCurrentValue <= liftRRequestedValue - waitLiftRerror)
+		{	while(SensorValue[ liftP ] >= liftRRequestedValue + waitLiftRerror
+			|| SensorValue[ liftP ] <= liftRRequestedValue - waitLiftRerror)
 			{} wait1Msec(50);
 		}
 }

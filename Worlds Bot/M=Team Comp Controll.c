@@ -62,14 +62,16 @@ SensorType[Gyro] = sensorNone;
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
+	SensorBias[Gyro] = 1862;
+	wait1Msec(250);
+	SensorScale[Gyro] = 155;
+	wait1Msec(250);
+
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
   mobileRRequestedValue = mobileIn;
 
-	SensorBias[Gyro] = 1862;
-	wait1Msec(500);
-	SensorScale[Gyro] = 143;
-	wait1Msec(500);
+
 	 //=========== Score 5's ==========//
 	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795)
 	{
@@ -152,7 +154,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 4000)
 			{
-				DefensiveTwo();
+				Defensive();
 			}
 	}
 }
@@ -222,13 +224,13 @@ setFourBarPower(20);
 		{
 			if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
 	  	{
-				motor[MobileR] = (vexRT[Ch2])*0.9;
-				motor[MobileL] = (vexRT[Ch3])*0.9;
+				motor[MobileR] = (vexRT[Ch2])*1.2;
+				motor[MobileL] = (vexRT[Ch3])*1.2;
 			}
 		  else
 			{
-				motor[MobileR] = (vexRT[Ch2Xmtr2])*0.9;
-				motor[MobileL] = (vexRT[Ch3Xmtr2])*0.9;
+				motor[MobileR] = (vexRT[Ch2Xmtr2])*1.2;
+				motor[MobileL] = (vexRT[Ch3Xmtr2])*1.2;
 			}
 		}
 
@@ -362,13 +364,13 @@ setFourBarPower(20);
 		{
 			if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
 	  	{
-				motor[MobileR] = vexRT[Ch2];
-				motor[MobileL] = vexRT[Ch3];
+				motor[MobileR] = vexRT[Ch2]*1.2;
+				motor[MobileL] = vexRT[Ch3]*1.2;
 			}
 		  else
 			{
-				motor[MobileR] = vexRT[Ch2Xmtr2];
-				motor[MobileL] = vexRT[Ch3Xmtr2];
+				motor[MobileR] = vexRT[Ch2Xmtr2]*1.2;
+				motor[MobileL] = vexRT[Ch3Xmtr2]*1.2;
 			}
 		}
   }
