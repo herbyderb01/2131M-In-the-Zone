@@ -154,7 +154,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 4000)
 			{
-				Defensive();
+				DefensiveTwo();
 			}
 	}
 }

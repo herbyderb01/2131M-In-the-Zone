@@ -146,13 +146,12 @@ setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25);
 }
 }
 
-void QuickPickUP(int delay)
+void QuickPickUP(int power, int delay)
 {
   goalRequest(mobileIn, false);
-  setDrivePower(127,127);
-  wait1Msec(400);
-  setDrivePower(0,0);
+  setDrivePower(power,power);
   wait1Msec(delay);
+  setDrivePower(0,0);
 }
 
 void FourBarPosition(int position, int timeest, int power)
@@ -237,12 +236,14 @@ task StackAtonOneTask()									// Simple Auto stack cone up aton
   RollerMode(In,0);
   liftRequest(BottomLift-120,true);
   RollerMode(In,250);
-  liftRequest(SkillsLift+3100000000000000000000000000000l967f8dy4 z67i5kfo,true);
+  liftRequest(SkillsLift+310,true);
   // wait1Msec(300);
   // FourBarPosition(Up,600,127);
+  liftRequest((SkillsLift-500)/2,false);
+  setFourBarPower(127);
 
   liftRequest(SkillsLift-500,false);
-  FourBarPosition(Up,300,127);
+  setFourBarPower(10);
 	// wait1Msec(300);
   RollerMode(Out,0);
 
@@ -459,19 +460,25 @@ void RightTenCones()
 
   goalRequest(mobileOut,true);
   Atondrive(42, drivepower);
-  goalRequest(mobileIn,true);
+
+  QuickPickUP(75, 310);
+  wait1Msec(350);
+
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
+  startTask(StackAtonOneTask);
+  wait1Msec(1400);
+  Atondrive(7, drivepower);
+  wait1Msec(800);
+  startTask(StackAtonOneTask);
+  wait1Msec(1200);
+  Atondrive(4, drivepower);
+  wait1Msec(800);
+  startTask(StackAtonOneTask);
+  wait1Msec(1000);
 
-  Atondrive(12, drivepower);
-  StackAtonOne();
-  Atondrive(8, drivepower);
-  StackAtonOne();
-
-  Atondrive(-58, drivepower);
-  setIntakePower(-127);
+  Atondrive(-50, drivepower);
   TurnPID(-NineP/2, true);
-  setIntakePower(0);
   liftRequest(SkillsLift,false);
   Atondrive(-5, drivepower);
   TurnPID(-NineP, true);
@@ -824,12 +831,9 @@ void SkillsTwo ()
 //#region Other Programs
 void Defensive ()
 {
-  startTask(StackAtonOneTask);
-
-  /*
   liftRequest(ParallelLift,true);
 
-  QuickPickUP(200);
+  // QuickPickUP(200);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
@@ -838,8 +842,13 @@ void Defensive ()
   Atondrive(6, drivepower);
   wait1Msec(800);
   startTask(StackAtonOneTask);
+  wait1Msec(1200);
+  Atondrive(6, drivepower);
+  wait1Msec(800);
+
+  startTask(StackAtonOneTask);
   wait1Msec(1000);
-  Atondrive(-12, drivepower);*/
+  Atondrive(-12, drivepower);
 }
 
 void DoNothing ()
@@ -853,12 +862,10 @@ void DoNothing ()
 void DefensiveTwo ()
 {
   liftRequest(1600, true);
-  goalRequest(mobileOut,true);
-
-  TurnPID(NineP,true);
-  //Atondrive(12, drivepower);
   goalRequest(mobileIn,true);
-  TurnPID(NineP, true);
+
+  Atondrive(48, drivepower);
+
 }
 
 void DoNothingTwo ()
