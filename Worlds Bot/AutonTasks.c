@@ -146,6 +146,15 @@ setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25);
 }
 }
 
+void QuickPickUP(int delay)
+{
+  goalRequest(mobileIn, false);
+  setDrivePower(127,127);
+  wait1Msec(400);
+  setDrivePower(0,0);
+  wait1Msec(delay);
+}
+
 void FourBarPosition(int position, int timeest, int power)
 {
   if(position == 1)
@@ -221,15 +230,36 @@ task AutoStackUpSimple()									// Simple Auto stack cone up
 	setIntakePower(10);
 }
 
-void StackAtonOne()									// Simple Auto stack cone up aton
+task StackAtonOneTask()									// Simple Auto stack cone up aton
 {
-  //liftRequest(ParallelLift,true);
+  liftRequest(SkillsLift,true);
   FourBarPosition(Down,500,127);
   RollerMode(In,0);
   liftRequest(BottomLift-120,true);
-  RollerMode(In,500);
-  liftRequest(ParallelLift-50,true);
-  FourBarPosition(Up,500,127);
+  RollerMode(In,250);
+  liftRequest(SkillsLift+3100000000000000000000000000000l967f8dy4 z67i5kfo,true);
+  // wait1Msec(300);
+  // FourBarPosition(Up,600,127);
+
+  liftRequest(SkillsLift-500,false);
+  FourBarPosition(Up,300,127);
+	// wait1Msec(300);
+  RollerMode(Out,0);
+
+  wait1Msec(100);
+  liftRequest(SkillsLift,false);
+}
+
+void StackAtonOne()									// Simple Auto stack cone up aton
+{
+  liftRequest(SkillsLift,true);
+  FourBarPosition(Down,500,127);
+  RollerMode(In,0);
+  liftRequest(BottomLift-120,true);
+  RollerMode(In,250);
+  liftRequest(SkillsLift+100,false);
+  // wait1Msec(300);
+  FourBarPosition(Up,600,127);
 
   liftRequest(SkillsLift-500,false);
 	wait1Msec(300);
@@ -237,7 +267,6 @@ void StackAtonOne()									// Simple Auto stack cone up aton
 
   wait1Msec(100);
   liftRequest(SkillsLift,false);
-	wait1Msec(300);
 }
 
 task StackAton()									// Simple Auto stack cone up aton
@@ -795,10 +824,22 @@ void SkillsTwo ()
 //#region Other Programs
 void Defensive ()
 {
-  liftRequest(2000,false);
-  StackAtonOne();
-  wait1Msec(500);
+  startTask(StackAtonOneTask);
 
+  /*
+  liftRequest(ParallelLift,true);
+
+  QuickPickUP(200);
+
+  liftRequest(BottomLift,true);
+  RollerMode(Out,0);
+  startTask(StackAtonOneTask);
+  wait1Msec(1200);
+  Atondrive(6, drivepower);
+  wait1Msec(800);
+  startTask(StackAtonOneTask);
+  wait1Msec(1000);
+  Atondrive(-12, drivepower);*/
 }
 
 void DoNothing ()
