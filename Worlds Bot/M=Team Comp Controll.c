@@ -62,7 +62,7 @@ SensorType[Gyro] = sensorNone;
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
-	startTask(killmeplz);
+	//startTask(killmeplz);
 	SensorBias[Gyro] = 1862;
 	wait1Msec(250);
 	SensorScale[Gyro] = 134;
@@ -80,14 +80,17 @@ task autonomous()
 			{
 				LeftFive();
 			}
-			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1850)
+			if (SensorValue[selectP] > 420 && SensorValue[selectP] < 1053)
 			{
-				LeftFiveCones();
 			}
-
-			if (SensorValue[selectP] > 1850 && SensorValue[selectP] < 4000)
+			if (SensorValue[selectP] > 1053 && SensorValue[selectP] < 1768)
 			{
-				RightFiveCones();
+			}
+			if (SensorValue[selectP] > 1768 && SensorValue[selectP] < 2735)
+			{
+			}
+			if (SensorValue[selectP] > 2735 && SensorValue[selectP] < 3642)
+			{
 			}
 			if (SensorValue[selectP] > 4000)
 			{
@@ -103,14 +106,21 @@ task autonomous()
 			{
 				LeftTen();
 			}
-			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1850)
+			if (SensorValue[selectP] > 420 && SensorValue[selectP] < 1053)
 			{
-				LeftTenCones();
+				LeftTenConesOne();
 			}
-
-			if (SensorValue[selectP] > 1850 && SensorValue[selectP] < 4000)
+			if (SensorValue[selectP] > 1053 && SensorValue[selectP] < 1768)
 			{
-				RightTenCones();
+				LeftTenConesTwo();
+			}
+			if (SensorValue[selectP] > 1768 && SensorValue[selectP] < 2735)
+			{
+				RightTenConesTwo();
+			}
+			if (SensorValue[selectP] > 2735 && SensorValue[selectP] < 3642)
+			{
+				RightTenConesOne();
 			}
 			if (SensorValue[selectP] > 4000)
 			{
@@ -126,11 +136,16 @@ task autonomous()
 			{
 				LeftTwenty();
 			}
-			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1850)
+			if (SensorValue[selectP] > 420 && SensorValue[selectP] < 1053)
 			{
 			}
-
-			if (SensorValue[selectP] > 1850 && SensorValue[selectP] < 4000)
+			if (SensorValue[selectP] > 1053 && SensorValue[selectP] < 1768)
+			{
+			}
+			if (SensorValue[selectP] > 1768 && SensorValue[selectP] < 2735)
+			{
+			}
+			if (SensorValue[selectP] > 2735 && SensorValue[selectP] < 3642)
 			{
 			}
 			if (SensorValue[selectP] > 4000)
@@ -341,7 +356,7 @@ setFourBarPower(20);
     //--------------------Simple Auto Stack-------------------------//
     if (vexRT[Btn5D] == 1)
     {
-    	startTask(AutoStackUpSimple);
+    	startTask(StackAtonOneTask);
     }
 
 		//----------------------Moblie Goal Lift------------------------//
