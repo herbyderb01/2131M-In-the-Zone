@@ -148,7 +148,7 @@ setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25);
 
 void QuickPickUP(int power, int delay)
 {
-  goalRequest(mobileIn, false);
+  goalRequest(mobileIn+100, false);
   setDrivePower(power,power);
   wait1Msec(delay);
   setDrivePower(0,0);
@@ -489,18 +489,20 @@ void RightTen()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(50, drivepower);
-  goalRequest(mobileIn,true);
+  Atondrive(48, drivepower);
+  QuickPickUP(75, 310);
+  wait1Msec(350);
   liftRequest(BottomLift,false);
 
-  Atondrive(-38, drivepower);
+  Atondrive(-40, drivepower);
   setIntakePower(-127);
   TurnPID(-NineP/2, true);
   setIntakePower(0);
   liftRequest(SkillsLift,false);
-  Atondrive(-5, drivepower);
-  TurnPID(-NineP, true);
-  Atondrive(2, drivepower);
+  Atondrive(-15, drivepower);
+  TurnPID(-NineP+80, true);
+  Atondrive(0.01, drivepower);
+  // setDrivePower(15,15);
   goalRequest(mobileOut,true);
   Atondrive(-10, drivepower);
 
@@ -940,8 +942,12 @@ void DefensiveTwo ()
 {
   liftRequest(SkillsLift,false);
 
-  TurnPID(18, true);
+  //TurnPID(900, true);
+  setDrivePowerLeft(-127);
+  setDrivePowerRight(127);
   wait1Msec(2000);
+  setDrivePowerLeft(0);
+  setDrivePowerRight(0);
 
 }
 
