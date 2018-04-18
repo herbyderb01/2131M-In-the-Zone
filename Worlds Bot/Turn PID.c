@@ -2,9 +2,9 @@ int TurnWaitError = 120;
 //#region Turn PID
 //----------------------Turn PID----------------------//
 
-static float  DriveT_Kp = 0.45; 	//Power Tuning Value
+static float  DriveT_Kp = 1; 	//Power Tuning Value
 static float  DriveTRequestedValue;
-static float  DriveT_Kd = 4;			// Requested Guess Value
+static float  DriveT_Kd = 3;			// Requested Guess Value
 
 float DriveTD;
 float DriveTP;
@@ -35,14 +35,12 @@ task TPIDDriveController()
   		DriveTDrive = DriveTP + DriveTDF;
 
   		// limit drive
-  		if( DriveTDrive > 127 )
-        DriveTDrive = 127;
-  		if( DriveTDrive < (-127) )
-        DriveTDrive = (-127);
-      if( DriveTDrive > (-45) && DriveTDrive < (0))
-        DriveTDrive = (-45);
-      if( DriveTDrive < (45) && DriveTDrive > (0))
-          DriveTDrive = (45);
+  		if( DriveTDrive > 127 )                         DriveTDrive = 127;
+
+  		if( DriveTDrive < (-127) )                      DriveTDrive = (-127);
+
+
+
 
 
   		// send to motor
@@ -71,9 +69,9 @@ void TurnPID (int turnAmount, bool waity=true)
   		|| SensorValue[Gyro] <= DriveTRequestedValue - TurnWaitError)
       {}
       //wait1Msec(200);
-      stopTask(TPIDDriveController);
       setDrivePowerLeft(0);
       setDrivePowerRight(0);
+
   }
   wait1Msec(25);
 }

@@ -64,7 +64,7 @@ task autonomous()
 {
 	SensorBias[Gyro] = 1862;
 	wait1Msec(250);
-	SensorScale[Gyro] = 155;
+	SensorScale[Gyro] = 134;
 	wait1Msec(250);
 
 	startTask(liftRController);    //Start Lift PID
@@ -81,10 +81,12 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1850)
 			{
+				LeftFiveCones();
 			}
 
 			if (SensorValue[selectP] > 1850 && SensorValue[selectP] < 4000)
 			{
+				RightFiveCones();
 			}
 			if (SensorValue[selectP] > 4000)
 			{
