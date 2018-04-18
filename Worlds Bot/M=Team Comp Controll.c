@@ -62,6 +62,7 @@ SensorType[Gyro] = sensorNone;
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
+	startTask(killmeplz);
 	SensorBias[Gyro] = 1862;
 	wait1Msec(250);
 	SensorScale[Gyro] = 134;

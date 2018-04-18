@@ -151,7 +151,7 @@ void QuickPickUP(int power, int delay)
   goalRequest(mobileIn+100, false);
   setDrivePower(power,power);
   wait1Msec(delay);
-  setDrivePower(0,0);
+  setDrivePower(power*0.1,power*0.1);
 }
 
 void FourBarPosition(int position, int timeest, int power)
@@ -494,15 +494,14 @@ void RightTen()
   wait1Msec(350);
   liftRequest(BottomLift,false);
 
-  Atondrive(-40, drivepower);
+  Atondrive(-52, drivepower);
   setIntakePower(-127);
   TurnPID(-NineP/2, true);
   setIntakePower(0);
   liftRequest(SkillsLift,false);
-  Atondrive(-15, drivepower);
+  Atondrive(-5, drivepower);
   TurnPID(-NineP+80, true);
   Atondrive(0.01, drivepower);
-  // setDrivePower(15,15);
   goalRequest(mobileOut,true);
   Atondrive(-10, drivepower);
 
@@ -516,7 +515,7 @@ void RightTen()
   goalRequest(mobileOut,false);
   Atondrive(-5, drivepower);
   wait1Msec(500);
-  Atondrive(13, drivepower);
+  Atondrive(18, drivepower);
 }
 
 void RightTenCones()
@@ -529,8 +528,8 @@ void RightTenCones()
   goalRequest(mobileOut,true);
   Atondrive(42, drivepower);
 
-  QuickPickUP(75, 310);
-  wait1Msec(350);
+  QuickPickUP(75, 300);
+  wait1Msec(150);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
@@ -539,13 +538,11 @@ void RightTenCones()
   Atondrive(7, drivepower);
   wait1Msec(800);
   startTask(StackAtonOneTask);
-  wait1Msec(1200);
-  Atondrive(6, drivepower);
-  wait1Msec(800);
-  startTask(StackAtonOneTask);
   wait1Msec(1000);
+  liftRequest(ParallelLift,false);
 
-  Atondrive(-56, drivepower);
+
+  Atondrive(-50, drivepower);
   TurnPID(-450, true);
   Atondrive(-10, drivepower);
   TurnPID(-900, true);
@@ -942,12 +939,7 @@ void DefensiveTwo ()
 {
   liftRequest(SkillsLift,false);
 
-  //TurnPID(900, true);
-  setDrivePowerLeft(-127);
-  setDrivePowerRight(127);
-  wait1Msec(2000);
-  setDrivePowerLeft(0);
-  setDrivePowerRight(0);
+  TurnPID(900, true);
 
 }
 

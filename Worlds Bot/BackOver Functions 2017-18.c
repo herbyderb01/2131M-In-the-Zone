@@ -49,6 +49,12 @@ void setMobilePower(int Mpower)
 	motor[MobileL] = Mpower;
 	motor[MobileR] = Mpower;
 }
+task killmeplz()
+{
+	wait1Msec(15000);
+	stopAllTasks();
+	allMotorsOff();
+}
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion
 //#region Lift PID
