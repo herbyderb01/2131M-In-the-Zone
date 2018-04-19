@@ -652,28 +652,33 @@ void RightTwenty()
   goalRequest(mobileOut,true);
   Atondrive(42, drivepower);
 
-  QuickPickUP(75, 310);
-  wait1Msec(350);
+  QuickPickUP(75, 300);
+  wait1Msec(200);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
   startTask(StackAtonOneTask);
-  wait1Msec(1400);
+  wait1Msec(1220);
   Atondrive(7, drivepower);
   wait1Msec(800);
   startTask(StackAtonOneTask);
-  wait1Msec(1200);
-
-  Atondrive(-54, drivepower);
-  TurnPID(-450, true);
-  Atondrive(-25, drivepower);
-  TurnPID(-900, true);
+  wait1Msec(1000);
   liftRequest(ParallelLift,false);
-  Atondrive(10, drivepower);
-  goalRequest(mobileOut,true);
-  Atondrive(-15, drivepower);
-  liftRequest(SkillsLift, true)
 
+
+  Atondrive(-55, drivepower);
+  setIntakePower(-127);
+  TurnPID(-450, true);
+  setIntakePower(0);
+  liftRequest(SkillsLift,false);
+  Atondrive(-21, drivepower);
+  TurnPID(-NineP+80, true);
+  setFourBarPower(20);
+
+  Atondrive(18, drivepower);
+  setDrivePower(20,20);
+  goalRequest(mobileOut,true);
+  Atondrive(-20, drivepower);
 }
 
 void LeftTwenty()

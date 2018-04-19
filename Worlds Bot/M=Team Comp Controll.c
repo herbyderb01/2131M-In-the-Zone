@@ -62,7 +62,7 @@ SensorType[Gyro] = sensorNone;
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
-	//startTask(killmeplz);
+	startTask(killmeplz);
 	SensorBias[Gyro] = 1862;
 	wait1Msec(250);
 	SensorScale[Gyro] = 134;
@@ -71,6 +71,7 @@ task autonomous()
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
   mobileRRequestedValue = mobileIn;
+  liftRequest(SkillsLift+100,false);
 
 
 	 //=========== Score 5's ==========//
