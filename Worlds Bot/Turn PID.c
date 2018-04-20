@@ -59,6 +59,7 @@ task TPIDDriveController()
 
 void TurnPID (int turnAmount, bool waity=true)
 {
+  stopTask(mobileRController);
   SensorValue[Gyro] = 0;
   DriveTRequestedValue = turnAmount;
   startTask(TPIDDriveController);

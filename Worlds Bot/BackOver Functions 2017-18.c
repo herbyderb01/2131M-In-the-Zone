@@ -155,6 +155,7 @@ task mobileRController()
 //#region WaityThing for mobilegoal and lift
 void goalRequest(int position, bool waity = false)
 {
+	startTask(mobileRController);
 	mobileRRequestedValue = position;
 		if(waity)
 		{	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
