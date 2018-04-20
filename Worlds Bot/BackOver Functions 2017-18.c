@@ -4,8 +4,6 @@ void setDrivePower(int left, int right)
 {// Defining all of the motors for the -DRIVE-
 	motor[LDrive] = left;		//Define this motor as the left drive
 	motor[RDrive] = right;	//Define this motor as the right drive
-	//motor[MobileL] = left;	//Define this motor as the left drive
-	//motor[MobileR] = right;	//Define this motor as the right drive
 }
 void setDrivePowerAton(int left, int right)
 {// Defining all of the motors for the -DRIVE-
@@ -48,12 +46,6 @@ void setMobilePower(int Mpower)
 {// Defining all of the motors for the -MOBILE GOAL INTAKE-
 	motor[MobileL] = Mpower;
 	motor[MobileR] = Mpower;
-}
-task killmeplz()
-{
-	wait1Msec(15000);
-	stopAllTasks();
-	allMotorsOff();
 }
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 //#endregion

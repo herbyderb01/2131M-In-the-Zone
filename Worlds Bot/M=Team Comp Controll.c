@@ -163,17 +163,25 @@ task autonomous()
 			{
 				SkillsOne();
 			}
-			if (SensorValue[selectP] > 15 && SensorValue[selectP] < 1900)
+			if (SensorValue[selectP] > 420 && SensorValue[selectP] < 1053)
 			{
-				SkillsTwo();
+				StationaryLeft();
 			}
-			if (SensorValue[selectP] > 1900 && SensorValue[selectP] < 2200)
+			if (SensorValue[selectP] > 1053 && SensorValue[selectP] < 1768)
 			{
-				SpecialAton();
+
+			}
+			if (SensorValue[selectP] > 1768 && SensorValue[selectP] < 2735)
+			{
+				TestingAton();
+			}
+			if (SensorValue[selectP] > 2735 && SensorValue[selectP] < 3642)
+			{
+				StationaryRight();
 			}
 			if (SensorValue[selectP] > 4000)
 			{
-				DefensiveTwo();
+				Defensive();
 			}
 	}
 }
