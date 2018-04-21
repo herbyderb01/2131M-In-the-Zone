@@ -62,7 +62,7 @@ SensorType[Gyro] = sensorNone;
 /*---------------------------------------------------------------------------*/
 task autonomous()
 {
-	startTask(killmeplz);
+	//startTask(killmeplz);
 	SensorBias[Gyro] = 1862;
 	wait1Msec(250);
 	SensorScale[Gyro] = 134;
@@ -256,7 +256,7 @@ setFourBarPower(20);
 
 		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to brake
 		{
-				setMobilePower(-10);
+				ScoreGoal();
 		}
 		else
 		{

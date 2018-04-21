@@ -10,7 +10,6 @@ float DriveTD;
 float DriveTP;
 float lastDriveTError;
 float DriveTDF;
-float  DriveTSensorCurrentValue;
 
 task TPIDDriveController()
 {

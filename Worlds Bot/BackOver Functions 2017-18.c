@@ -102,7 +102,6 @@ float liftRP;
 float lastliftRError;
 int waitLiftRerror = 150;
 float liftRDF;
-float liftRSensorCurrentValue;
 
 task liftRController()
 {
