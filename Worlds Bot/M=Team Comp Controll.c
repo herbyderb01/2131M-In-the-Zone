@@ -8,7 +8,7 @@
 #pragma config(Sensor, dgtl5,  Sonar,          sensorSONAR_raw)
 #pragma config(Motor,  port1,           MobileR,       tmotorVex393_HBridge, openLoop, reversed)
 #pragma config(Motor,  port2,           FourBar,       tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port3,           INtake,        tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port3,           INtake,        tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port4,           UliftL,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port5,           UliftR,        tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port6,           DliftL,        tmotorVex393_MC29, openLoop)
@@ -83,6 +83,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 420 && SensorValue[selectP] < 1053)
 			{
+				LeftFiveCones();
 			}
 			if (SensorValue[selectP] > 1053 && SensorValue[selectP] < 1768)
 			{
@@ -92,6 +93,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 2735 && SensorValue[selectP] < 3642)
 			{
+				RightFiveCones();
 			}
 			if (SensorValue[selectP] > 4000)
 			{
@@ -243,6 +245,15 @@ setFourBarPower(20);
 		{
 				setMobilePower(-127);
 		}
+		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn7U to Extend Goal
+		{
+				setMobilePower(127);
+		}
+		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn7D to Intake Goal
+		{
+				setMobilePower(-127);
+		}
+
 		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to brake
 		{
 				setMobilePower(-10);
@@ -276,7 +287,7 @@ setFourBarPower(20);
 			liftstillspeed=15;
 		}
 
-		/*else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D on Secondary to lift Down
+		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D on Secondary to lift Down
 		{
 			setLiftPower(-127);
 			liftstillspeed=-15;
@@ -286,14 +297,14 @@ setFourBarPower(20);
 		{
 			setLiftPower(127);
 			liftstillspeed=15;
-		}*/
+		}
 
 		else
 		{
 			setLiftPower(liftstillspeed);	// Setting the Still Speed when no commands
 		}
 
-	//----------------------Intake Control------------------------//
+	//----------------------Roller Control------------------------//
 
 		if( vexRT[Btn6U] == 1)      // Setting Btn 6U to Intake Cone
 		{
@@ -317,14 +328,12 @@ setFourBarPower(20);
 
 		if( vexRT[Btn8D] == 1)      // Setting Btn8D to Extend Four Bar
 		{
-			setFourBarPower(127);
-			FourBarstillspeed=20;
+			startTask(FourBarIn);
 		}
 
 		else if( vexRT[Btn8R] == 1)      // Setting Btn8R to bring in Four Bar
 		{
-			setFourBarPower(-127);
-			FourBarstillspeed=-20;
+			startTask(FourBarOut);
 		}
 		/*else if( vexRT[Btn6DXmtr2] == 1) // Setting Btn8D on 2nd to Extend Four Bar
 		{
@@ -337,10 +346,6 @@ setFourBarPower(20);
 			setFourBarPower(-127);
 			FourBarstillspeed=-20;
 		}*/
-		else
-		{
-			setFourBarPower(FourBarstillspeed);// Setting the Still Speed when no commands
-		}
 	}
 //-=-=-=-==-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 //===========================================================================//

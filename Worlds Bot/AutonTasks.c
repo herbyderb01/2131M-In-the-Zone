@@ -122,16 +122,31 @@ SensorValue[Gyro] = 0;					///
 task IntakeCone()
 {
 	setIntakePower (127);
-	wait1Msec (25);
+	wait1Msec (50);
 	setIntakePower (20);
 }
 
 task OutakeCone()
 {
-setIntakePower (-127);
-wait1Msec (1000);
-setIntakePower (20);
+setIntakePower(-127);
+wait1Msec(1000);
+setIntakePower(20);
 }
+
+task FourBarIn()
+{
+  setFourBarPower(127);
+  wait1Msec(400);
+  setFourBarPower(20);
+}
+
+task FourBarOut()
+{
+  setFourBarPower(-127);
+  wait1Msec(400);
+  setFourBarPower(-20);
+}
+
 
 task OutakePreload()
 {
@@ -145,7 +160,7 @@ task OutakePreload()
 
 task drivelock()
 {
-  ClearAllSensors();
+ClearAllSensors();
 while(true)
 {
 setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25);
@@ -167,50 +182,6 @@ void QuickOffLoad(int power, int delay)
   wait1Msec(delay);
   setDrivePower(power*0.1,power*0.1);
 }
-
-void FourBarPosition(int position, int timeest, int power)
-{
-  if(position == 1)
-  {
-  setFourBarPower(power);
-  wait1Msec(timeest);
-  setFourBarPower(10);
-  }
-  if(position == 0)
-  {
-  setFourBarPower(-power);
-  wait1Msec(timeest);
-  setFourBarPower(-15);
-  }
-}
-void RollerMode(int position, int timeest)
-{
-  if(position == 1 && timeest > 0)
-  {
-  setIntakePower(127);
-  wait1Msec(timeest);
-  setIntakePower(10);
-  }
-  if(position == 0 && timeest > 0)
-  {
-  setIntakePower(-127);
-  wait1Msec(timeest);
-  setIntakePower(10);
-  }
-  if(timeest == 0)
-  {
-    if(position == 1)
-    {
-      setIntakePower(127);
-    }
-    if(position == 0)
-    {
-      setIntakePower(-127);
-    }
-  }
-}
-
-
 //#endregion
 //#region Auto Stack Voids and Tasks
 task StackAtonOneTask()									// Simple Auto stack cone up aton
@@ -221,6 +192,7 @@ task StackAtonOneTask()									// Simple Auto stack cone up aton
   setFourBarPower(-20);
   liftRequest(BottomLift-120,true);
   RollerMode(In,250);
+  setIntakePower(100);
 
   liftRequest(SkillsLift+210,false);
   FourBarPosition(Up,700,127);
@@ -335,7 +307,7 @@ void RightFive()
   Atondrive(44, drivepower);
 
   QuickPickUP(75, 310);
-  wait1Msec(300);
+  wait1Msec(310);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
@@ -343,19 +315,18 @@ void RightFive()
   wait1Msec(1000);
   liftRequest(ParallelLift,false);
 
-  Atondrive(-30, drivepower);
-  TurnPID(-1550, true);
+  Atondrive(-36, drivepower);
+  TurnPID(-1400, true);
 
-  // Atondrive(10, drivepower);
+  liftRequest(SkillsLift,false);
+  Atondrive(0.01, drivepower);
   goalRequest(mobileOut,true);
-  Atondrive(-15, drivepower);
-
-  wait1Msec(300);
-  TurnPID(NineP/2);
-  Atondrive(-21, drivepower);
-  TurnPID(NineP/2);
-  goalRequest(mobileMid,false);
-  Atondrive(-20, drivepower);
+  Atondrive(-35, drivepower);
+  goalRequest(mobileIn,true);
+  TurnPID(150);
+  Atondrive(-40, drivepower);
+  TurnPID(-900,true);
+  goalRequest(mobileOut,false);
 }
 void RightFiveCones()
 {
@@ -365,38 +336,37 @@ void RightFiveCones()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(42, drivepower);
+  Atondrive(44, drivepower);
 
   QuickPickUP(75, 300);
-  wait1Msec(150);
+  wait1Msec(200);
+  goalRequest(mobileIn,true);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
+  startTask(StackAtonOneTask);
+  wait1Msec(1220);
+  Atondrive(7, drivepower);
+  wait1Msec(800);
   startTask(StackAtonOneTask);
   wait1Msec(1220);
   Atondrive(9, drivepower);
   wait1Msec(800);
   startTask(StackAtonOneTask);
   wait1Msec(1000);
+  RollerMode(In,0);
   liftRequest(ParallelLift,false);
 
-  Atondrive(-32, drivepower);
-  TurnPID(300, true);
+  Atondrive(-59, drivepower);
+  liftRequest(ParallelLift,true);
+  TurnPID(-1000, true);
   Atondrive(0.01, drivepower);
-  startTask(StackAtonOneTask);
-  wait1Msec(2100);
-  stopTask(StackAtonOneTask);
-  liftRequest(ParallelLift,true);
   setFourBarPower(20);
-  wait1Msec(300);
 
   liftRequest(ParallelLift,true);
-  TurnPID(1550, true);
-
-  Atondrive(10, drivepower);
-  goalRequest(mobileOut,true);
+  QuickOffLoad(127, 500);
+  wait1Msec(175);
   Atondrive(-15, drivepower);
-
 }
 void LeftFive()
 {
@@ -406,31 +376,29 @@ void LeftFive()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(50, drivepower);
-  goalRequest(mobileIn,true);
-  liftRequest(BottomLift,false);
-  wait1Msec(500);
-  setIntakePower(-127);
-  Atondrive(8, drivepower); //20 points are good, and I started the 5 points but I couldn't get it to pick up the 2nd and 3rd cones. Otherwise it should be good. I haven't updated the right 5 point though
-  setIntakePower(0);
-  // startTask(StackAton);
-  wait1Msec(1000);
-  liftRequest(BottomLift,false);
-  wait1Msec(300);
-  setIntakePower(-127);
-  Atondrive(9, drivepower);
-  setIntakePower(0);
-  // startTask(StackAton);
-  wait1Msec(1000);
-  Atondrive(-50, drivepower);
-  TurnPID(1350, true);
+  Atondrive(44, drivepower);
 
+  QuickPickUP(75, 310);
+  wait1Msec(310);
+
+  liftRequest(BottomLift,true);
+  RollerMode(Out,0);
+  startTask(StackAtonOneTask);
+  wait1Msec(1000);
+  liftRequest(ParallelLift,false);
+
+  Atondrive(-36, drivepower);
+  TurnPID(1400, true);
+
+  liftRequest(SkillsLift,false);
+  Atondrive(0.01, drivepower);
   goalRequest(mobileOut,true);
-  Atondrive(-60, drivepower);
+  Atondrive(-35, drivepower);
   goalRequest(mobileIn,true);
-  TurnPID(900, true);
-  goalRequest(mobileOut,true);
-  Atondrive(25, drivepower);
+  TurnPID(150);
+  Atondrive(-40, drivepower);
+  TurnPID(900,true);
+  goalRequest(mobileOut,false);
 }
 
 void LeftFiveCones()
@@ -441,30 +409,37 @@ void LeftFiveCones()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(42, drivepower);
+  Atondrive(44, drivepower);
 
-  QuickPickUP(75, 310);
-  wait1Msec(350);
+  QuickPickUP(75, 300);
+  wait1Msec(200);
+  goalRequest(mobileIn,true);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
   startTask(StackAtonOneTask);
-  wait1Msec(1400);
+  wait1Msec(1220);
   Atondrive(7, drivepower);
   wait1Msec(800);
   startTask(StackAtonOneTask);
-  wait1Msec(1200);
-  Atondrive(6, drivepower);
+  wait1Msec(1220);
+  Atondrive(9, drivepower);
   wait1Msec(800);
   startTask(StackAtonOneTask);
   wait1Msec(1000);
-
-  Atondrive(-50, drivepower);
-  TurnPID(1350, true);
+  RollerMode(In,0);
   liftRequest(ParallelLift,false);
-  goalRequest(mobileOut,true);
-  Atondrive(-10, drivepower);
-  liftRequest(SkillsLift, true)
+
+  Atondrive(-59, drivepower);
+  liftRequest(ParallelLift,true);
+  TurnPID(1000, true);
+  Atondrive(0.01, drivepower);
+  setFourBarPower(20);
+
+  liftRequest(ParallelLift,true);
+  QuickOffLoad(127, 500);
+  wait1Msec(175);
+  Atondrive(-15, drivepower);
 }
 //#endregion
 //#region Score 10's
@@ -481,27 +456,19 @@ void RightTen()
   wait1Msec(350);
   liftRequest(BottomLift,false);
 
-  Atondrive(-57, drivepower);
+  Atondrive(-60, drivepower);
   setIntakePower(-127);
   TurnPID(FullP+210, true);
-  // Atondrive(-5, drivepower);
-  // TurnPID(930, true);
   setIntakePower(0);
   liftRequest(SkillsLift,false);
-  // Atondrive(5, drivepower);
-  // TurnPID(-NineP, true);
   Atondrive(0.01, drivepower);
   goalRequest(mobileOut,true);
-  Atondrive(-30, drivepower);
-
-  TurnPID(200);
-  goalRequest(mobileLow,false);
+  Atondrive(-35, drivepower);
+  goalRequest(mobileIn,true);
+  TurnPID(150);
   Atondrive(-40, drivepower);
-  TurnPID(-1200,true);
+  TurnPID(-900,true);
   goalRequest(mobileOut,false);
-  Atondrive(-5, drivepower);
-  wait1Msec(500);
-  Atondrive(18, drivepower);
 }
 
 void RightTenConesOne()
@@ -549,10 +516,11 @@ void RightTenConesTwo()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(42, drivepower);
+  Atondrive(44, drivepower);
 
   QuickPickUP(75, 300);
-  wait1Msec(150);
+  wait1Msec(200);
+  goalRequest(mobileIn,true);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
@@ -567,8 +535,8 @@ void RightTenConesTwo()
 
   Atondrive(-50, drivepower);
   TurnPID(-450, true);
-  Atondrive(-10, drivepower);
-  TurnPID(-NineP+80, true);
+  Atondrive(-7, drivepower);
+  TurnPID(-NineP+110, true);
   liftRequest(ParallelLift,false);
   Atondrive(4, drivepower);
   goalRequest(mobileOut,true);
@@ -589,30 +557,19 @@ void LeftTen()
   wait1Msec(350);
   liftRequest(BottomLift,false);
 
-  Atondrive(-54, drivepower);
+  Atondrive(-60, drivepower);
   setIntakePower(-127);
-  TurnPID(-FullP-80, true);
-  // Atondrive(-5, drivepower);
-  // TurnPID(930, true);
+  TurnPID(-FullP-210, true);
   setIntakePower(0);
   liftRequest(SkillsLift,false);
-  // Atondrive(5, drivepower);
-  // TurnPID(-NineP, true);
   Atondrive(0.01, drivepower);
   goalRequest(mobileOut,true);
-  Atondrive(-10, drivepower);
-
-  wait1Msec(300);
-  TurnPID(-200);
-  // Atondrive(-16, drivepower);
-  // TurnPID(-NineP/2);
-  goalRequest(1300,true);
+  Atondrive(-35, drivepower);
+  goalRequest(mobileIn,true);
+  TurnPID(-150);
   Atondrive(-40, drivepower);
-  TurnPID(1200,true);
+  TurnPID(900,true);
   goalRequest(mobileOut,false);
-  Atondrive(-5, drivepower);
-  wait1Msec(500);
-  Atondrive(18, drivepower);
 }
 
 void LeftTenConesOne()
@@ -625,8 +582,8 @@ void LeftTenConesOne()
   goalRequest(mobileOut,true);
   Atondrive(44, drivepower);
 
-  QuickPickUP(75, 340);
-  wait1Msec(310);
+  QuickPickUP(75, 310);
+  wait1Msec(300);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
@@ -634,30 +591,22 @@ void LeftTenConesOne()
   wait1Msec(1000);
   liftRequest(ParallelLift,false);
 
-  Atondrive(-46, drivepower);
-  setIntakePower(-127);
-  TurnPID(-FullP-100, true);
-  // Atondrive(-5, drivepower);
-  // TurnPID(930, true);
-  setIntakePower(0);
-  liftRequest(SkillsLift,false);
-  // Atondrive(5, drivepower);
-  // TurnPID(-NineP, true);
-  Atondrive(0.01, drivepower);
+  Atondrive(-50, drivepower);
+  TurnPID(450, true);
+  Atondrive(-5, drivepower);
+  TurnPID(NineP-80, true);
+  liftRequest(ParallelLift,false);
+  Atondrive(2, drivepower);
   goalRequest(mobileOut,true);
+  liftRequest(SkillsLift, false)
   Atondrive(-10, drivepower);
 
   wait1Msec(300);
-  TurnPID(-200);
-  // Atondrive(-16, drivepower);
-  // TurnPID(-NineP/2);
+  TurnPID(NineP/2);
+  Atondrive(-21, drivepower);
+  TurnPID(-NineP/2);
   goalRequest(mobileMid,false);
-  Atondrive(-40, drivepower);
-  TurnPID(1200,true);
-  goalRequest(mobileOut,false);
-  Atondrive(-5, drivepower);
-  wait1Msec(500);
-  Atondrive(18, drivepower);
+  Atondrive(-38, drivepower);
 }
 
 void LeftTenConesTwo()
@@ -668,10 +617,11 @@ void LeftTenConesTwo()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(43, drivepower);
+  Atondrive(44, drivepower);
 
-  QuickPickUP(75, 330);
-  wait1Msec(300);
+  QuickPickUP(75, 300);
+  wait1Msec(200);
+  goalRequest(mobileIn,true);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
@@ -683,30 +633,15 @@ void LeftTenConesTwo()
   wait1Msec(1000);
   liftRequest(ParallelLift,false);
 
-
   Atondrive(-50, drivepower);
-  TurnPID(-FullP-100, true);
-  // Atondrive(-5, drivepower);
-  // TurnPID(930, true);
-  setIntakePower(0);
-  liftRequest(SkillsLift,false);
-  // Atondrive(5, drivepower);
-  // TurnPID(-NineP, true);
-  Atondrive(0.01, drivepower);
+  TurnPID(450, true);
+  Atondrive(-7, drivepower);
+  TurnPID(NineP-110, true);
+  liftRequest(ParallelLift,false);
+  Atondrive(4, drivepower);
   goalRequest(mobileOut,true);
-  Atondrive(-10, drivepower);
-
-  wait1Msec(300);
-  TurnPID(-200);
-  // Atondrive(-16, drivepower);
-  // TurnPID(-NineP/2);
-  goalRequest(mobileMid,false);
-  Atondrive(-40, drivepower);
-  TurnPID(1200,true);
-  goalRequest(mobileOut,false);
-  Atondrive(-5, drivepower);
-  wait1Msec(500);
-  Atondrive(18, drivepower);
+  liftRequest(SkillsLift, false)
+  Atondrive(-30, drivepower);
 }
 
 //#endregion
@@ -719,7 +654,7 @@ void RightTwenty()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(42, drivepower);
+  Atondrive(43, drivepower);
 
   QuickPickUP(75, 300);
   wait1Msec(200);
@@ -732,16 +667,24 @@ void RightTwenty()
   wait1Msec(800);
   startTask(StackAtonOneTask);
   wait1Msec(1000);
+  RollerMode(In,0);
   liftRequest(ParallelLift,false);
 
   Atondrive(-58, drivepower);
+  RollerMode(In,0);
+  liftRequest(1488,false);
   TurnPID(-300, true);
+  RollerMode(In,1);
   Atondrive(-17, drivepower);
   TurnPID(-850, true);
   setFourBarPower(20);
 
   Atondrive(19, drivepower);
   setDrivePower(15,15);
+  RollerMode(Out,0);
+  liftRequest(ParallelLift,false);
+  wait1Msec(100);
+
   waitMobliERerror = 150;
   goalRequest(mobileLow,true);
   Atondrive(-21, drivepower);
@@ -750,7 +693,7 @@ void RightTwenty()
 void LeftTwenty()
 {
   liftRequest(SkillsLift+100,false);
-  goalRequest(mobileIn);
+  goalRequest(mobileIn,true);
   setFourBarPower(20);
   setIntakePower(15);
 
@@ -761,7 +704,6 @@ void LeftTwenty()
   wait1Msec(200);
 
   liftRequest(BottomLift,true);
-  goalRequest(mobileIn);
   RollerMode(Out,0);
   startTask(StackAtonOneTask);
   wait1Msec(1220);
@@ -769,17 +711,24 @@ void LeftTwenty()
   wait1Msec(800);
   startTask(StackAtonOneTask);
   wait1Msec(1000);
+  RollerMode(In,0);
   liftRequest(ParallelLift,false);
 
-  TurnPID(130,true);
-  Atondrive(-55, drivepower);
-  TurnPID(450, true);
-  Atondrive(-19, drivepower);
+  Atondrive(-58, drivepower);
+  RollerMode(In,0);
+  liftRequest(1488,false);
+  TurnPID(300, true);
+  RollerMode(In,1);
+  Atondrive(-17, drivepower);
   TurnPID(850, true);
   setFourBarPower(20);
 
   Atondrive(19, drivepower);
   setDrivePower(15,15);
+  RollerMode(Out,0);
+  liftRequest(ParallelLift,false);
+  wait1Msec(100);
+
   waitMobliERerror = 150;
   goalRequest(mobileLow,true);
   Atondrive(-21, drivepower);

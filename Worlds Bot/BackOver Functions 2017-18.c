@@ -48,6 +48,47 @@ void setMobilePower(int Mpower)
 	motor[MobileR] = Mpower;
 }
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
+void FourBarPosition(int position, int timeest, int power)
+{
+  if(position == 1)
+  {
+  setFourBarPower(power);
+  wait1Msec(timeest);
+  setFourBarPower(15);
+  }
+  if(position == 0)
+  {
+  setFourBarPower(-power);
+  wait1Msec(timeest);
+  setFourBarPower(-20);
+  }
+}
+void RollerMode(int position, int timeest)
+{
+  if(position == 1 && timeest > 0)
+  {
+  setIntakePower(127);
+  wait1Msec(timeest);
+  setIntakePower(10);
+  }
+  if(position == 0 && timeest > 0)
+  {
+  setIntakePower(-127);
+  wait1Msec(timeest);
+  setIntakePower(10);
+  }
+  if(timeest == 0)
+  {
+    if(position == 1)
+    {
+      setIntakePower(127);
+    }
+    if(position == 0)
+    {
+      setIntakePower(-127);
+    }
+  }
+}
 //#endregion
 //#region Lift PID
 //----------------------LIFT PID----------------------//
