@@ -12,7 +12,7 @@ float lastDriveTError;
 float DriveTDF;
 
 task TPIDDriveController()
-{
+{// void to call the mobile goal request in aton, to make it simpler
   float  DriveTSensorCurrentValue;
 	float  DriveTError;
 	float  DriveTDrive;
@@ -27,23 +27,16 @@ task TPIDDriveController()
 
   		// calculate drive
   		DriveTP = (DriveT_Kp * DriveTError);
-
   		DriveTD = DriveTError - lastDriveTError;
   		DriveTDF = (DriveT_Kd * DriveTD);
 
   		DriveTDrive = DriveTP + DriveTDF;
 
   		// limit drive
-  		if( DriveTDrive > 127 )                         DriveTDrive = 127;
-
-  		if( DriveTDrive < (-127) )                      DriveTDrive = (-127);
-
-
-
-
+  		if( DriveTDrive > 127 ) DriveTDrive = 127;
+  		if( DriveTDrive < (-127) ) DriveTDrive = (-127);
 
   		// send to motor
-
   		setDrivePowerLeft(-DriveTDrive);
       setDrivePowerRight(DriveTDrive);
 
@@ -55,7 +48,6 @@ task TPIDDriveController()
 }
 //#endregion
 //#region Called functions
-
 void TurnPID (int turnAmount, bool waity=true)
 {
   stopTask(mobileRController);
@@ -71,7 +63,6 @@ void TurnPID (int turnAmount, bool waity=true)
       //wait1Msec(200);
       setDrivePowerLeft(0);
       setDrivePowerRight(0);
-
   }
   wait1Msec(25);
 }

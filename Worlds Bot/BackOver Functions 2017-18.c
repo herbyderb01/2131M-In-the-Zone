@@ -49,7 +49,7 @@ void setMobilePower(int Mpower)
 }
 //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_//
 void FourBarPosition(int position, int timeest, int power)
-{
+{//void to controll the four bar in aton
   if(position == 1)
   {
   setFourBarPower(power);
@@ -64,7 +64,7 @@ void FourBarPosition(int position, int timeest, int power)
   }
 }
 void RollerMode(int position, int timeest)
-{
+{// Void to controll the roller during aton
   if(position == 1 && timeest > 0)
   {
   setIntakePower(127);
@@ -104,7 +104,7 @@ int waitLiftRerror = 150;
 float liftRDF;
 
 task liftRController()
-{
+{ // PID to set the lift/lock the lift during aton to increase accuracy
 	float  liftRSensorCurrentValue;
 	float  liftRError;
 	float  liftRDrive;
@@ -132,11 +132,8 @@ task liftRController()
 			liftRDrive = (-127);
 
 		// send to motor
-
 		setLiftPower(liftRDrive);
-
 		lastliftRError = liftRError;
-
 		// Don't hog cpu
 		wait1Msec( 25 );
 	}
@@ -144,7 +141,6 @@ task liftRController()
 //#endregion
 //#region Mobile PID
 //----------------------Mobile Bar PID----------------------//
-
 static float  mobileR_Kp = 0.30; //Power Tuning Value
 static float  mobileRRequestedValue;
 static float  mobileR_Kd = 0.5; // Requested Guess Value
@@ -157,8 +153,8 @@ int waitMobliERerror = 75;
 float  mobileRSensorCurrentValue;
 
 task mobileRController()
-{
-	//float  mobileRSensorCurrentValue;
+{// PID to set the mobile goal/lock the mobile goal during aton to increase accuracy
+	float  mobileRSensorCurrentValue;
 	float  mobileRError;
 	float  mobileRDrive;
 
@@ -185,8 +181,8 @@ task mobileRController()
 
 		// send to motor
 		setMobilePower(mobileRDrive);
-
 		lastmobileRError = mobileRError;
+
 		// Don't hog cpu
 		wait1Msec( 25 );
 	}
@@ -194,7 +190,7 @@ task mobileRController()
 //#endregion
 //#region WaityThing for mobilegoal and lift
 void goalRequest(int position, bool waity = false)
-{
+{// void to call the mobile goal request in aton, to make it simpler
 	startTask(mobileRController);
 	mobileRRequestedValue = position;
 		if(waity)
@@ -204,7 +200,7 @@ void goalRequest(int position, bool waity = false)
 		}
 }
 void liftRequest(int position, bool waity = false)
-{
+{// void to call the lift request in aton, to make it simpler
 	liftRRequestedValue = position;
 		if(waity)
 		{	while(SensorValue[ liftP ] >= liftRRequestedValue + waitLiftRerror

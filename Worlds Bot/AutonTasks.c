@@ -28,12 +28,14 @@ int SkillsLift = 1540;
 
 // Auto Stack variables
 int SonarsThreshold = 500;
+
+//Fourbar and roller void vars
 int Up = 1;
 int In = 1;
 int Down = 0;
 int Out = 0;
 
-
+//converts and other vars
 float wheelDiameter = 4;
 float cumBias;
 float debug;
@@ -81,9 +83,7 @@ void Atondrive(float inches, int power)
   SensorValue[rightEncoder] = 0;
   SensorValue[leftEncoder] = 0;
 		///forward
-	/*AutoStrait(ticks*0.6, power);
-	AutoStrait(ticks*0.8, power/2);*/
-	AutoStrait(ticks, power/*/3*/);
+	AutoStrait(ticks, power);
 //sudden stop to correct overshooting the value
 	motor[LDrive] = -15 * sgn(ticks);
   motor[RDrive] = -15 * sgn(ticks);
@@ -106,50 +106,52 @@ task drive() //Redirecting Drive into a task
 		wait1Msec(25); //dont hog cpu
   }
 }
+
 task killmeplz()
-{
+{ // tuning task to stop aton at 15 sec
 	wait1Msec(15000);
 	stopAllTasks();
 	allMotorsOff();
 }
+
 void ClearAllSensors()
-{
+{// void to quickly clear all sensors
 SensorValue[rightEncoder] = 0;  ///
 SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
 SensorValue[Gyro] = 0;					///
 }
 
 task IntakeCone()
-{
+{// task for user controll to intake cone
 	setIntakePower (127);
 	wait1Msec (50);
 	setIntakePower (20);
 }
 
 task OutakeCone()
-{
-setIntakePower(-127);
-wait1Msec(1000);
-setIntakePower(20);
+{// task for user controll to outake cone
+  wait1Msec (50);
+  setIntakePower(-127);
+  wait1Msec(1000);
+  setIntakePower(20);
 }
 
 task FourBarIn()
-{
+{// task to bring the fourbar in
   setFourBarPower(127);
   wait1Msec(200);
   setFourBarPower(20);
 }
 
 task FourBarOut()
-{
+{// task to bring the fourbar in
   setFourBarPower(-127);
   wait1Msec(200);
   setFourBarPower(-20);
 }
 
-
 task OutakePreload()
-{
+{// task to outake the preload at the begining of skills
 	liftRRequestedValue = SkillsLift - 500;
 	wait1Msec(100);
 	setIntakePower (-127);
@@ -159,7 +161,7 @@ task OutakePreload()
 }
 
 task drivelock()
-{
+{// task to keep the drive locked during driver loads
 ClearAllSensors();
 while(true)
 {
@@ -168,7 +170,7 @@ setDrivePower(SensorValue[leftEncoder]*-1.25, SensorValue[rightEncoder]*-1.25);
 }
 
 void QuickPickUP(int power, int delay)
-{
+{// quick sequence to pick up a mobile goal during aton
   goalRequest(mobileIn+100, false);
   setDrivePower(power,power);
   wait1Msec(delay);
@@ -176,7 +178,7 @@ void QuickPickUP(int power, int delay)
 }
 
 void QuickOffLoad(int power, int delay)
-{
+{// quick sequence to offload mobile goal during aton
   goalRequest(mobileOut, false);
   setDrivePower(-power,-power);
   wait1Msec(delay);
@@ -184,7 +186,7 @@ void QuickOffLoad(int power, int delay)
 }
 
 void ScoreGoal()
-{
+{// quick void to score a high stack safely during the match
   startTask(mobileRController);
   setLiftPower(15);
   setFourBarPower(-50);
@@ -197,7 +199,7 @@ void ScoreGoal()
 }
 //#endregion
 //#region Auto Stack Voids and Tasks
-task StackAtonOneTask()									// Simple Auto stack cone up aton
+task StackAtonOneTask()									// Simple Auto stack task cone up aton
 {
   liftRequest(SkillsLift,false);
   FourBarPosition(Down,500,127);
@@ -219,7 +221,7 @@ task StackAtonOneTask()									// Simple Auto stack cone up aton
   liftRequest(SkillsLift,false);
 }
 
-void StackAtonOne()									// Simple Auto stack cone up aton
+void StackAtonOne()									// Simple Auto stack void cone up aton
 {
   liftRequest(SkillsLift,true);
   FourBarPosition(Down,500,127);
@@ -308,6 +310,7 @@ set pid to the grab height
 //#endregion
 //<editor-fold Autonomous Programs
 //--------------------Autonomous Programs----------------------------//
+// programs that corilate with M=Team Comp Controll.c to run our autonomous
 //#region Score 5's
 void RightFive()
 {

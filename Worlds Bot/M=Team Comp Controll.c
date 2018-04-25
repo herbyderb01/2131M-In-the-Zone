@@ -77,7 +77,7 @@ task autonomous()
 
 	 //=========== Score 5's ==========//
 	if (SensorValue[selecttwoP] > 300 && SensorValue[selecttwoP] < 1795)
-	{
+	{ // start The five point atons wichever we choose
 			if (SensorValue[selectP] < 15)
 			{
 				LeftFive();
@@ -104,7 +104,7 @@ task autonomous()
 
 	 //=========== Score 10's ==========//
 	if (SensorValue[selecttwoP] > 1795 && SensorValue[selecttwoP] < 3530)
-	{
+	{ // start The ten point atons wichever we choose
 			if (SensorValue[selectP] < 15)
 			{
 				LeftTen();
@@ -133,7 +133,7 @@ task autonomous()
 
 	 //=========== Score 20's ==========//
 	if (SensorValue[selecttwoP] > 3530)
-	{
+	{ // start The twenty point atons wichever we choose
 			if (SensorValue[selectP] < 15)
 			{
 				LeftTwenty();
@@ -158,7 +158,7 @@ task autonomous()
 
 	 //=========== Score Special's ==========//
 	if (SensorValue[selecttwoP] < 300)
-	{
+	{ // start The specials point atons wichever we choose
 			if (SensorValue[selectP] < 15)
 			{
 				SkillsOne();
@@ -193,13 +193,12 @@ task autonomous()
 /*---------------------------------------------------------------------------*/
 task usercontrol()
 {
-startTask(drive);
-setFourBarPower(20);
+startTask(drive); //enable the drive to continusaly run during user controll
+setFourBarPower(20); //set a preset to the four bar to stay up at the begining
 
 	while (3.1415926535897932384626433832795028841971==3.1415926535897932384626433832795028841971)
   //starting while loop to always run during userconroll
 	{
-
 		if (vexRT[Btn7L]==0)																	//
 		{																											//
 			usertoggle=1;																				//
@@ -221,8 +220,9 @@ setFourBarPower(20);
     if (initalize==0)																			// To Initalize Normal
     {																											// match Code
       stopTask(liftRController);
-      setFourBarPower(20);
+      setFourBarPower(20); //set a preset to the four bar to stay up at the begining
     }
+
     initalize=1;
 
 		  if (vexRT[Btn8L]==1)
@@ -244,16 +244,16 @@ setFourBarPower(20);
 		{
 				setMobilePower(-127);
 		}
-		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn7U to Extend Goal
+		else if( vexRT[Btn6UXmtr2] == 1)      // Setting Btn6UXmtr2 to Extend Goal
 		{
 				setMobilePower(127);
 		}
-		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn7D to Intake Goal
+		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn6DXmtr2 to Intake Goal
 		{
 				setMobilePower(-127);
 		}
 
-		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to brake
+		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to score goal
 		{
 				ScoreGoal(); 								// void to score ScoreGoal at the end of match
 		}
@@ -266,52 +266,45 @@ setFourBarPower(20);
 			}
 		  else
 			{
-				motor[MobileR] = (vexRT[Ch2Xmtr2])*1.2;
+				motor[MobileR] = (vexRT[Ch2Xmtr2])*1.2;	// seting mobile goal motors slightly slower to lock mobile Goal
 				motor[MobileL] = (vexRT[Ch3Xmtr2])*1.2;
 			}
 		}
 
 	//----------------------Lift Controll------------------------//
-
 		if( vexRT[Btn5D] == 1)      // Setting Btn5D to lift Down
 		{
 			setLiftPower(-127);
 			liftstillspeed=-15;
 		}
-
 		else if( vexRT[Btn5U] == 1)      // Setting Btn5U to lift Up
 		{
 			setLiftPower(127);
 			liftstillspeed=15;
 		}
-
 		else if( vexRT[Btn5DXmtr2] == 1)      // Setting Btn5D on Secondary to lift Down
 		{
 			setLiftPower(-127);
 			liftstillspeed=-15;
 		}
-
 		else if( vexRT[Btn5UXmtr2] == 1)      // Setting Btn5U on Secondary to lift Up
 		{
 			setLiftPower(127);
 			liftstillspeed=15;
 		}
-
 		else
 		{
 			setLiftPower(liftstillspeed);	// Setting the Still Speed when no commands
 		}
 
 	//----------------------Roller Control------------------------//
-
 		if( vexRT[Btn6U] == 1)      // Setting Btn 6U to Intake Cone
 		{
-			startTask(IntakeCone);
+			startTask(IntakeCone); 	// starting a void to intake Cone
 		}
-
 		else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Outtake Cone
 		{
-			startTask(OutakeCone);
+			startTask(OutakeCone); 	// starting a void to Outtake Cone for 1 sec
 		}
 		/*else if( vexRT[Btn8LXmtr2] == 1)      // Setting Btn 6U to Intake Cone
 		{
@@ -326,19 +319,17 @@ setFourBarPower(20);
 
 		if( vexRT[Btn8D] == 1)      // Setting Btn8D to Extend Four Bar
 		{
-			startTask(FourBarIn);
+			startTask(FourBarIn);	// starting a void to bring fourbar up
 		}
-
 		else if( vexRT[Btn8R] == 1)      // Setting Btn8R to bring in Four Bar
 		{
-			startTask(FourBarOut);
+			startTask(FourBarOut);	// starting a void to bring fourbar down
 		}
 		/*else if( vexRT[Btn6DXmtr2] == 1) // Setting Btn8D on 2nd to Extend Four Bar
 		{
 			setFourBarPower(127);
 			FourBarstillspeed=20;
 		}
-
 		else if( vexRT[Btn6UXmtr2] == 1)// Setting Btn8D on 2nd to bring in Four Bar
 		{
 			setFourBarPower(-127);
@@ -363,20 +354,18 @@ setFourBarPower(20);
     //---------------------PreLoad Task-----------------------------//
     if (vexRT[Btn5U] == 1)
     {
-    	startTask(OutakePreload);
+    	startTask(OutakePreload);	// starting a void to outake skills Preload
     }
     //--------------------Simple Auto Stack-------------------------//
     if (vexRT[Btn5D] == 1)
     {
-    	startTask(StackAtonOneTask);
+    	startTask(StackAtonOneTask);	// starting a void to stack a cone quick
     }
-
 		//----------------------Moblie Goal Lift------------------------//
 		if( vexRT[Btn6U] == 1)      // Setting Btn6U to Extend Goal
 		{
 			setMobilePower(127);
 		}
-
 		else if( vexRT[Btn6D] == 1)      // Setting Btn6D to Intake Goal
 		{
 			setMobilePower(-127);
@@ -385,7 +374,6 @@ setFourBarPower(20);
 		{
 			setMobilePower(127);
 		}
-
 		else if( vexRT[Btn6DXmtr2] == 1)      // Setting Btn6D to Intake Goal
 		{
 			setMobilePower(-127);
@@ -399,7 +387,7 @@ setFourBarPower(20);
 			}
 		  else
 			{
-				motor[MobileR] = vexRT[Ch2Xmtr2]*1.2;
+				motor[MobileR] = vexRT[Ch2Xmtr2]*1.2; // seting mobile goal motors slightly slower to lock mobile Goal
 				motor[MobileL] = vexRT[Ch3Xmtr2]*1.2;
 			}
 		}
