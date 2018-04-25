@@ -30,13 +30,18 @@
 #include "Turn PID.c"
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
-/*                                                                           */
 /*---------------------------------------------------------------------------*/
 void pre_auton()
 {
 	SensorValue[rightEncoder] = 0;  ///
   SensorValue[leftEncoder] = 0;   ///  Making sure to clear all values
 	SensorValue[Gyro] = 0;					///
+
+	SensorBias[Gyro] = 1862;
+	wait1Msec(250);
+	SensorScale[Gyro] = 134;
+	wait1Msec(250);
+
 	/*SensorType[Gyro] = sensorNone;
 	wait1Msec(1000);										//
 	SensorType[Gyro] = sensorGyro;      // To correct Gyro Drift
@@ -63,10 +68,6 @@ SensorType[Gyro] = sensorNone;
 task autonomous()
 {
 	//startTask(killmeplz);
-	SensorBias[Gyro] = 1862;
-	wait1Msec(250);
-	SensorScale[Gyro] = 134;
-	wait1Msec(250);
 
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
@@ -99,7 +100,6 @@ task autonomous()
 			{
 				RightFive();
 			}
-
 	}
 
 	 //=========== Score 10's ==========//
@@ -129,7 +129,6 @@ task autonomous()
 			{
 				RightTen();
 			}
-
 	}
 
 	 //=========== Score 20's ==========//
@@ -155,7 +154,6 @@ task autonomous()
 			{
 				RightTwenty();
 			}
-
 	}
 
 	 //=========== Score Special's ==========//
@@ -271,7 +269,6 @@ setFourBarPower(20);
 				motor[MobileL] = (vexRT[Ch3Xmtr2])*1.2;
 			}
 		}
-
 
 	//----------------------Lift Controll------------------------//
 
