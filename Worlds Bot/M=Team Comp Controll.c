@@ -171,6 +171,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 1053 && SensorValue[selectP] < 1768)
 			{
+				Defensive();
 
 			}
 			if (SensorValue[selectP] > 1768 && SensorValue[selectP] < 2735)
@@ -183,7 +184,7 @@ task autonomous()
 			}
 			if (SensorValue[selectP] > 4000)
 			{
-				Defensive();
+				SkillsTwo();
 			}
 	}
 }
@@ -228,12 +229,12 @@ setFourBarPower(20);
 
 		  if (vexRT[Btn8L]==1)
 		  {
-		  	startTask(drivelock);
+		  	startTask(drivelock);     //Task to lock the drive for Aton
 		  }
 
 		  if (vexRT[Btn8U]==1)
 		  {
-		  	stopTask(drivelock);
+		  	stopTask(drivelock);			//Unlock drive task
 		  }
 		//----------------------Moblie Goal------------------------//
 
@@ -256,13 +257,13 @@ setFourBarPower(20);
 
 		else if( vexRT[Btn7R] == 1)      // Setting Btn7R to brake
 		{
-				ScoreGoal();
+				ScoreGoal(); 								// void to score ScoreGoal at the end of match
 		}
 		else
 		{
 			if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
 	  	{
-				motor[MobileR] = (vexRT[Ch2])*1.2;
+				motor[MobileR] = (vexRT[Ch2])*1.2;	// seting mobile goal motors slightly slower to lock mobile Goal
 				motor[MobileL] = (vexRT[Ch3])*1.2;
 			}
 		  else
@@ -396,7 +397,7 @@ setFourBarPower(20);
 		{
 			if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
 	  	{
-				motor[MobileR] = vexRT[Ch2]*1.2;
+				motor[MobileR] = vexRT[Ch2]*1.2; // seting mobile goal motors slightly slower to lock mobile Goal
 				motor[MobileL] = vexRT[Ch3]*1.2;
 			}
 		  else
