@@ -1102,8 +1102,12 @@ void Defensive ()
 
 void TestingAton ()
 {
-  QuickOffLoad(127, 500);
-  wait1Msec(200);
+  liftRequest(1830,false);
+  goalRequest(mobileIn, true);
+  goalRequest(mobileOut, true);
+  goalRequest(mobileIn, true);
+  goalRequest(mobileOut, true);
+
 }
 
 void StationaryLeft()

@@ -149,7 +149,7 @@ float mobileRD;						//Establishing variables
 float mobileRP;
 float lastmobileRError;
 float mobileRDF;
-int waitMobliERerror = 75;
+int waitMobliERerror = 100;
 float  mobileRSensorCurrentValue;
 
 task mobileRController()
@@ -194,8 +194,8 @@ void goalRequest(int position, bool waity = false)
 	startTask(mobileRController);
 	mobileRRequestedValue = position;
 		if(waity)
-		{	while(mobileRSensorCurrentValue >= mobileRRequestedValue + waitMobliERerror
-				|| mobileRSensorCurrentValue <= mobileRRequestedValue - waitMobliERerror)
+		{	while(SensorValue[mobileP] >= mobileRRequestedValue + waitMobliERerror
+				|| SensorValue[mobileP] <= mobileRRequestedValue - waitMobliERerror)
 				{} wait1Msec(50);
 		}
 }
