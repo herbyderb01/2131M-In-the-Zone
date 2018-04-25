@@ -937,6 +937,144 @@ void SkillsOne ()
 			Atondrive(-200, drivepower);
 
 }
+void SkillsTwo ()
+{
+  liftRequest(SkillsLift+100,false);
+  goalRequest(mobileIn,true);
+  setFourBarPower(20);
+  setIntakePower(15);
+
+  goalRequest(mobileOut,true);
+  Atondrive(43, drivepower);
+
+  QuickPickUP(75, 300);
+  wait1Msec(200);
+
+  liftRequest(BottomLift,true);
+  RollerMode(Out,0);
+  startTask(StackAtonOneTask);
+  wait1Msec(1220);
+  Atondrive(8, drivepower);
+  wait1Msec(800);
+  startTask(StackAtonOneTask);
+  wait1Msec(1000);
+  RollerMode(In,0);
+  liftRequest(ParallelLift,false);
+
+  Atondrive(-58, drivepower);
+  RollerMode(In,0);
+  liftRequest(1488,false);
+  TurnPID(-300, true);
+  RollerMode(In,1);
+  Atondrive(-17, drivepower);
+  TurnPID(-850, true);
+  setFourBarPower(20);
+
+  Atondrive(19, drivepower);
+  setDrivePower(15,15);
+  RollerMode(Out,0);
+  liftRequest(ParallelLift,false);
+  wait1Msec(100);
+
+  waitMobliERerror = 150;
+  goalRequest(mobileLow,true);
+  Atondrive(-24, drivepower);
+
+
+  //End of twenty point portion
+  liftRequest(SkillsLift,false)
+  TurnPID(-900, true);
+  Atondrive(18, drivepower);
+  TurnPID(-450, true);
+  //End of Patch
+
+  liftRequest(SkillsLift+100,false);
+  goalRequest(mobileIn,true);
+  setFourBarPower(20);
+  setIntakePower(15);
+
+  goalRequest(mobileOut,true);
+  Atondrive(43, drivepower);
+
+  QuickPickUP(75, 300);
+  wait1Msec(200);
+
+  liftRequest(BottomLift,true);
+  RollerMode(Out,0);
+  startTask(StackAtonOneTask);
+  wait1Msec(1220);
+  Atondrive(8, drivepower);
+  wait1Msec(800);
+  startTask(StackAtonOneTask);
+  wait1Msec(1000);
+  RollerMode(In,0);
+  liftRequest(ParallelLift,false);
+
+  Atondrive(-58, drivepower);
+  RollerMode(In,0);
+  liftRequest(1488,false);
+  TurnPID(-1250, true);
+  RollerMode(In,1);
+  Atondrive(17, drivepower);
+  TurnPID(-850, true);
+  setFourBarPower(20);
+  Atondrive(4, drivepower)
+
+  RollerMode(Out,0);
+  liftRequest(ParallelLift,false);
+  wait1Msec(100);
+
+  waitMobliERerror = 150;
+  goalRequest(mobileOut,true);
+  Atondrive(-4, drivepower);
+//End of second goal
+  TurnPID(900, true);
+  Atondrive(6, drivepower);
+  TurnPID(900, true);
+  Atondrive(18, drivepower);
+
+  QuickPickUP(75, 300);
+  wait1Msec(200);
+
+  TurnPID(-1800, true);
+  Atondrive(20, drivepower);
+  goalRequest(mobileOut,true);
+  Atondrive(-4, drivepower);
+  goalRequest(mobileMid, false);
+  TurnPID(1800, true);
+  goalRequest(mobileOut, true);
+  Atondrive(18, true);
+
+  QuickPickUP(75, 300);
+  wait1Msec(200);
+
+  TurnPID(900, true);
+  Atondrive(18, drivepower);
+  goalRequest(mobileOut, true);
+  Atondrive(-6, drivepower);
+  TurnPID(-1800);
+  //On to other side of feild
+
+  Atondrive(36, drivepower);
+
+  QuickPickUP(75, 300);
+  wait1Msec(200);
+
+  Atondrive(18, drivepower);
+  TurnPID(-900, true);
+  Atondrive(12, drivepower);
+  TurnPID(900, true);
+
+  Atondrive(19, drivepower);
+  setDrivePower(15,15);
+  RollerMode(Out,0);
+  liftRequest(ParallelLift,false);
+  wait1Msec(100);
+
+  waitMobliERerror = 150;
+  goalRequest(mobileLow,true);
+  Atondrive(-24, drivepower);
+}
 //#endregion
 //#region Other Programs
 void Defensive ()
