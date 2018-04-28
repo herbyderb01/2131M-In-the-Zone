@@ -69,6 +69,7 @@ SensorType[Gyro] = sensorNone;
 task autonomous()
 {
 	//startTask(killmeplz);
+	stopTask(drive);
 
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
@@ -235,6 +236,10 @@ setFourBarPower(20); //set a preset to the four bar to stay up at the begining
 		  {
 		  	stopTask(drivelock);			//Unlock drive task
 		  }
+		  /*while( vexRT[Btn7R] == 1)
+		  {
+		  	ScoreGoal();
+		  }*/
 		//----------------------Moblie Goal------------------------//
 
 		if( vexRT[Btn7U] == 1)      // Setting Btn7U to Extend Goal

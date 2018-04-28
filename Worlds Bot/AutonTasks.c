@@ -95,7 +95,7 @@ task drive() //Redirecting Drive into a task
 {
   while (true)
   {
-    if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>10)
+    if (abs(vexRT[Ch3]) + abs(vexRT[Ch2])>17)
     {
     setDrivePower(vexRT[Ch3],vexRT[Ch2]);
     }
@@ -189,9 +189,13 @@ void ScoreGoal()
   startTask(mobileRController);
   setLiftPower(15);
   setFourBarPower(-50);
-  goalRequest(mobileOut,true);
-
+  RollerMode(Out,1);
+  goalRequest(mobileOut,false);
+  wait1Msec(1000);
+  setLiftPower(-25);
+  wait1Msec(750);
   RollerMode(Out,0);
+  setLiftPower(15);
   FourBarPosition(Up,500,127);
   stopTask(mobileRController);
   setIntakePower(20);
@@ -498,7 +502,7 @@ void RightTenConesOne()
   Atondrive(44, drivepower);
 
   QuickPickUP(75, 310);
-  wait1Msec(300);
+  wait1Msec(290);
 
   liftRequest(BottomLift,true);
   RollerMode(Out,0);
@@ -508,7 +512,7 @@ void RightTenConesOne()
 
   Atondrive(-50, drivepower);
   TurnPID(-450, true);
-  Atondrive(-5, drivepower);
+  Atondrive(-3, drivepower);
   TurnPID(-NineP+80, true);
   liftRequest(ParallelLift,false);
   Atondrive(2, drivepower);
@@ -596,7 +600,7 @@ void LeftTenConesOne()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(44, drivepower);
+  Atondrive(43, drivepower);
 
   QuickPickUP(75, 310);
   wait1Msec(300);
@@ -633,7 +637,7 @@ void LeftTenConesTwo()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(43, drivepower);
+  Atondrive(42.5, drivepower);
 
   QuickPickUP(75, 300);
   wait1Msec(200);
@@ -649,15 +653,22 @@ void LeftTenConesTwo()
   wait1Msec(1000);
   liftRequest(ParallelLift,false);
 
-  Atondrive(-52, drivepower);
-  TurnPID(-2050, true);
-  // Atondrive(5, drivepower);
-  // TurnPID(-NineP, true);
+  Atondrive(-53, drivepower);
+  TurnPID(450, true);
+  Atondrive(-5, drivepower);
+  TurnPID(NineP-80, true);
   liftRequest(ParallelLift,false);
-  // Atondrive(4, drivepower);
+  Atondrive(2, drivepower);
   goalRequest(mobileOut,true);
   liftRequest(SkillsLift, false);
-  Atondrive(-30, drivepower);
+  Atondrive(-10, drivepower);
+
+  wait1Msec(300);
+  TurnPID(NineP/2);
+  Atondrive(-21, drivepower);
+  TurnPID(-NineP/2);
+  goalRequest(mobileMid,false);
+  Atondrive(-38, drivepower);
 }
 
 //#endregion
@@ -686,13 +697,13 @@ void RightTwenty()
   RollerMode(In,0);
   liftRequest(ParallelLift,false);
 
-  Atondrive(-56, drivepower);
+  Atondrive(-55, drivepower);
   RollerMode(In,0);
   liftRequest(1488,false);
-  TurnPID(-400, true);
+  TurnPID(1200, true);
   RollerMode(In,1);
-  Atondrive(-17, drivepower);
-  TurnPID(-850, true);
+  Atondrive(17, drivepower);
+  TurnPID(850, true);
   setFourBarPower(20);
 
   Atondrive(19, drivepower);
@@ -703,7 +714,12 @@ void RightTwenty()
 
   waitMobliERerror = 150;
   goalRequest(mobileLow,true);
+  liftRequest(BottomLift,false);
   Atondrive(-21, drivepower);
+
+  TurnPID(-400, true);
+  Atondrive(-36, drivepower);
+
 }
 
 void LeftTwenty()
@@ -730,12 +746,12 @@ void LeftTwenty()
   RollerMode(In,0);
   liftRequest(ParallelLift,false);
 
-  Atondrive(-58, drivepower);
+  Atondrive(-55, drivepower);
   RollerMode(In,0);
   liftRequest(1488,false);
-  TurnPID(-1250, true);
+  TurnPID(-1200, true);
   RollerMode(In,1);
-  Atondrive(15, drivepower);
+  Atondrive(17, drivepower);
   TurnPID(-850, true);
   setFourBarPower(20);
 
@@ -747,7 +763,12 @@ void LeftTwenty()
 
   waitMobliERerror = 150;
   goalRequest(mobileLow,true);
+  liftRequest(BottomLift,false);
   Atondrive(-21, drivepower);
+
+  TurnPID(400, true);
+  Atondrive(-36, drivepower);
+
 }
 //#endregion
 //#region Skills
@@ -966,7 +987,7 @@ void SkillsTwo ()
   Atondrive(-54, drivepower);
   RollerMode(In,0);
   liftRequest(1488,false);
-  TurnPID(-400, true);
+  TurnPID(-450, true);
   RollerMode(In,1);
   Atondrive(-25, drivepower);
   TurnPID(-850, true);
@@ -984,106 +1005,13 @@ void SkillsTwo ()
   wait1Msec(100);
   //End of twenty point portion
   TurnPID(-900, true);
-  Atondrive(15, drivepower);
-  TurnPID(-900, true);
-  //End of Patch
-  goalRequest(mobileOut,true);
-  Atondrive(18, drivepower);
+  Atondrive(23, drivepower);
 
   QuickPickUP(75, 300);
   wait1Msec(200);
-  TurnPID(-1800, true);
-  Atondrive(30, drivepower);
-  goalRequest(mobileOut,true);
-  Atondrive(-10, drivepower);
+  // TurnPID(-1800, true);
+  Atondrive(-30, drivepower);
 
-
-  liftRequest(SkillsLift+100,false);
-  goalRequest(mobileIn,true);
-  setFourBarPower(20);
-  setIntakePower(15);
-
-  goalRequest(mobileOut,true);
-  Atondrive(43, drivepower);
-
-  QuickPickUP(75, 300);
-  wait1Msec(200);
-
-  liftRequest(BottomLift,true);
-  RollerMode(Out,0);
-  startTask(StackAtonOneTask);
-  wait1Msec(1220);
-  Atondrive(8, drivepower);
-  wait1Msec(800);
-  startTask(StackAtonOneTask);
-  wait1Msec(1000);
-  RollerMode(In,0);
-  liftRequest(ParallelLift,false);
-
-  Atondrive(-58, drivepower);
-  RollerMode(In,0);
-  liftRequest(1488,false);
-  TurnPID(-1250, true);
-  RollerMode(In,1);
-  Atondrive(17, drivepower);
-  TurnPID(-850, true);
-  setFourBarPower(20);
-  Atondrive(4, drivepower)
-
-  RollerMode(Out,0);
-  liftRequest(ParallelLift,false);
-  wait1Msec(100);
-
-  waitMobliERerror = 150;
-  goalRequest(mobileOut,true);
-  Atondrive(-4, drivepower);
-//End of second goal
-  TurnPID(900, true);
-  Atondrive(6, drivepower);
-  TurnPID(900, true);
-  Atondrive(18, drivepower);
-
-  QuickPickUP(75, 300);
-  wait1Msec(200);
-
-  TurnPID(-1800, true);
-  Atondrive(20, drivepower);
-  goalRequest(mobileOut,true);
-  Atondrive(-4, drivepower);
-  goalRequest(mobileMid, false);
-  TurnPID(1800, true);
-  goalRequest(mobileOut, true);
-  Atondrive(18, true);
-
-  QuickPickUP(75, 300);
-  wait1Msec(200);
-
-  TurnPID(900, true);
-  Atondrive(18, drivepower);
-  goalRequest(mobileOut, true);
-  Atondrive(-6, drivepower);
-  TurnPID(-1800);
-  //On to other side of feild
-
-  Atondrive(36, drivepower);
-
-  QuickPickUP(75, 300);
-  wait1Msec(200);
-
-  Atondrive(18, drivepower);
-  TurnPID(-900, true);
-  Atondrive(12, drivepower);
-  TurnPID(900, true);
-
-  Atondrive(19, drivepower);
-  setDrivePower(15,15);
-  RollerMode(Out,0);
-  liftRequest(ParallelLift,false);
-  wait1Msec(100);
-
-  waitMobliERerror = 150;
-  goalRequest(mobileLow,true);
-  Atondrive(-24, drivepower);
 }
 //#endregion
 //#region Other Programs
