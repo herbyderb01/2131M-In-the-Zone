@@ -368,9 +368,9 @@ void RightFiveCones()
   Atondrive(7, drivepower);
   wait1Msec(800);
   startTask(StackAtonOneTask);
-  wait1Msec(1220);
+  wait1Msec(1300);
   Atondrive(9, drivepower);
-  wait1Msec(800);
+  wait1Msec(900);
   startTask(StackAtonOneTask);
   wait1Msec(1000);
   RollerMode(In,0);
@@ -637,7 +637,7 @@ void LeftTenConesTwo()
   setIntakePower(15);
 
   goalRequest(mobileOut,true);
-  Atondrive(42.5, drivepower);
+  Atondrive(43, drivepower);
 
   QuickPickUP(75, 300);
   wait1Msec(200);
@@ -1017,70 +1017,48 @@ void SkillsTwo ()
 //#region Other Programs
 void Defensive ()
 {
-  liftRequest(ParallelLift,true);
-  // QuickPickUP(200);
-  liftRequest(BottomLift,true);
-  RollerMode(Out,0);
-  startTask(StackAtonOneTask);
-  wait1Msec(1200);
-  Atondrive(6, drivepower);
-  wait1Msec(800);
-  startTask(StackAtonOneTask);
-  wait1Msec(1200);
-  Atondrive(6, drivepower);
-  wait1Msec(800);
-
-  startTask(StackAtonOneTask);
-  wait1Msec(1000);
-  Atondrive(-12, drivepower);
+setDrivePowerAton(127,127);
+wait1Msec(5000);
+setDrivePowerAton(0,0);
 }
 
 void TestingAton ()
 {
-  liftRequest(1830,false);
-  Atondrive(120,drivepower);
+  liftRequest(BottomLift,false);
 }
 
 void StationaryLeft()
 {
   liftRequest(1830,false);
-
   Atondrive(18, drivepower);
   FourBarPosition(Down,500,127);
   RollerMode(Out,0);
   FourBarPosition(Up,500,127);
-  liftRequest(SkillsLift,false);
+  liftRequest(BottomLift,false);
   TurnPID(NineP-80, true);
   Atondrive(19, drivepower);
   TurnPID(-NineP/2, true);
-  Atondrive(36, drivepower);
+  Atondrive(56, drivepower);
   wait1Msec(300);
   Atondrive(-12, drivepower);
-  TurnPID(-880/2, true);
-  wait1Msec(300);
-  goalRequest(mobileOut,true);
-  Atondrive(20, drivepower);
+  setDrivePowerAton(0,0);
 }
 
 void StationaryRight()
 {
   liftRequest(1830,false);
-
   Atondrive(18, drivepower);
   FourBarPosition(Down,500,127);
   RollerMode(Out,0);
   FourBarPosition(Up,500,127);
-  liftRequest(SkillsLift,false);
+  liftRequest(BottomLift,false);
   TurnPID(-NineP+80, true);
   Atondrive(19, drivepower);
   TurnPID(NineP/2, true);
-  Atondrive(36, drivepower);
+  Atondrive(56, drivepower);
   wait1Msec(300);
   Atondrive(-12, drivepower);
-  TurnPID(880/2, true);
-  wait1Msec(300);
-  goalRequest(mobileOut,true);
-  Atondrive(20, drivepower);
+  setDrivePowerAton(0,0);
 }
 
 //#endregion

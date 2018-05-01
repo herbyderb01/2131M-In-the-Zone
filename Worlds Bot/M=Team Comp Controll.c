@@ -69,7 +69,6 @@ SensorType[Gyro] = sensorNone;
 task autonomous()
 {
 	//startTask(killmeplz);
-	stopTask(drive);
 
 	startTask(liftRController);    //Start Lift PID
 	startTask(mobileRController);  //Start Mobile PID
